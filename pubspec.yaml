@@ -61,6 +61,12 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/font/
+
+  fonts:
+     - family: Oxanium
+      fonts:
+        - asset: assets/font/Oxanium/static/Oxanium-Light.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
