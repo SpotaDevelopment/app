@@ -37,8 +37,8 @@ dependencies:
   cloud_firestore: ^3.1.8
 
   #Google Sign In
-  firebase_auth: ^1.1.4
-  google_sign_in: ^5.0.3
+  firebase_auth: ^3.3.7
+  google_sign_in: ^5.2.3
 
   #Google Icon
   font_awesome_flutter: ^9.0.0
