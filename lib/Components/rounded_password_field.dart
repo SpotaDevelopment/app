@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/text_field_container.dart';
+import 'package:sign_ups/auth/validator.dart';
 import 'package:sign_ups/constants.dart';
 
 class RoundedPasswordField extends StatelessWidget {
@@ -13,9 +14,12 @@ class RoundedPasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      child: TextField(
+      child: TextFormField(
         obscureText: true,
         onChanged: onChanged,
+        validator: (value) => Validator.validatePassword(
+          password: value!,
+        ),
         decoration: InputDecoration(
           icon: Icon(
             Icons.lock,
