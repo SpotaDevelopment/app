@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Screens/Welcome/welcome_screen.dart';
 import 'package:sign_ups/constants.dart';
@@ -20,29 +18,26 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: primaryColor,
         scaffoldBackgroundColor: Colors.white,
-
-
       ),
       home: WelcomeScreen(),
     );
   }
 
-  AppBar getHeaderBar() {
-  return AppBar(
-    title: Text('Spota',
-        style: TextStyle(
-          fontFamily: "Oxanium",
-          fontSize: 30,
-        )),
-    backgroundColor: Color(0xffff7a22),
-    actions: const <Widget>[
-      Icon(
-        Icons.menu,
-        color: Colors.white,
-        size: 24.0,
-      )
-    ],
-  );
+  AppBar headerBar() {
+    return AppBar(
+      title: Text('Spota',
+          style: TextStyle(
+            fontFamily: "Oxanium",
+            fontSize: 30,
+          )),
+      backgroundColor: Color(0xffff7a22),
+      actions: const <Widget>[
+        Icon(
+          Icons.menu,
+          color: Colors.white,
+          size: 24.0,
+        )
+      ],
+    );
+  }
 }
-}
-
