@@ -18,11 +18,26 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: primaryColor,
         scaffoldBackgroundColor: Colors.white,
-
-
       ),
       home: WelcomeScreen(),
     );
   }
-}
 
+  AppBar headerBar() {
+    return AppBar(
+      title: Text('Spota',
+          style: TextStyle(
+            fontFamily: "Oxanium",
+            fontSize: 30,
+          )),
+      backgroundColor: Color(0xffff7a22),
+      actions: const <Widget>[
+        Icon(
+          Icons.menu,
+          color: Colors.white,
+          size: 24.0,
+        )
+      ],
+    );
+  }
+}
