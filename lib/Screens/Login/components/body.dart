@@ -26,8 +26,9 @@ class Body extends StatelessWidget {
           Text(
             "Welcome Back",
             style: TextStyle(
+                fontFamily: "Oxanium",
                 fontWeight: FontWeight.normal,
-                fontSize: 30), //TODO: change this font
+                fontSize: 30),
           ),
           Spacer(),
           Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
@@ -35,7 +36,8 @@ class Body extends StatelessWidget {
             Text(
               "Username",
               style: TextStyle(
-                  fontWeight: FontWeight.bold), //TODO: change this font
+                  fontFamily: "Oxanium",
+                  fontWeight: FontWeight.bold),
             ),
             Spacer(flex: 5),
           ]),
@@ -48,7 +50,9 @@ class Body extends StatelessWidget {
             Spacer(),
             Text(
               "Password",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontFamily: "Oxanium",
+                fontWeight: FontWeight.bold),
             ),
             Spacer(flex: 5)
           ]),
