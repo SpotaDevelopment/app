@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "966384919693",
+    "project_id": "spota-app",
+    "storage_bucket": "spota-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966384919693:android:5468904adcd97ae475aec4",
+        "android_client_info": {
+          "package_name": "com.example.sign_ups"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "966384919693-h1cp7n7jghqdevg507i27rnuc19qnp3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTeO7Td73DNVmDlEZ7ByQ7x8h-9sAzo-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "966384919693-h1cp7n7jghqdevg507i27rnuc19qnp3v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966384919693:android:a6ac0a4c0dc1389775aec4",
+        "android_client_info": {
+          "package_name": "com.example.spota"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "966384919693-h1cp7n7jghqdevg507i27rnuc19qnp3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTeO7Td73DNVmDlEZ7ByQ7x8h-9sAzo-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "966384919693-h1cp7n7jghqdevg507i27rnuc19qnp3v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
