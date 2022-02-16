@@ -76,16 +76,18 @@ class Body extends StatelessWidget {
             color: Colors.black,
             textColor: Colors.white,
           ),
-          AlreadyHaveAnAccountCheck(press: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return SignUpScreen(); //TODO: Change this to redirect to the choose teams page once its setup
-                },
-              ),
-            );
-          }),
+          AlreadyHaveAnAccountCheck(
+              login: true,
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return SignUpScreen(); //TODO: Change this to redirect to the choose teams page once its setup
+                    },
+                  ),
+                );
+              }),
           Spacer(flex: 1)
         ],
       ),
