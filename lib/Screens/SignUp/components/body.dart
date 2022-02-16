@@ -14,6 +14,7 @@ class Body extends StatelessWidget {
           Text(
             "Let the Games Begin",
             style: TextStyle(
+              fontFamily: "Oxanium",
               fontWeight: FontWeight.normal,
               fontSize: 30,
             ),
@@ -24,12 +25,14 @@ class Body extends StatelessWidget {
             Text(
               "Username",
               style: TextStyle(
+                  fontFamily: "Oxanium",
                   fontWeight: FontWeight.bold), //TODO: change this font
             ),
             Spacer(flex: 5),
           ]),
           RoundedInputField(
             hintText: "Your Username",
+            icon: Icons.person,
             onChanged: (value) {},
           ),
           Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
@@ -37,26 +40,45 @@ class Body extends StatelessWidget {
             Spacer(flex: 1),
             Text(
               "Password",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontFamily: "Oxanium",
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Spacer(flex: 5)
           ]),
-          RoundedPasswordField(
-            onChanged: (value) {},
-          ),
+          RoundedPasswordField(),
+          Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
+            //TODO:Figure out how to shift this to the right to match figma
+            SizedBox(width: 52),
+            Text(
+              "Confirm Password",
+              style: TextStyle(
+                fontFamily: "Oxanium",
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Spacer(flex: 5)
+          ]),
+          RoundedPasswordField(),
           Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
             //TODO:Figure out how to shift this to the right to match figma
             Spacer(flex: 1),
             Text(
-              "Password",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              "Email",
+              style: TextStyle(
+                fontFamily: "Oxanium",
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Spacer(flex: 5)
           ]),
-          RoundedPasswordField(
+          RoundedInputField(
+            hintText: "Your Email",
             onChanged: (value) {},
+            icon: Icons.email,
           ),
-          SizedBox(height: size.height * .2),
+          SizedBox(height: size.height * .05),
         ],
       ),
     );

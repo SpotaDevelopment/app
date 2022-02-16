@@ -35,24 +35,23 @@ class Body extends StatelessWidget {
             Spacer(flex: 1),
             Text(
               "Username",
-              style: TextStyle(
-                  fontFamily: "Oxanium",
-                  fontWeight: FontWeight.bold),
+              style:
+                  TextStyle(fontFamily: "Oxanium", fontWeight: FontWeight.bold),
             ),
             Spacer(flex: 5),
           ]),
           RoundedInputField(
             hintText: "Your Username",
             onChanged: (value) {},
+            icon: Icons.person,
           ),
           Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
             //TODO:Figure out how to shift this to the right to match figma
             Spacer(),
             Text(
               "Password",
-              style: TextStyle(
-                fontFamily: "Oxanium",
-                fontWeight: FontWeight.bold),
+              style:
+                  TextStyle(fontFamily: "Oxanium", fontWeight: FontWeight.bold),
             ),
             Spacer(flex: 5)
           ]),
