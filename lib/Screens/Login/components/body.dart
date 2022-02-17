@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:sign_ups/Components/already_have_an_account_check.dart';
 import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Components/rounded_password_field.dart';
 import 'package:sign_ups/Components/text_field_container.dart';
 import 'package:sign_ups/Screens/Login/components/background.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
-import 'package:sign_ups/auth/FireAuth.dart';
 import 'package:sign_ups/constants.dart';
 
 import '../../../Components/rounded_input_field.dart';
@@ -73,9 +71,7 @@ class Body extends StatelessWidget {
           RoundedButton(
             //TODO: Move this down
             text: "Login",
-            pressed: () {
-    
-            },
+            pressed: () {},
             color: Colors.black,
             textColor: Colors.white,
           ),
