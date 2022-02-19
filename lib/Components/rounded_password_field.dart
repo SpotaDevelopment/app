@@ -4,6 +4,9 @@ import 'package:sign_ups/auth/validator.dart';
 import 'package:sign_ups/constants.dart';
 
 class RoundedPasswordField extends StatefulWidget {
+  final TextEditingController controller;
+  RoundedPasswordField({Key? key, required this.controller}) : super(key: key);
+
   @override
   State<RoundedPasswordField> createState() => _RoundedPasswordFieldState();
 }
@@ -20,9 +23,11 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextFormField(
+        controller: widget.controller,
         obscureText: _hideText,
         // onChanged: onChanged,
         validator: (value) => Validator.validatePassword(
+          //!Does Validator even get used?
           password: value!,
         ),
         decoration: InputDecoration(
