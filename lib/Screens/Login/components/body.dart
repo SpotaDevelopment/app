@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/already_have_an_account_check.dart';
 import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Components/rounded_password_field.dart';
-import 'package:sign_ups/Components/skip_button.dart';
+import 'package:sign_ups/Components/skip_and_back_button.dart';
 import 'package:sign_ups/Components/text_field_container.dart';
 import 'package:sign_ups/Screens/Login/components/background.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
@@ -22,9 +22,9 @@ class Body extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           // SizedBox(height:size.height*0.03), //TODO: USE SizedBox() instead of
-          Spacer(flex: 4),
-          SkipButton(),
-          Spacer(flex: 5),
+          Spacer(flex: 3),
+          SkipButton(backScreen: SignUpScreen(), skipScreen: SignUpScreen()),
+          Spacer(flex: 6),
           Text(
             "Welcome Back",
             style: TextStyle(
@@ -55,7 +55,7 @@ class Body extends StatelessWidget {
               style:
                   TextStyle(fontFamily: "Oxanium", fontWeight: FontWeight.bold),
             ),
-            Spacer(flex: 5)
+            Spacer(flex: 5),
           ]),
           RoundedPasswordField(
               // onChanged: (value) {},

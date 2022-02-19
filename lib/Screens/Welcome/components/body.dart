@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/rounded_button.dart';
+import 'package:sign_ups/Components/skip_and_back_button.dart';
 import 'package:sign_ups/Screens/Login/login_screen.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
 import 'package:sign_ups/Screens/Welcome/components/welcomeBackground.dart';
@@ -13,6 +14,10 @@ class Body extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          SizedBox(
+            height: size.height * 0.05,
+          ),
+          SkipButton(backScreen: null, skipScreen: SignUpScreen()),
           SizedBox(height: size.height * .60),
           RoundedButton(
               text: "Create an Account",
