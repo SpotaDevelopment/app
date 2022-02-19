@@ -3,6 +3,8 @@ import 'package:sign_ups/Screens/Welcome/welcome_screen.dart';
 import 'package:sign_ups/auth/AuthenticationService.dart';
 
 class HomeScreen extends StatefulWidget {
+  static var id = 'home';
+
   HomeScreen({Key? key}) : super(key: key);
 
   @override
