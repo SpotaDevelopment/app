@@ -3,8 +3,10 @@ import 'package:sign_ups/Components/already_have_an_account_check.dart';
 import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Components/rounded_input_field.dart';
 import 'package:sign_ups/Components/rounded_password_field.dart';
+import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/login_screen.dart';
 import 'package:sign_ups/Screens/SignUp/components/signUpBackground.dart';
+import 'package:sign_ups/auth/AuthenticationService.dart';
 
 class Body extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -96,8 +98,29 @@ class Body extends StatelessWidget {
             SizedBox(height: 100),
             RoundedButton(
               //TODO: Move this down
-              text: "LOGIN",
-              pressed: () {},
+              text: "Create Account",
+              pressed: () {
+                AuthenticationService()
+                    .signUp(
+                        email: emailController.text.trim(),
+                        password: passwordController.text.trim())
+                    .then((result) {
+                  if (result == null) {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      //TODO: probably want to change the implentation of this?
+                      SnackBar(
+                        content: Text(
+                          result,
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    );
+                  }
+                });
+              },
               color: Colors.black,
               textColor: Colors.white,
             ),
