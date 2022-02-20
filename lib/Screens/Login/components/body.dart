@@ -50,6 +50,7 @@ class Body extends StatelessWidget {
             controller: emailController,
             hintText: "Your Email",
             onChanged: (value) {},
+            icon: Icons.person,
           ),
           Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
             //TODO:Figure out how to shift this to the right to match figma

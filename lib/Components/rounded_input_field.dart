@@ -11,9 +11,9 @@ class RoundedInputField extends StatelessWidget {
   const RoundedInputField({
     Key? key,
     required this.hintText,
-    this.icon = Icons.person, //TODO: Change this icon?
-    required this.controller,
+    required this.icon,
     required this.onChanged,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class RoundedInputField extends StatelessWidget {
             icon,
             // color: secondaryColor, //TODO: Change this icon color
           ),
-          hintText: "Your Username",
+          hintText: hintText,
           border: InputBorder.none,
         ),
       ),
