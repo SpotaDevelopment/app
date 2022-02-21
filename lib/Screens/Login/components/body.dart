@@ -92,7 +92,8 @@ class Body extends StatelessWidget {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => HomeScreen()));
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar( //TODO: probably want to change the implentation of this?
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    //TODO: probably want to change the implentation of this?
                     SnackBar(
                       content: Text(
                         result,
