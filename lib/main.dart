@@ -51,7 +51,10 @@ class _MyAppState extends State<MyApp> {
         primaryColor: primaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      routes: {WelcomeScreen.id: (context) => WelcomeScreen()},
+      routes: {
+        WelcomeScreen.id: (context) => WelcomeScreen(),
+        HomeScreen.id: (context) => HomeScreen(),
+      },
       home: WelcomeScreen(),
     );
   }
