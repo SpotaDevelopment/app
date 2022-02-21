@@ -3,12 +3,18 @@ import 'package:sign_ups/Components/already_have_an_account_check.dart';
 import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Components/rounded_input_field.dart';
 import 'package:sign_ups/Components/rounded_password_field.dart';
-import 'package:sign_ups/Components/skip_and_back_button.dart';
+import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/login_screen.dart';
 import 'package:sign_ups/Screens/SignUp/components/signUpBackground.dart';
+import 'package:sign_ups/auth/AuthenticationService.dart';
+import 'package:sign_ups/Components/skip_and_back_button.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
 
 class Body extends StatelessWidget {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordCheckController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -40,6 +46,7 @@ class Body extends StatelessWidget {
               Spacer(flex: 5),
             ]),
             RoundedInputField(
+              controller: usernameController,
               hintText: "Your Username",
               icon: Icons.person,
               onChanged: (value) {},
@@ -56,7 +63,9 @@ class Body extends StatelessWidget {
               ),
               Spacer(flex: 5)
             ]),
-            RoundedPasswordField(),
+            RoundedPasswordField(
+              controller: passwordController,
+            ),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
               //TODO:Figure out how to shift this to the right to match figma
               SizedBox(width: 52),
@@ -69,7 +78,9 @@ class Body extends StatelessWidget {
               ),
               Spacer(flex: 5)
             ]),
-            RoundedPasswordField(),
+            RoundedPasswordField(
+              controller: passwordCheckController,
+            ),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
               //TODO:Figure out how to shift this to the right to match figma
               Spacer(flex: 1),
@@ -83,6 +94,7 @@ class Body extends StatelessWidget {
               Spacer(flex: 5)
             ]),
             RoundedInputField(
+              controller: emailController,
               hintText: "Your Email",
               onChanged: (value) {},
               icon: Icons.email,
@@ -90,8 +102,29 @@ class Body extends StatelessWidget {
             SizedBox(height: 100),
             RoundedButton(
               //TODO: Move this down
-              text: "LOGIN",
-              pressed: () {},
+              text: "Create Account",
+              pressed: () {
+                AuthenticationService()
+                    .signUp(
+                        email: emailController.text.trim(),
+                        password: passwordController.text.trim())
+                    .then((result) {
+                  if (result == null) {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      //TODO: probably want to change the implentation of this?
+                      SnackBar(
+                        content: Text(
+                          result,
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    );
+                  }
+                });
+              },
               color: Colors.black,
               textColor: Colors.white,
             ),

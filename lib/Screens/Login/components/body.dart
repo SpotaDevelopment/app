@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sign_ups/Components/already_have_an_account_check.dart';
 import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Components/rounded_password_field.dart';
 import 'package:sign_ups/Components/skip_and_back_button.dart';
 import 'package:sign_ups/Components/text_field_container.dart';
+import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/components/background.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
+import 'package:sign_ups/auth/AuthenticationService.dart';
 import 'package:sign_ups/constants.dart';
 
 import '../../../Components/rounded_input_field.dart';
 
 class Body extends StatelessWidget {
-  const Body({
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  Body({
     Key? key,
   }) : super(key: key);
 
@@ -36,14 +42,15 @@ class Body extends StatelessWidget {
           Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
             Spacer(flex: 1),
             Text(
-              "Username",
+              "Email",
               style:
                   TextStyle(fontFamily: "Oxanium", fontWeight: FontWeight.bold),
             ),
             Spacer(flex: 5),
           ]),
           RoundedInputField(
-            hintText: "Your Username",
+            controller: emailController,
+            hintText: "Your Email",
             onChanged: (value) {},
             icon: Icons.person,
           ),
@@ -58,8 +65,9 @@ class Body extends StatelessWidget {
             Spacer(flex: 5),
           ]),
           RoundedPasswordField(
-              // onChanged: (value) {},
-              ),
+            controller: passwordController,
+            // onChanged: (value) {},
+          ),
           GestureDetector(
             onTap:
                 () {}, //TODO: Add in the transition to forgot username/password page
@@ -73,8 +81,28 @@ class Body extends StatelessWidget {
           Spacer(flex: 7),
           RoundedButton(
             //TODO: Move this down
-            text: "LOGIN",
-            pressed: () {},
+            text: "Login",
+            pressed: () {
+              AuthenticationService()
+                  .signIn(
+                      email: emailController.text.trim(),
+                      password: passwordController.text.trim())
+                  .then((result) {
+                if (result == null) {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar( //TODO: probably want to change the implentation of this?
+                    SnackBar(
+                      content: Text(
+                        result,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  );
+                }
+              });
+            },
             color: Colors.black,
             textColor: Colors.white,
           ),
