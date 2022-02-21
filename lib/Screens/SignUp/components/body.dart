@@ -7,6 +7,8 @@ import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/login_screen.dart';
 import 'package:sign_ups/Screens/SignUp/components/signUpBackground.dart';
 import 'package:sign_ups/auth/AuthenticationService.dart';
+import 'package:sign_ups/Components/skip_and_back_button.dart';
+import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
 
 class Body extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -21,7 +23,9 @@ class Body extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 75),
+            SizedBox(height: size.height * 0.07),
+            SkipButton(backScreen: null, skipScreen: SignUpScreen()),
+            SizedBox(height: size.height * 0.05),
             Text(
               "Let the Games Begin",
               style: TextStyle(

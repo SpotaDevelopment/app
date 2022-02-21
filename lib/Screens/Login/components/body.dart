@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:sign_ups/Components/already_have_an_account_check.dart';
 import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Components/rounded_password_field.dart';
+import 'package:sign_ups/Components/skip_and_back_button.dart';
 import 'package:sign_ups/Components/text_field_container.dart';
 import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/components/background.dart';
@@ -22,13 +23,14 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Background(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          // SizedBox(height:size.height*0.03), //TODO: USE SizedBox() instead of Spacer()
-          Spacer(flex: 10),
+          // SizedBox(height:size.height*0.03), //TODO: USE SizedBox() instead of
+          Spacer(flex: 3),
+          SkipButton(backScreen: SignUpScreen(), skipScreen: SignUpScreen()),
+          Spacer(flex: 6),
           Text(
             "Welcome Back",
             style: TextStyle(
@@ -60,7 +62,7 @@ class Body extends StatelessWidget {
               style:
                   TextStyle(fontFamily: "Oxanium", fontWeight: FontWeight.bold),
             ),
-            Spacer(flex: 5)
+            Spacer(flex: 5),
           ]),
           RoundedPasswordField(
             controller: passwordController,
