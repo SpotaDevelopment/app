@@ -5,6 +5,7 @@ import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Components/rounded_password_field.dart';
 import 'package:sign_ups/Components/skip_and_back_button.dart';
 import 'package:sign_ups/Components/text_field_container.dart';
+import 'package:sign_ups/Screens/ForgotInfo/forgot_info_screen.dart';
 import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/components/background.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
@@ -69,8 +70,16 @@ class Body extends StatelessWidget {
             // onChanged: (value) {},
           ),
           GestureDetector(
-            onTap:
-                () {}, //TODO: Add in the transition to forgot username/password page
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return ForgotInfoScreen(); //TODO: Change this to redirect to the choose teams page once its setup
+                  },
+                ),
+              );
+            }, //TODO: Add in the transition to forgot username/password page
             child: Text(
               "Forgot Username or Password?",
               style: TextStyle(
