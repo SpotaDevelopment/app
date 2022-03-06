@@ -7,6 +7,7 @@ class RoundedInputField extends StatelessWidget {
   final IconData icon;
   final ValueChanged<String> onChanged;
   final TextEditingController controller;
+  final onTap;
 
   const RoundedInputField({
     Key? key,
@@ -14,6 +15,7 @@ class RoundedInputField extends StatelessWidget {
     required this.icon,
     required this.onChanged,
     required this.controller,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -22,6 +24,7 @@ class RoundedInputField extends StatelessWidget {
       child: TextField(
         controller: controller,
         onChanged: onChanged,
+        onTap: onTap,
         decoration: InputDecoration(
           icon: Icon(
             icon,
