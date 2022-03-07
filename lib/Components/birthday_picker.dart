@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sign_ups/Components/rounded_input_field.dart';
+
+final TextEditingController birthdayController = TextEditingController();
 
 class BirthdayPicker extends StatefulWidget {
   const BirthdayPicker({Key? key}) : super(key: key);
@@ -16,13 +19,17 @@ class _BirthdayPickerState extends State<BirthdayPicker> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          ElevatedButton(
-            onPressed: () {
+          RoundedInputField(
+            controller: birthdayController,
+            hintText: "Tap to Select Birthday",
+            onChanged: (value) {},
+            showCursor: true,
+            readOnly: true,
+            onTap: () {
               _selectDate(context);
             },
-            child: Text("Choose Date"),
+            icon: Icons.cake,
           ),
-          Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}")
         ],
       ),
     );
@@ -32,12 +39,14 @@ class _BirthdayPickerState extends State<BirthdayPicker> {
     var selected = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime(2010),
-      lastDate: DateTime(2025),
+      firstDate: DateTime(1980),
+      lastDate: DateTime(2023),
     );
     if (selected != null && selected != selectedDate)
       setState(() {
         selectedDate = selected;
+        birthdayController.text =
+            "${selectedDate.month}/${selectedDate.day}/${selectedDate.year}";
       });
   }
 }
