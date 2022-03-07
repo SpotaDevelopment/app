@@ -8,6 +8,7 @@ import 'package:sign_ups/Components/text_field_container.dart';
 import 'package:sign_ups/Screens/ForgotInfo/forgot_info_screen.dart';
 import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/components/background.dart';
+import 'package:sign_ups/Screens/News/news_screen.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
 import 'package:sign_ups/auth/AuthenticationService.dart';
 import 'package:sign_ups/constants.dart';
@@ -30,7 +31,7 @@ class Body extends StatelessWidget {
         children: <Widget>[
           // SizedBox(height:size.height*0.03), //TODO: USE SizedBox() instead of
           Spacer(flex: 3),
-          SkipButton(backScreen: SignUpScreen(), skipScreen: SignUpScreen()),
+          SkipButton(backScreen: SignUpScreen(), skipScreen: SportsNewsPage()),
           Spacer(flex: 6),
           Text(
             "Welcome Back",
