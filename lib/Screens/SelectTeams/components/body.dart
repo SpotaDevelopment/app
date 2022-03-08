@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/already_have_an_account_check.dart';
 import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Components/rounded_password_field.dart';
+import 'package:sign_ups/Components/select_league.dart';
 import 'package:sign_ups/Screens/ForgotInfo/forgot_info_screen.dart';
 import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/SelectTeams/components/background.dart';
@@ -47,132 +48,36 @@ class Body extends StatelessWidget {
           Stack(
             clipBehavior: Clip.none,
             children: [
-              Container(
-                height: size.height * 0.07,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                      width: 2,
-                      color: Colors.black,
-                    ),
-                    bottom: BorderSide(
-                      width: 2,
-                      color: Colors.black,
-                    ),
-                  ),
-                  color: lightGrey,
-                ),
+              SelectLeague(
+                isFirstLeague: true,
               ),
-              Positioned(
-                child: Container(
-                  height: size.height * 0.07,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    border: Border(
-                      top: BorderSide(
-                        width: 2,
-                        color: Colors.black,
-                      ),
-                      bottom: BorderSide(
-                        width: 2,
-                        color: Colors.black,
-                      ),
-                    ),
-                    color: lightGrey,
-                  ),
-                ),
-                right: 0,
-                left: 0,
-                bottom: -50,
+              SelectLeague(
+                isFirstLeague: false,
+                index: 1,
               ),
-              Positioned(
-                child: Container(
-                  height: size.height * 0.07,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    border: Border(
-                      top: BorderSide(
-                        width: 2,
-                        color: Colors.black,
-                      ),
-                      bottom: BorderSide(
-                        width: 2,
-                        color: Colors.black,
-                      ),
-                    ),
-                    color: lightGrey,
-                  ),
-                ),
-                right: 0,
-                left: 0,
-                bottom: -100,
+              SelectLeague(
+                isFirstLeague: false,
+                index: 2,
               ),
-              Positioned(
-                child: Container(
-                  height: size.height * 0.07,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    border: Border(
-                      top: BorderSide(
-                        width: 2,
-                        color: Colors.black,
-                      ),
-                      bottom: BorderSide(
-                        width: 2,
-                        color: Colors.black,
-                      ),
-                    ),
-                    color: lightGrey,
-                  ),
-                ),
-                right: 0,
-                left: 0,
-                bottom: -150,
+              SelectLeague(
+                isFirstLeague: false,
+                index: 3,
               ),
-              Positioned(
-                child: Container(
-                  height: size.height * 0.07,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    border: Border(
-                      top: BorderSide(
-                        width: 2,
-                        color: Colors.black,
-                      ),
-                      bottom: BorderSide(
-                        width: 2,
-                        color: Colors.black,
-                      ),
-                    ),
-                    color: lightGrey,
-                  ),
-                ),
-                right: 0,
-                left: 0,
-                bottom: -200,
+              SelectLeague(
+                isFirstLeague: false,
+                index: 4,
               ),
-              Positioned(
-                child: Container(
-                  height: size.height * 0.07,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    border: Border(
-                      top: BorderSide(
-                        width: 2,
-                        color: Colors.black,
-                      ),
-                      bottom: BorderSide(
-                        width: 2,
-                        color: Colors.black,
-                      ),
-                    ),
-                    color: lightGrey,
-                  ),
-                ),
-                right: 0,
-                left: 0,
-                bottom: -250,
+              SelectLeague(
+                isFirstLeague: false,
+                index: 5,
+              ),
+              SelectLeague(
+                isFirstLeague: false,
+                index: 6,
+              ),
+              SelectLeague(
+                isFirstLeague: false,
+                index: 7,
               ),
             ],
           ),
