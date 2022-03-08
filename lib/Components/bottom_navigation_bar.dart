@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sign_ups/constants.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -23,32 +24,32 @@ class _BottomNavBarState extends State<BottomNavBar> {
         BottomNavigationBarItem(
           icon: Icon(Icons.newspaper, color: Colors.black, size: 32),
           backgroundColor: Colors.white,
-          label: 'News',
-          activeIcon: Icon(Icons.newspaper, color: Colors.amber, size: 32),
+          label: '',
+          activeIcon: Icon(Icons.newspaper, color: Colors.black, size: 36),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.scoreboard, color: Colors.black, size: 32),
           backgroundColor: Colors.white,
-          label: 'Scores',
-          activeIcon: Icon(Icons.scoreboard, color: Colors.amber, size: 32),
+          label: '',
+          activeIcon: Icon(Icons.scoreboard, color: Colors.black, size: 36),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.home, color: Colors.black, size: 32),
           backgroundColor: Colors.white,
-          label: 'Home',
-          activeIcon: Icon(Icons.home, color: Colors.amber, size: 32),
+          label: '',
+          activeIcon: Icon(Icons.home, color: Colors.black, size: 36),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.chat, color: Colors.black, size: 32),
           backgroundColor: Colors.white,
-          label: 'Chat',
-          activeIcon: Icon(Icons.chat, color: Colors.amber, size: 32),
+          label: '',
+          activeIcon: Icon(Icons.chat, color: Colors.black, size: 36),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person, color: Colors.black, size: 32),
           backgroundColor: Colors.white,
-          label: 'Profile',
-          activeIcon: Icon(Icons.person, color: Colors.amber, size: 32),
+          label: '',
+          activeIcon: Icon(Icons.person, color: Colors.black, size: 36),
         ),
       ],
       currentIndex: _selectedIndex,

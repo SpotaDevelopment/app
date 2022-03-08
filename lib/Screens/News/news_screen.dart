@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sign_ups/Components/leagues_toggle_buttons.dart';
+import 'package:sign_ups/Components/news_article_with_image.dart';
 import 'package:sign_ups/Components/spota_appbar.dart';
 import 'package:sign_ups/constants.dart';
-
 import '../../Components/bottom_navigation_bar.dart';
+import '../../Components/news_article_without_image.dart';
 
 class SportsNewsPage extends StatelessWidget{
   static const String path = 'lib/Screens/News/news_screen.dart';
@@ -12,83 +14,46 @@ class SportsNewsPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: SpotaAppBar(),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 16, 32, 16),
+      body: Column(
         children: <Widget>[
-          ToggleButtons(
-            fillColor: primaryColor,
-            hoverColor: primaryColor,
-            color: secondaryColor,
-            selectedColor: Colors.white,
-            borderColor: Colors.grey.shade300,
-            renderBorder: true,
-            highlightColor: secondaryColor,
-            children: <Widget>[
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                    children: const <Widget>[
-                      Text("Top News"),
-                    ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: const <Widget>[
-                    Text("NBA"),
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: const <Widget>[
-                    Text("NFL"),
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: const <Widget>[
-                    Text("MLB"),
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: const <Widget>[
-                    Text("NHL"),
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: const <Widget>[
-                    Text("NCAAF"),
-                  ],
-                ),
-              ),
-            ],
-            onPressed: (int index) {},
-            isSelected: [true, false, false, false,
-            false, false],
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: LeaguesToggleButtons(),
           ),
-      ],
+          Divider(
+            color: Colors.black),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.all(16),
+              children: <Widget>[
+                NewsArticleWithImage(
+                  title: "Spota is a sick app baby!",
+                  date: "3/7/22 1:32 PM",
+                  source: "Basketball",
+                  newsImage: "assets/images/SpotaLogo.jpeg",
+                  pressed: () {  },
+                ),
+                NewsArticleWithoutImage(
+                  title: "Spota is a dope (even without images) app baby!",
+                  date: "3/7/22 1:34 PM",
+                  source: "Basketball",
+                  pressed: () {  },
+                ),
+                NewsArticleWithImage(
+                  title: "Thank you for scrolling",
+                  date: "3/7/22 1:35 PM",
+                  source: "Basketball",
+                  newsImage: "assets/images/SpotaLogo.jpeg",
+                  pressed: () {  },
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
-      bottomNavigationBar: BottomNavBar()
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 }
