@@ -5,9 +5,13 @@ import '../constants.dart';
 class SelectLeague extends StatelessWidget {
   final bool isFirstLeague;
   final double index;
+  final Icon icon;
+  final String league;
   const SelectLeague({
     Key? key,
     required this.isFirstLeague,
+    required this.icon,
+    required this.league,
     this.index = 0,
   }) : super(key: key);
 
@@ -16,7 +20,7 @@ class SelectLeague extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     if (isFirstLeague) {
       return Container(
-        height: size.height * 0.07,
+        height: size.height * 0.065,
         width: double.infinity,
         decoration: BoxDecoration(
           border: Border(
@@ -30,6 +34,26 @@ class SelectLeague extends StatelessWidget {
             ),
           ),
           color: lightGrey,
+        ),
+        child: Row(
+          children: [
+            SizedBox(width: size.width * 0.03),
+            icon,
+            SizedBox(width: size.width * 0.03),
+            Text(
+              league,
+              style: TextStyle(
+                  fontFamily: "Oxanium",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  letterSpacing: 1.25),
+            ),
+            Spacer(),
+            Icon(
+              Icons.add_circle_outline,
+            ),
+            SizedBox(width: size.width * 0.05),
+          ],
         ),
       );
     } else {
@@ -49,6 +73,26 @@ class SelectLeague extends StatelessWidget {
               ),
             ),
             color: lightGrey,
+          ),
+          child: Row(
+            children: [
+              SizedBox(width: size.width * 0.03),
+              icon,
+              SizedBox(width: size.width * 0.03),
+              Text(
+                league,
+                style: TextStyle(
+                    fontFamily: "Oxanium",
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    letterSpacing: 1.25),
+              ),
+              Spacer(),
+              Icon(
+                Icons.add_circle_outline,
+              ),
+              SizedBox(width: size.width * 0.05),
+            ],
           ),
         ),
         right: 0,

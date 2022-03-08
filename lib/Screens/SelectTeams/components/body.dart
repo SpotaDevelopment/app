@@ -49,37 +49,55 @@ class Body extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               SelectLeague(
+                icon: Icon(Icons.sports_football_outlined),
+                league: "NFL Football",
                 isFirstLeague: true,
               ),
               SelectLeague(
+                icon: Icon(Icons.sports_basketball_outlined),
+                league: "NBA Basketball",
                 isFirstLeague: false,
                 index: 1,
               ),
               SelectLeague(
+                icon: Icon(Icons.sports_baseball_outlined),
+                league: "MLB Baseball",
                 isFirstLeague: false,
                 index: 2,
               ),
               SelectLeague(
+                icon: Icon(Icons.sports_hockey_outlined),
+                league: "NHL Hockey",
                 isFirstLeague: false,
                 index: 3,
               ),
               SelectLeague(
+                icon: Icon(Icons.sports_basketball_outlined),
+                league: "NCAA Basketball",
                 isFirstLeague: false,
                 index: 4,
               ),
               SelectLeague(
+                icon: Icon(Icons.sports_football_outlined),
+                league: "NCAA Football",
                 isFirstLeague: false,
                 index: 5,
               ),
               SelectLeague(
+                icon: Icon(Icons.sports_golf_outlined),
+                league: "PGA Golf",
                 isFirstLeague: false,
                 index: 6,
               ),
               SelectLeague(
+                icon: Icon(Icons.directions_car),
+                league: "NASCAR Racing",
                 isFirstLeague: false,
                 index: 7,
               ),
               SelectLeague(
+                icon: Icon(Icons.sports_basketball_outlined),
+                league: "WNBA Basketball",
                 isFirstLeague: false,
                 index: 8,
               ),
