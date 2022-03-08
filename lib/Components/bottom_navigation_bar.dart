@@ -22,31 +22,31 @@ class _BottomNavBarState extends State<BottomNavBar> {
       type: BottomNavigationBarType.fixed,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.newspaper, color: Colors.black, size: 32),
+          icon: Icon(Icons.newspaper_outlined , color: Colors.black, size: 36),
           backgroundColor: Colors.white,
           label: '',
-          activeIcon: Icon(Icons.newspaper, color: Colors.black, size: 36),
+          activeIcon: Icon(Icons.newspaper_sharp, color: Colors.black, size: 36),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.scoreboard, color: Colors.black, size: 32),
+          icon: Icon(Icons.scoreboard_outlined, color: Colors.black, size: 36),
           backgroundColor: Colors.white,
           label: '',
           activeIcon: Icon(Icons.scoreboard, color: Colors.black, size: 36),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.home, color: Colors.black, size: 32),
+          icon: Icon(Icons.home_outlined, color: Colors.black, size: 36),
           backgroundColor: Colors.white,
           label: '',
           activeIcon: Icon(Icons.home, color: Colors.black, size: 36),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.chat, color: Colors.black, size: 32),
+          icon: Icon(Icons.chat_outlined, color: Colors.black, size: 36),
           backgroundColor: Colors.white,
           label: '',
           activeIcon: Icon(Icons.chat, color: Colors.black, size: 36),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person, color: Colors.black, size: 32),
+          icon: Icon(Icons.person_outlined, color: Colors.black, size: 36),
           backgroundColor: Colors.white,
           label: '',
           activeIcon: Icon(Icons.person, color: Colors.black, size: 36),
