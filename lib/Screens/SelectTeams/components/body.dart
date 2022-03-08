@@ -27,24 +27,24 @@ class Body extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SizedBox(
-              height: size.height * 0.03), //TODO: USE SizedBox() instead of
+          SizedBox(height: size.height * 0.03),
           Text(
             "Pick your favorite leagues",
             style: TextStyle(
                 fontFamily: "Oxanium",
-                fontWeight: FontWeight.normal,
+                fontWeight: FontWeight.bold,
                 fontSize: 26),
           ),
           Text(
             "for updates, highlights, news, and more",
             style: TextStyle(
               fontFamily: "Oxanium",
-              fontWeight: FontWeight.normal,
+              fontWeight: FontWeight.bold,
               fontSize: 14,
               color: Colors.grey,
             ),
           ),
+          SizedBox(height: size.height * 0.03),
           Stack(
             clipBehavior: Clip.none,
             children: [
@@ -79,50 +79,22 @@ class Body extends StatelessWidget {
                 isFirstLeague: false,
                 index: 7,
               ),
+              SelectLeague(
+                isFirstLeague: false,
+                index: 8,
+              ),
             ],
           ),
-
-          Spacer(flex: 2),
+          SizedBox(
+            height: size.height * 0.5,
+          ),
           RoundedButton(
             //TODO: Move this down
-            text: "Login",
-            pressed: () {
-              AuthenticationService()
-                  .signIn(
-                      email: emailController.text.trim(),
-                      password: passwordController.text.trim())
-                  .then((result) {
-                if (result == null) {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()));
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    //TODO: probably want to change the implentation of this?
-                    SnackBar(
-                      content: Text(
-                        result,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
-                  );
-                }
-              });
-            },
-            color: Colors.black,
+            text: "Continue",
+            pressed: () {},
+            color: primaryColor,
             textColor: Colors.white,
           ),
-          AlreadyHaveAnAccountCheck(
-              login: true,
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SignUpScreen(); //TODO: Change this to redirect to the choose teams page once its setup
-                    },
-                  ),
-                );
-              }),
           Spacer(flex: 1)
         ],
       ),
