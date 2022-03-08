@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
-class SelectLeague extends StatelessWidget {
+class SelectLeague extends StatefulWidget {
   final bool isFirstLeague;
   final double index;
   final Icon icon;
@@ -16,9 +16,14 @@ class SelectLeague extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _SelectLeagueState createState() => _SelectLeagueState();
+}
+
+class _SelectLeagueState extends State<SelectLeague> {
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    if (isFirstLeague) {
+    if (widget.isFirstLeague) {
       return Container(
         height: size.height * 0.065,
         width: double.infinity,
@@ -38,10 +43,10 @@ class SelectLeague extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(width: size.width * 0.03),
-            icon,
+            widget.icon,
             SizedBox(width: size.width * 0.03),
             Text(
-              league,
+              widget.league,
               style: TextStyle(
                   fontFamily: "Oxanium",
                   fontWeight: FontWeight.bold,
@@ -77,10 +82,10 @@ class SelectLeague extends StatelessWidget {
           child: Row(
             children: [
               SizedBox(width: size.width * 0.03),
-              icon,
+              widget.icon,
               SizedBox(width: size.width * 0.03),
               Text(
-                league,
+                widget.league,
                 style: TextStyle(
                     fontFamily: "Oxanium",
                     fontWeight: FontWeight.bold,
@@ -97,7 +102,7 @@ class SelectLeague extends StatelessWidget {
         ),
         right: 0,
         left: 0,
-        bottom: -47 * index,
+        bottom: -47 * widget.index,
       );
     }
   }
