@@ -23,6 +23,28 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var leagueNames = [
+      'NFL Football',
+      'NBA Basketball',
+      'MLB Baseball',
+      'NHL Hockey',
+      'NCAA Basketball',
+      'NCAA Football',
+      'PGA Golf',
+      'NASCAR Racing',
+      'WNBA Basketball'
+    ];
+    var iconList = [
+      Icon(Icons.sports_football_outlined, color: Colors.black),
+      Icon(Icons.sports_basketball_outlined, color: Colors.black),
+      Icon(Icons.sports_baseball_outlined, color: Colors.black),
+      Icon(Icons.sports_hockey_outlined, color: Colors.black),
+      Icon(Icons.sports_basketball_outlined, color: Colors.black),
+      Icon(Icons.sports_football_outlined, color: Colors.black),
+      Icon(Icons.sports_golf_outlined, color: Colors.black),
+      Icon(Icons.directions_car, color: Colors.black),
+      Icon(Icons.sports_basketball_outlined, color: Colors.black),
+    ];
     return Background(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -45,65 +67,33 @@ class Body extends StatelessWidget {
             ),
           ),
           SizedBox(height: size.height * 0.03),
-          Stack(
-            children: [
-              SelectLeague(
-                icon: Icon(Icons.sports_football_outlined),
-                league: "NFL Football",
-                isFirstLeague: true,
-              ),
-              SelectLeague(
-                icon: Icon(Icons.sports_basketball_outlined),
-                league: "NBA Basketball",
-                isFirstLeague: false,
-                index: 1,
-              ),
-              SelectLeague(
-                icon: Icon(Icons.sports_baseball_outlined),
-                league: "MLB Baseball",
-                isFirstLeague: false,
-                index: 2,
-              ),
-              SelectLeague(
-                icon: Icon(Icons.sports_hockey_outlined),
-                league: "NHL Hockey",
-                isFirstLeague: false,
-                index: 3,
-              ),
-              SelectLeague(
-                icon: Icon(Icons.sports_basketball_outlined),
-                league: "NCAA Basketball",
-                isFirstLeague: false,
-                index: 4,
-              ),
-              SelectLeague(
-                icon: Icon(Icons.sports_football_outlined),
-                league: "NCAA Football",
-                isFirstLeague: false,
-                index: 5,
-              ),
-              SelectLeague(
-                icon: Icon(Icons.sports_golf_outlined),
-                league: "PGA Golf",
-                isFirstLeague: false,
-                index: 6,
-              ),
-              SelectLeague(
-                icon: Icon(Icons.directions_car),
-                league: "NASCAR Racing",
-                isFirstLeague: false,
-                index: 7,
-              ),
-              SelectLeague(
-                icon: Icon(Icons.sports_basketball_outlined),
-                league: "WNBA Basketball",
-                isFirstLeague: false,
-                index: 8,
-              ),
-            ],
-          ),
           SizedBox(
-            height: size.height * 0.5,
+            height: size.height * 0.6,
+            child: ListView.separated(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: 11,
+              itemBuilder: (context, index) {
+                if (index == 0 || index == 10) return const SizedBox.shrink();
+                return SizedBox(
+                  height: size.height * 0.065,
+                  child: ListTile(
+                    leading: iconList[index - 1],
+                    title: Text(leagueNames[index - 1]),
+                    tileColor: lightGrey,
+                    trailing:
+                        Icon(Icons.add_circle_outline, color: Colors.black),
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) {
+                return Divider(
+                  color: Colors.black,
+                  thickness: 1,
+                  height: 1,
+                );
+              },
+            ),
           ),
           RoundedButton(
             //TODO: Move this down
@@ -112,7 +102,6 @@ class Body extends StatelessWidget {
             color: primaryColor,
             textColor: Colors.white,
           ),
-          Spacer(flex: 1)
         ],
       ),
     );
