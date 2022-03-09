@@ -22,7 +22,7 @@ class Body extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
 
   Body({
-    Key? key,
+    Key? key, email,
   }) : super(key: key);
 
   @override
