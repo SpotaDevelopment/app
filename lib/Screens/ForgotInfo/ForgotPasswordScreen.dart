@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../Components/skip_and_back_button.dart';
+import '../SignUp/signup_screen.dart';
 import 'ConfirmEmailScreen.dart';
+import 'components/ForgotInfoBackground.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   static String id = 'forgot-password';
@@ -25,11 +28,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) {
-          return ConfirmEmailScreen(
-            message: widget.message,
-          );
-        }),
+        MaterialPageRoute(
+          builder: (context) {
+            return ConfirmEmailScreen(
+              message: widget.message,
+            );
+          },
+        ),
       );
     } catch (e) {
       print(e);
@@ -38,18 +43,31 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context)
+        .size; //This size provides us total height and width of our screen
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30.0),
+      //backgroundColor: Colors.lightBlueAccent,
+      body: Background(
+        child: Form(
+          key: _formKey,
+          //child: Padding(
+          //padding: EdgeInsets.symmetric(horizontal: 30.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              //SizedBox(
+              // height: size.height * 0.05,
+              //),
+              SkipButton(
+                  backScreen: SignUpScreen(), skipScreen: SignUpScreen()),
               Text(
-                'Email Your Email',
-                style: TextStyle(fontSize: 30, color: Colors.white),
+                "No worries, \n We wouldn't forget about you",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: "Oxanium",
+                  fontWeight: FontWeight.normal,
+                  fontSize: 27,
+                ),
               ),
               TextFormField(
                 onSaved: (newEmail) {
@@ -92,8 +110,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           ),
         ),
       ),
+      // ),
     );
   }
-
-  ConfirmEmail({required String message}) {}
 }

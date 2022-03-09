@@ -78,7 +78,7 @@ class Body extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return ForgotPasswordScreen(); //TODO: Change this to redirect to the choose teams page once its setup
+                    return ForgotInfoScreen(); //TODO: Change this to redirect to the choose teams page once its setup
                   },
                 ),
               );
