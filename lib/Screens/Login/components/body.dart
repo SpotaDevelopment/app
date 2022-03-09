@@ -15,7 +15,6 @@ import 'package:sign_ups/auth/AuthenticationService.dart';
 import 'package:sign_ups/constants.dart';
 
 import '../../../Components/rounded_input_field.dart';
-import '../../ForgotInfo/ForgotPasswordScreen.dart';
 
 class Body extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();

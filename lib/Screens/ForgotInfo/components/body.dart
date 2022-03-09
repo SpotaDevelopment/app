@@ -8,7 +8,6 @@ import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
 import 'package:sign_ups/Screens/ForgotInfo/components/ForgotInfoBackground.dart';
 
 import '../../../auth/AuthenticationService.dart';
-import '../ConfirmEmailScreen.dart';
 
 class Body extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -71,7 +70,6 @@ class Body extends StatelessWidget {
                     .passwordReset(email: emailController.text.trim())
                     .then((result) {
                   if (result == null) {
-
                     showAlertDialog(context);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
