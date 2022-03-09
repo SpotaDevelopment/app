@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sign_ups/Screens/Home/home_page.dart';
 import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/login_screen.dart';
 import 'package:sign_ups/Screens/News/news_screen.dart';
@@ -21,7 +22,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final screens = [
     const SportsNewsPage(),
     SportsScoresPage(),
-    HomeScreen(),
+    const HomePage(),
     const LoginScreen(),
     const LoginScreen(),
   ];

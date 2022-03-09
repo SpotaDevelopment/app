@@ -32,11 +32,11 @@ class SportsNewsPage extends StatelessWidget{
                   title: "Spota is a sick app baby!",
                   date: "3/7/22 1:32 PM",
                   source: "Basketball",
-                  newsImage: "assets/images/SpotaLogo.jpeg",
+                  newsImage: "assets/images/suns.jpg",
                   pressed: () {  },
                 ),
                 NewsArticleWithoutImage(
-                  title: "Spota is a dope (even without images) app baby!",
+                  title: "Spota is a dope app baby (even without images)!",
                   date: "3/7/22 1:34 PM",
                   source: "Basketball",
                   pressed: () {  },
