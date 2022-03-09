@@ -20,7 +20,10 @@ class Body extends StatelessWidget {
           SizedBox(
             height: size.height * 0.05,
           ),
-          SkipButton(backScreen: SignUpScreen(), skipScreen: SignUpScreen()),
+          SkipButton(
+              backScreen: SignUpScreen(),
+              skipScreen:
+                  SignUpScreen()), //TODO: Change this to go back to previous screen and home screen?
           SizedBox(
             height: size.height * 0.2,
           ),
