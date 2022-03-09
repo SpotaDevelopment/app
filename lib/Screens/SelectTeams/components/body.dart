@@ -46,7 +46,6 @@ class Body extends StatelessWidget {
           ),
           SizedBox(height: size.height * 0.03),
           Stack(
-            clipBehavior: Clip.none,
             children: [
               SelectLeague(
                 icon: Icon(Icons.sports_football_outlined),
