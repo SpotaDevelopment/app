@@ -15,14 +15,13 @@ import 'package:sign_ups/auth/AuthenticationService.dart';
 import 'package:sign_ups/constants.dart';
 
 import '../../../Components/rounded_input_field.dart';
-import '../../ForgotInfo/ForgotPasswordScreen.dart';
 
 class Body extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   Body({
-    Key? key,
+    Key? key, email,
   }) : super(key: key);
 
   @override
@@ -78,7 +77,7 @@ class Body extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return ForgotPasswordScreen(); //TODO: Change this to redirect to the choose teams page once its setup
+                    return ForgotInfoScreen(); //TODO: Change this to redirect to the choose teams page once its setup
                   },
                 ),
               );
