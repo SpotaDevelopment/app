@@ -105,34 +105,45 @@ class Body extends StatelessWidget {
               //TODO: Move this down
               text: "Continue",
               pressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SignUpContinue();
-                    },
-                  ),
-                );
-                // AuthenticationService()
-                //     .signUp(
-                //         email: emailController.text.trim(),
-                //         password: passwordController.text.trim())
-                //     .then((result) {
-                //   if (result == null) {
-                //     Navigator.pushReplacement(context,
-                //         MaterialPageRoute(builder: (context) => HomeScreen()));
-                //   } else {
-                //     ScaffoldMessenger.of(context).showSnackBar(
-                //       //TODO: probably want to change the implentation of this?
-                //       SnackBar(
-                //         content: Text(
-                //           result,
-                //           style: TextStyle(fontSize: 16),
-                //         ),
-                //       ),
-                //     );
-                //   }
-                // });
+                //!When the button is pressed, it calls the authentication service to sign the user up
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) {
+                //       return SignUpContinue();
+                //     },
+                //   ),
+                // );
+                AuthenticationService()
+                    .signUp(
+                        email: emailController.text.trim(),
+                        password: passwordController.text.trim(),
+                        passwordCheck: passwordCheckController.text.trim(),
+                        username: usernameController.text.trim())
+                    .then((result) {
+                  if (result == null) {
+                    // Navigator.pushReplacement(context,
+                    //   MaterialPageRoute(builder: (context) => HomeScreen()));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return SignUpContinue();
+                        },
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      //TODO: probably want to change the implentation of this?
+                      SnackBar(
+                        content: Text(
+                          result,
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    );
+                  }
+                });
               },
               color: Colors.black,
               textColor: Colors.white,
