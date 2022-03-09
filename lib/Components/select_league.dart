@@ -37,14 +37,26 @@ class _SelectLeaguesState extends State<SelectLeagues> {
     Icon(Icons.add_circle_outline, color: Colors.black),
     Icon(Icons.check_circle_outlined, color: Colors.black)
   ];
-  var iconToggleIdx = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  var colorToggle = [lightGrey, Colors.grey];
+  var iconToggleIndices = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  var colorToggleIndices = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   int indexChosen = -1;
+
   Icon getSelectionState(int index, int indexChosen) {
     if (indexChosen == index) {
-      iconToggleIdx[index] = (iconToggleIdx[index] + 1) % 2;
-      return iconToggle[iconToggleIdx[index]];
+      iconToggleIndices[index] = (iconToggleIndices[index] + 1) % 2;
+      return iconToggle[iconToggleIndices[index]];
     } else {
-      return iconToggle[iconToggleIdx[index]];
+      return iconToggle[iconToggleIndices[index]];
+    }
+  }
+
+  Color getColorState(int index, int indexChosen) {
+    if (indexChosen == index) {
+      colorToggleIndices[index] = (colorToggleIndices[index] + 1) % 2;
+      return colorToggle[colorToggleIndices[index]];
+    } else {
+      return colorToggle[colorToggleIndices[index]];
     }
   }
 
@@ -64,7 +76,7 @@ class _SelectLeaguesState extends State<SelectLeagues> {
             child: ListTile(
               leading: iconList[index - 1],
               title: Text(leagueNames[index - 1]),
-              tileColor: lightGrey,
+              tileColor: getColorState(index - 1, indexChosen - 1),
               trailing: GestureDetector(
                   child: Container(
                     child: getSelectionState(index - 1, indexChosen - 1),
