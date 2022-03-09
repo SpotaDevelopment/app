@@ -21,7 +21,7 @@ class NewsArticleWithImage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0, bottom:8.0),
       child: Card(
-        elevation: 4.0,
+        elevation: 5.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -32,10 +32,13 @@ class NewsArticleWithImage extends StatelessWidget {
                 Container(
                   height: 200.0,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(topLeft:
-                    Radius.circular(10.0), topRight: Radius.circular(10.0),
+                    border: Border(
+                      top: BorderSide(color: Colors.white, width: 16.0),
+                      right: BorderSide(color: Colors.white, width: 16.0),
+                      left: BorderSide(color: Colors.white, width: 16.0),
                     ),
                     image: DecorationImage(
+                      fit: BoxFit.fill,
                       image: AssetImage(newsImage),
                     ),
                   ),
