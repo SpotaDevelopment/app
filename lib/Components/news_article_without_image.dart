@@ -18,7 +18,7 @@ class NewsArticleWithoutImage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0, bottom:8.0),
       child: Card(
-        elevation: 4.0,
+        elevation: 5.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
