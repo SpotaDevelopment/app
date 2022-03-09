@@ -9,7 +9,7 @@ import '../../Components/news_article_without_image.dart';
 class SportsNewsPage extends StatelessWidget{
   static const String path = 'lib/Screens/News/news_screen.dart';
 
-  SportsNewsPage({Key? key}) : super(key: key);
+  const SportsNewsPage({Key? key}) : super(key: key);
 
 
   @override
@@ -26,7 +26,7 @@ class SportsNewsPage extends StatelessWidget{
             color: Colors.black),
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(8),
               children: <Widget>[
                 NewsArticleWithImage(
                   title: "Spota is a sick app baby!",
@@ -45,7 +45,7 @@ class SportsNewsPage extends StatelessWidget{
                   title: "Thank you for scrolling",
                   date: "3/7/22 1:35 PM",
                   source: "Basketball",
-                  newsImage: "assets/images/SpotaLogo.jpeg",
+                  newsImage: "assets/images/suns.jpg",
                   pressed: () {  },
                 ),
               ],

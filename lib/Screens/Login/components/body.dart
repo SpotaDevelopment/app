@@ -6,6 +6,7 @@ import 'package:sign_ups/Components/rounded_password_field.dart';
 import 'package:sign_ups/Components/skip_and_back_button.dart';
 import 'package:sign_ups/Components/text_field_container.dart';
 import 'package:sign_ups/Screens/ForgotInfo/forgot_info_screen.dart';
+
 import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/components/background.dart';
 import 'package:sign_ups/Screens/News/news_screen.dart';
@@ -14,6 +15,7 @@ import 'package:sign_ups/auth/AuthenticationService.dart';
 import 'package:sign_ups/constants.dart';
 
 import '../../../Components/rounded_input_field.dart';
+import '../../ForgotInfo/ForgotPasswordScreen.dart';
 
 class Body extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -76,7 +78,7 @@ class Body extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return ForgotInfoScreen(); //TODO: Change this to redirect to the choose teams page once its setup
+                    return ForgotPasswordScreen(); //TODO: Change this to redirect to the choose teams page once its setup
                   },
                 ),
               );

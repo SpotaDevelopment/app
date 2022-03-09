@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
           ? WelcomeScreen.id
           : HomeScreen.id,
       debugShowCheckedModeBanner: false,
-      title: 'Sign Ups',
+      title: 'Spota',
       theme: ThemeData(
         primaryColor: primaryColor,
         scaffoldBackgroundColor: Colors.white,

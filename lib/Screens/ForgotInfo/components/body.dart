@@ -27,7 +27,7 @@ class Body extends StatelessWidget {
           SizedBox(
             height: size.height * 0.2,
           ),
-          Text(
+          const Text(
             "No worries, \n We wouldn't forget about you",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -39,18 +39,20 @@ class Body extends StatelessWidget {
           SizedBox(
             height: size.height * 0.05,
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
-            //TODO:Figure out how to shift this to the right to match figma
-            Spacer(flex: 1),
-            Text(
-              "Email",
-              style: TextStyle(
-                fontFamily: "Oxanium",
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Spacer(flex: 5)
-          ]),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: const <Widget>[
+                //TODO:Figure out how to shift this to the right to match figma
+                Spacer(flex: 1),
+                Text(
+                  "Email",
+                  style: TextStyle(
+                    fontFamily: "Oxanium",
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Spacer(flex: 5)
+              ]),
           RoundedInputField(
             controller: emailController,
             hintText: "Your Email",
@@ -74,7 +76,7 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return SignUpScreen();
+                      return const SignUpScreen();
                     },
                   ),
                 );
