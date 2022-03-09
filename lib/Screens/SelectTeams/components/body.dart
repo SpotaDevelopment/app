@@ -23,28 +23,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var leagueNames = [
-      'NFL Football',
-      'NBA Basketball',
-      'MLB Baseball',
-      'NHL Hockey',
-      'NCAA Basketball',
-      'NCAA Football',
-      'PGA Golf',
-      'NASCAR Racing',
-      'WNBA Basketball'
-    ];
-    var iconList = [
-      Icon(Icons.sports_football_outlined, color: Colors.black),
-      Icon(Icons.sports_basketball_outlined, color: Colors.black),
-      Icon(Icons.sports_baseball_outlined, color: Colors.black),
-      Icon(Icons.sports_hockey_outlined, color: Colors.black),
-      Icon(Icons.sports_basketball_outlined, color: Colors.black),
-      Icon(Icons.sports_football_outlined, color: Colors.black),
-      Icon(Icons.sports_golf_outlined, color: Colors.black),
-      Icon(Icons.directions_car, color: Colors.black),
-      Icon(Icons.sports_basketball_outlined, color: Colors.black),
-    ];
+
     return Background(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -67,34 +46,7 @@ class Body extends StatelessWidget {
             ),
           ),
           SizedBox(height: size.height * 0.03),
-          SizedBox(
-            height: size.height * 0.6,
-            child: ListView.separated(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: 11,
-              itemBuilder: (context, index) {
-                if (index == 0 || index == 10) return const SizedBox.shrink();
-                return SizedBox(
-                  height: size.height * 0.065,
-                  child: ListTile(
-                    leading: iconList[index - 1],
-                    title: Text(leagueNames[index - 1]),
-                    tileColor: lightGrey,
-                    trailing:
-                        Icon(Icons.add_circle_outline, color: Colors.black),
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) {
-                return Divider(
-                  color: Colors.black,
-                  thickness: 1,
-                  height: 1,
-                );
-              },
-            ),
-          ),
+          SelectLeagues(),
           RoundedButton(
             //TODO: Move this down
             text: "Continue",

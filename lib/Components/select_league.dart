@@ -2,108 +2,89 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
-class SelectLeague extends StatefulWidget {
-  final bool isFirstLeague;
-  final double index;
-  final Icon icon;
-  final String league;
-  const SelectLeague({
-    Key? key,
-    required this.isFirstLeague,
-    required this.icon,
-    required this.league,
-    this.index = 0,
-  }) : super(key: key);
+var leagueNames = [
+  'NFL Football',
+  'NBA Basketball',
+  'MLB Baseball',
+  'NHL Hockey',
+  'NCAA Basketball',
+  'NCAA Football',
+  'PGA Golf',
+  'NASCAR Racing',
+  'WNBA Basketball'
+];
+var iconList = [
+  Icon(Icons.sports_football_outlined, color: Colors.black),
+  Icon(Icons.sports_basketball_outlined, color: Colors.black),
+  Icon(Icons.sports_baseball_outlined, color: Colors.black),
+  Icon(Icons.sports_hockey_outlined, color: Colors.black),
+  Icon(Icons.sports_basketball_outlined, color: Colors.black),
+  Icon(Icons.sports_football_outlined, color: Colors.black),
+  Icon(Icons.sports_golf_outlined, color: Colors.black),
+  Icon(Icons.directions_car, color: Colors.black),
+  Icon(Icons.sports_basketball_outlined, color: Colors.black),
+];
+
+class SelectLeagues extends StatefulWidget {
+  const SelectLeagues({Key? key}) : super(key: key);
 
   @override
-  _SelectLeagueState createState() => _SelectLeagueState();
+  State<SelectLeagues> createState() => _SelectLeaguesState();
 }
 
-class _SelectLeagueState extends State<SelectLeague> {
+class _SelectLeaguesState extends State<SelectLeagues> {
+  var iconToggle = [
+    Icon(Icons.add_circle_outline, color: Colors.black),
+    Icon(Icons.check_circle_outlined, color: Colors.black)
+  ];
+  var iconToggleIdx = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  int indexChosen = -1;
+  Icon getSelectionState(int index, int indexChosen) {
+    if (indexChosen == index) {
+      iconToggleIdx[index] = (iconToggleIdx[index] + 1) % 2;
+      return iconToggle[iconToggleIdx[index]];
+    } else {
+      return iconToggle[iconToggleIdx[index]];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    if (widget.isFirstLeague) {
-      return Container(
-        height: size.height * 0.065,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(
-              width: 2,
-              color: Colors.black,
+    return SizedBox(
+      height: size.height * 0.6,
+      child: ListView.separated(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemCount: 11,
+        itemBuilder: (context, index) {
+          if (index == 0 || index == 10) return const SizedBox.shrink();
+          return SizedBox(
+            height: size.height * 0.065,
+            child: ListTile(
+              leading: iconList[index - 1],
+              title: Text(leagueNames[index - 1]),
+              tileColor: lightGrey,
+              trailing: GestureDetector(
+                  child: Container(
+                    child: getSelectionState(index - 1, indexChosen - 1),
+                  ),
+                  onTap: () {
+                    setState(() {
+                      indexChosen = index;
+                    });
+                  }),
             ),
-            bottom: BorderSide(
-              width: 2,
-              color: Colors.black,
-            ),
-          ),
-          color: lightGrey,
-        ),
-        child: Row(
-          children: [
-            SizedBox(width: size.width * 0.03),
-            widget.icon,
-            SizedBox(width: size.width * 0.03),
-            Text(
-              widget.league,
-              style: TextStyle(
-                  fontFamily: "Oxanium",
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  letterSpacing: 1.25),
-            ),
-            Spacer(),
-            Icon(
-              Icons.add_circle_outline,
-            ),
-            SizedBox(width: size.width * 0.05),
-          ],
-        ),
-      );
-    } else {
-      return Positioned(
-        child: Container(
-          height: size.height * 0.065,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            border: Border(
-              top: BorderSide(
-                width: 2,
-                color: Colors.black,
-              ),
-              bottom: BorderSide(
-                width: 2,
-                color: Colors.black,
-              ),
-            ),
-            color: lightGrey,
-          ),
-          child: Row(
-            children: [
-              SizedBox(width: size.width * 0.03),
-              widget.icon,
-              SizedBox(width: size.width * 0.03),
-              Text(
-                widget.league,
-                style: TextStyle(
-                    fontFamily: "Oxanium",
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                    letterSpacing: 1.25),
-              ),
-              Spacer(),
-              Icon(
-                Icons.add_circle_outline,
-              ),
-              SizedBox(width: size.width * 0.05),
-            ],
-          ),
-        ),
-        right: 0,
-        left: 0,
-        bottom: -47 * widget.index,
-      );
-    }
+          );
+        },
+        separatorBuilder: (context, index) {
+          return Divider(
+            color: Colors.black,
+            thickness: 1,
+            height: 1,
+          );
+        },
+      ),
+    );
   }
 }
