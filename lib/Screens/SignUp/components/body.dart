@@ -115,7 +115,7 @@ class Body extends StatelessWidget {
                 //   ),
                 // );
                 AuthenticationService()
-                    .signUp(
+                    .createUserWithEmailAndPassword(
                         email: emailController.text.trim(),
                         password: passwordController.text.trim(),
                         passwordCheck: passwordCheckController.text.trim(),

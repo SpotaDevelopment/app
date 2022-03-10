@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
@@ -33,7 +34,7 @@ class AuthenticationService {
     //Do this later
   }
 
-  Future<String?> signUp(
+  Future<String?> createUserWithEmailAndPassword(
       {required String email,
       required String password,
       required String passwordCheck,
@@ -63,30 +64,36 @@ class AuthenticationService {
     }
   }
 
-  Future<String?> signUpNew(
-      {required String email, required String username}) async {
+  Future<String?> signUp({
+    required String email,
+    required String username,
+    required String firstName,
+    required String lastName,
+    required String birthday,
+  }) async {
     try {
       var url = Uri.parse("http://137.184.0.205:8080/users/signUp");
       Map data = {
         'email': email,
         'username': username,
       };
-      FirebaseAuth.instance.currentUser
-          ?.updateDisplayName(username); //adds users username to their account
       var body = json.encode(data);
       var response = await http.post(url,
           headers: {"content-type": "application/json"}, body: body);
-      //print('Response body: ${response.body} , ${response.statusCode}');
+      if (response.statusCode != 200) {
+        return '${response.statusCode}';
+      }
       return null;
-    } on FirebaseAuthException catch (e) {
-      return e.message;
+    } on SocketException {
+      print('No Internet connection');
+    } on FormatException {
+      print("Bad response format");
     }
   }
 
   Future<String?> passwordReset({required String email}) async {
     try {
       final user = await _firebaseAuth.sendPasswordResetEmail(email: email);
-
       return null;
     } on FirebaseAuthException catch (e) {
       return e.message;

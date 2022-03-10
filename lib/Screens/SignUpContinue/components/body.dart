@@ -94,11 +94,12 @@ class Body extends StatelessWidget {
               text: "Create an Account",
               pressed: () {
                 AuthenticationService()
-                    .signUpNew(
+                    .signUp(
                   email: email,
                   username: username,
                   firstName: firstNameController.text.trim(),
                   lastName: lastNameController.text.trim(),
+                  birthday: birthdayController.text.trim(),
                 )
                     .then((result) {
                   if (result == null) {
