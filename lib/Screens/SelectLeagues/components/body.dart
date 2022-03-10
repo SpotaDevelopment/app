@@ -5,7 +5,7 @@ import 'package:sign_ups/Components/rounded_password_field.dart';
 import 'package:sign_ups/Components/select_league.dart';
 import 'package:sign_ups/Screens/ForgotInfo/forgot_info_screen.dart';
 import 'package:sign_ups/Screens/Home/home_screen.dart';
-import 'package:sign_ups/Screens/SelectTeams/components/background.dart';
+import 'package:sign_ups/Screens/SelectLeagues/components/background.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
 import 'package:sign_ups/auth/AuthenticationService.dart';
 import 'package:sign_ups/constants.dart';

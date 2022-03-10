@@ -5,7 +5,7 @@ import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Components/rounded_input_field.dart';
 import 'package:sign_ups/Components/rounded_password_field.dart';
 import 'package:sign_ups/Screens/Login/login_screen.dart';
-import 'package:sign_ups/Screens/SelectTeams/select_teams_screen.dart';
+import 'package:sign_ups/Screens/SelectTeams/select_leagues_screen.dart';
 import 'package:sign_ups/Screens/SignUpContinue/components/signUpContinueBackground.dart';
 import 'package:sign_ups/Components/skip_and_back_button.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
@@ -89,7 +89,7 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return SelectTeams();
+                      return SelectLeagues();
                     },
                   ),
                 );
