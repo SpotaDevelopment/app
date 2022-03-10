@@ -32,6 +32,7 @@ class AuthenticationService {
   Future<String?> verifyValidUsername({required String username}) async {
     //Do this later
   }
+
   Future<String?> signUp(
       {required String email,
       required String password,
@@ -43,6 +44,7 @@ class AuthenticationService {
       try {
         await _firebaseAuth.createUserWithEmailAndPassword(
             email: email, password: password);
+
         var url = Uri.parse("http://137.184.0.205:8080/users/signUp");
         Map data = {
           'email': email,
@@ -60,4 +62,24 @@ class AuthenticationService {
       }
     }
   }
+
+  /*Future<String?> continuedOptionalSignUp({
+    required String firstName,
+    required String lastName}) async {
+
+      var url = Uri.parse("http://137.184.0.205:8080/users/signUp");
+      Map data = {
+        'firstName': firstName,
+        'lastName': lastName,
+      };
+      FirebaseAuth.instance.currentUser?.updateDisplayName(
+          username); //adds users username to their account
+      var body = json.encode(data);
+      var response = await http.post(url,
+          headers: {"content-type": "application/json"}, body: body);
+    }
+
+  Future<String?> addBirthday(
+    required String birthday
+  )*/
 }

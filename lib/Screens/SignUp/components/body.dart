@@ -104,7 +104,8 @@ class Body extends StatelessWidget {
             RoundedButton(
               //TODO: Move this down
               text: "Continue",
-              pressed: () {
+              pressed: (
+              ) {
                 //!When the button is pressed, it calls the authentication service to sign the user up
                 // Navigator.push(
                 //   context,
