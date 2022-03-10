@@ -63,27 +63,26 @@ class AuthenticationService {
     }
   }
 
-<<<<<<< HEAD
-  /*Future<String?> continuedOptionalSignUp({
-    required String firstName,
-    required String lastName}) async {
-
+  Future<String?> signUpNew(
+      {required String email, required String username}) async {
+    try {
       var url = Uri.parse("http://137.184.0.205:8080/users/signUp");
       Map data = {
-        'firstName': firstName,
-        'lastName': lastName,
+        'email': email,
+        'username': username,
       };
-      FirebaseAuth.instance.currentUser?.updateDisplayName(
-          username); //adds users username to their account
+      FirebaseAuth.instance.currentUser
+          ?.updateDisplayName(username); //adds users username to their account
       var body = json.encode(data);
       var response = await http.post(url,
           headers: {"content-type": "application/json"}, body: body);
+      //print('Response body: ${response.body} , ${response.statusCode}');
+      return null;
+    } on FirebaseAuthException catch (e) {
+      return e.message;
     }
+  }
 
-  Future<String?> addBirthday(
-    required String birthday
-  )*/
-=======
   Future<String?> passwordReset({required String email}) async {
     try {
       final user = await _firebaseAuth.sendPasswordResetEmail(email: email);
@@ -93,5 +92,4 @@ class AuthenticationService {
       return e.message;
     }
   }
->>>>>>> origin/AuthService
 }
