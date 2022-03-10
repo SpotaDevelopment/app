@@ -9,9 +9,20 @@ import 'package:sign_ups/Screens/SelectTeams/select_teams_screen.dart';
 import 'package:sign_ups/Screens/SignUpContinue/components/signUpContinueBackground.dart';
 import 'package:sign_ups/Components/skip_and_back_button.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
+import 'package:sign_ups/auth/AuthenticationService.dart';
+import 'package:sign_ups/model/UserAccount.dart';
 
 class Body extends StatelessWidget {
-  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final String email;
+  final String username;
+
+  Body({
+    Key? key,
+    required this.email,
+    required this.username,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +55,7 @@ class Body extends StatelessWidget {
               Spacer(flex: 5),
             ]),
             RoundedInputField(
-              controller: usernameController,
+              controller: firstNameController,
               hintText: "Your First Name",
               icon: Icons.person,
               onChanged: (value) {},
@@ -62,13 +73,12 @@ class Body extends StatelessWidget {
               Spacer(flex: 5)
             ]),
             RoundedInputField(
-              controller: usernameController,
+              controller: lastNameController,
               hintText: "Your Last Name",
               icon: Icons.person,
               onChanged: (value) {},
             ),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
-              //TODO:Figure out how to shift this to the right to match figma
               Spacer(flex: 1),
               Text(
                 "Birthday (optional)",
@@ -82,17 +92,35 @@ class Body extends StatelessWidget {
             BirthdayPicker(),
             SizedBox(height: 100),
             RoundedButton(
-              //TODO: Move this down
               text: "Create an Account",
               pressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SelectTeams();
-                    },
-                  ),
-                );
+                UserAccount userAccount = new UserAccount(username: username, email: email, 
+                firstName: firstNameController.text.trim(), lastName: lastNameController.text.trim(), birthday: birthdayController.text.trim());
+                AuthenticationService()
+                    .signUp(userAccount: userAccount
+                )
+                    .then((result) {
+                  if (result == null) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return SelectTeams();
+                        },
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      //TODO: probably want to change the implentation of this?
+                      SnackBar(
+                        content: Text(
+                          result,
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    );
+                  }
+                });
               },
               color: Colors.black,
               textColor: Colors.white,
