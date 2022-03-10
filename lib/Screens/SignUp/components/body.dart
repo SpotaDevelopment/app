@@ -115,7 +115,7 @@ class Body extends StatelessWidget {
                 //   ),
                 // );
                 AuthenticationService()
-                    .signUp(
+                    .createUserWithEmailAndPassword(
                         email: emailController.text.trim(),
                         password: passwordController.text.trim(),
                         passwordCheck: passwordCheckController.text.trim(),
@@ -128,7 +128,9 @@ class Body extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return SignUpContinue();
+                          return SignUpContinue(
+                              email: emailController.text.trim(),
+                              username: usernameController.text.trim());
                         },
                       ),
                     );

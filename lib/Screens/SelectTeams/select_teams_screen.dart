@@ -15,14 +15,6 @@ class SelectTeams extends StatelessWidget {
         centerTitle: true,
         leading: GestureDetector(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return SignUpContinue(); //TODO: Change this to redirect to the choose teams page once its setup
-                },
-              ),
-            );
           },
           child: Row(
             children: [
@@ -53,14 +45,6 @@ class SelectTeams extends StatelessWidget {
           Container(
             child: GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SignUpContinue(); //TODO: Change this to redirect to the choose teams page once its setup
-                    },
-                  ),
-                );
               },
               child: Row(
                 children: [
