@@ -3,6 +3,7 @@ import 'package:sign_ups/Screens/Home/home_page.dart';
 import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/login_screen.dart';
 import 'package:sign_ups/Screens/News/news_screen.dart';
+import 'package:sign_ups/Screens/Profile/personal_profile_screen.dart';
 import 'package:sign_ups/Screens/Scores/scores_screen.dart';
 import 'package:sign_ups/constants.dart';
 
@@ -23,8 +24,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
     const SportsNewsPage(),
     SportsScoresPage(),
     const HomePage(),
-    const LoginScreen(),
-    const LoginScreen(),
+    const HomePage(),
+    PersonalProfilePage(),
   ];
 
   _onTap() {
