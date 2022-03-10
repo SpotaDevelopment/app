@@ -12,6 +12,14 @@ import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
 
 class Body extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
+  final String email;
+  final String username;
+
+  Body({
+    Key? key,
+    required this.email,
+    required this.username,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
