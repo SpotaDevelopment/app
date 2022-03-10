@@ -6,6 +6,7 @@ import 'package:sign_ups/Components/rounded_password_field.dart';
 import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/login_screen.dart';
 import 'package:sign_ups/Screens/SignUp/components/signUpBackground.dart';
+import 'package:sign_ups/Screens/SignUpContinue/signup_screen_continue.dart';
 import 'package:sign_ups/auth/AuthenticationService.dart';
 import 'package:sign_ups/Components/skip_and_back_button.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
@@ -102,16 +103,35 @@ class Body extends StatelessWidget {
             SizedBox(height: 100),
             RoundedButton(
               //TODO: Move this down
-              text: "Create Account",
+              text: "Continue",
               pressed: () {
+                //!When the button is pressed, it calls the authentication service to sign the user up
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) {
+                //       return SignUpContinue();
+                //     },
+                //   ),
+                // );
                 AuthenticationService()
                     .signUp(
                         email: emailController.text.trim(),
-                        password: passwordController.text.trim())
+                        password: passwordController.text.trim(),
+                        passwordCheck: passwordCheckController.text.trim(),
+                        username: usernameController.text.trim())
                     .then((result) {
                   if (result == null) {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                    // Navigator.pushReplacement(context,
+                    //   MaterialPageRoute(builder: (context) => HomeScreen()));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return SignUpContinue();
+                        },
+                      ),
+                    );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       //TODO: probably want to change the implentation of this?

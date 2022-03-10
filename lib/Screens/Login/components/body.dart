@@ -6,6 +6,7 @@ import 'package:sign_ups/Components/rounded_password_field.dart';
 import 'package:sign_ups/Components/skip_and_back_button.dart';
 import 'package:sign_ups/Components/text_field_container.dart';
 import 'package:sign_ups/Screens/ForgotInfo/forgot_info_screen.dart';
+
 import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/components/background.dart';
 import 'package:sign_ups/Screens/News/news_screen.dart';
@@ -20,7 +21,7 @@ class Body extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
 
   Body({
-    Key? key,
+    Key? key, email,
   }) : super(key: key);
 
   @override
