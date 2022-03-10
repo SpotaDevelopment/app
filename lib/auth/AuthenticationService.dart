@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
+
+import '../model/UserAccount.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -33,7 +36,7 @@ class AuthenticationService {
     //Do this later
   }
 
-  Future<String?> signUp(
+  Future<String?> createUserWithEmailAndPassword(
       {required String email,
       required String password,
       required String passwordCheck,
@@ -45,16 +48,16 @@ class AuthenticationService {
         await _firebaseAuth.createUserWithEmailAndPassword(
             email: email, password: password);
 
-        var url = Uri.parse("http://137.184.0.205:8080/users/signUp");
-        Map data = {
-          'email': email,
-          'username': username,
-        };
         FirebaseAuth.instance.currentUser?.updateDisplayName(
             username); //adds users username to their account
-        var body = json.encode(data);
-        var response = await http.post(url,
-            headers: {"content-type": "application/json"}, body: body);
+        //var url = Uri.parse("http://137.184.0.205:8080/users/signUp");
+        /*Map data = {
+          'email': email,
+          'username': username,
+        };*/
+        //var body = json.encode(data);
+        /*var response = await http.post(url,
+            headers: {"content-type": "application/json"}, body: body);*/
         //print('Response body: ${response.body} , ${response.statusCode}');
         return null;
       } on FirebaseAuthException catch (e) {
@@ -63,23 +66,40 @@ class AuthenticationService {
     }
   }
 
-  /*Future<String?> continuedOptionalSignUp({
+  Future<String?> signUp({
+    required UserAccount userAccount
+    /*required String email,
+    required String username,
     required String firstName,
-    required String lastName}) async {
-
+    required String lastName,
+    required String birthday,*/
+  }) async {
+    try {
       var url = Uri.parse("http://137.184.0.205:8080/users/signUp");
-      Map data = {
-        'firstName': firstName,
-        'lastName': lastName,
-      };
-      FirebaseAuth.instance.currentUser?.updateDisplayName(
-          username); //adds users username to their account
-      var body = json.encode(data);
+      /*Map data = {
+        'email': email,
+        'username': username,
+      };*/
+      var body = jsonEncode(userAccount);
       var response = await http.post(url,
           headers: {"content-type": "application/json"}, body: body);
+      if (response.statusCode != 201) {
+        return '${response.statusCode}';
+      }
+      return null;
+    } on SocketException {
+      print('No Internet connection');
+    } on FormatException {
+      print("Bad response format");
     }
+  }
 
-  Future<String?> addBirthday(
-    required String birthday
-  )*/
+  Future<String?> passwordReset({required String email}) async {
+    try {
+      final user = await _firebaseAuth.sendPasswordResetEmail(email: email);
+      return null;
+    } on FirebaseAuthException catch (e) {
+      return e.message;
+    }
+  }
 }
