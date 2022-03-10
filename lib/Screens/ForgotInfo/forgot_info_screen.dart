@@ -8,7 +8,10 @@ class ForgotInfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      body: Body(),
+      resizeToAvoidBottomInset: false, // set it to false?
+      body: SingleChildScrollView(
+        child: Body(),
+      ),
     );
   }
 }

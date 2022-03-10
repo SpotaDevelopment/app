@@ -129,7 +129,9 @@ class Body extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return SignUpContinue();
+                          return SignUpContinue(
+                              email: emailController.text.trim(),
+                              username: usernameController.text.trim());
                         },
                       ),
                     );
