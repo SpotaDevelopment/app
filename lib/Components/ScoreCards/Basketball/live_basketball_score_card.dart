@@ -32,12 +32,12 @@ class LiveBasketballScoreCard extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 24, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    const SizedBox(width: 8),
+                    Spacer(),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -47,16 +47,25 @@ class LiveBasketballScoreCard extends StatelessWidget {
                         Text(awayRecord, style: TextStyle(fontSize: 12)),
                       ],
                     ),
-                    const SizedBox(width: 8),
-                    ClipRect(
+                    Spacer(),
+                    /*ClipRect(
                       child: Align(
                         heightFactor: 0.075,
                         widthFactor: 0.075,
-                        child: Image.asset("assets/images/SpotaLogo.jpeg"),
+                        child: Image.asset("assets/icons/NBA/suns.png"),
                         //child: Image.asset(awayLogo),
                       ),
+                    ),*/
+                    SizedBox(
+                      height: 61.5,
+                      width: 61.5,
+                      child: Image(
+                        //child: Image.network(favorite leagues images list[index])
+                        image: AssetImage("assets/icons/NBA/bucks.png"),
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                    const SizedBox(width: 8),
+                    Spacer(),
                     Text(awayScore, style: TextStyle(fontSize: 32,
                         fontWeight: FontWeight.bold)),
                     const SizedBox(width: 8),
@@ -68,19 +77,20 @@ class LiveBasketballScoreCard extends StatelessWidget {
                         Text(time, style: TextStyle(fontSize: 12)),
                       ],
                     ),
-                    const SizedBox(width: 8),
+                    Spacer(),
                     Text(homeScore, style: TextStyle(fontSize: 32,
                         fontWeight: FontWeight.bold)),
-                    const SizedBox(width: 8),
-                    ClipRect(
-                      child: Align(
-                        heightFactor: 0.075,
-                        widthFactor: 0.075,
-                        child: Image.asset("assets/images/SpotaLogo.jpeg"),
-                        //child: Image.asset(homeLogo),
+                    Spacer(),
+                    SizedBox(
+                      height: 61.5,
+                      width: 61.5,
+                      child: Image(
+                        //child: Image.network(favorite leagues images list[index])
+                        image: AssetImage("assets/icons/NBA/thunder.png"),
+                        fit: BoxFit.fill,
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    Spacer(),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,7 +100,7 @@ class LiveBasketballScoreCard extends StatelessWidget {
                         Text(homeRecord, style: TextStyle(fontSize: 12)),
                       ],
                     ),
-                    const SizedBox(width: 8),
+                    Spacer(),
                   ],
                 ),
               ),
