@@ -64,7 +64,7 @@ class Body extends StatelessWidget {
               //TODO:Figure out how to shift this to the right to match figma
               Spacer(flex: 1),
               Text(
-                "Password",
+                "Last Name",
                 style: TextStyle(
                   fontFamily: "Oxanium",
                   fontWeight: FontWeight.bold,
