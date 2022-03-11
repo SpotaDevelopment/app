@@ -5,6 +5,7 @@ var leagueAndTeams = [
     'league': 'NBA Basketball',
     'IconsAndTeams': [
       {
+        'id': '76ers',
         'icon': Image.asset(
           "assets/icons/NBA/76ers.png",
           color: null,
@@ -14,6 +15,7 @@ var leagueAndTeams = [
         'team': '76ers',
       },
       {
+        'id': 'bucks',
         'icon': Image.asset(
           "assets/icons/NBA/bucks.png",
           color: null,
@@ -23,6 +25,7 @@ var leagueAndTeams = [
         'team': 'Bucks',
       },
       {
+        'id': 'bulls',
         'icon': Image.asset(
           "assets/icons/NBA/bulls.png",
           color: null,
@@ -32,6 +35,7 @@ var leagueAndTeams = [
         'team': 'Bulls',
       },
       {
+        'id': 'cavaliers',
         'icon': Image.asset(
           "assets/icons/NBA/cavaliers.png",
           color: null,
@@ -41,6 +45,7 @@ var leagueAndTeams = [
         'team': 'Cavaliers',
       },
       {
+        'id': 'celtics',
         'icon': Image.asset(
           "assets/icons/NBA/celtics.png",
           color: null,
@@ -50,6 +55,7 @@ var leagueAndTeams = [
         'team': 'Celtics',
       },
       {
+        'id': 'clippers',
         'icon': Image.asset(
           "assets/icons/NBA/clippers.png",
           color: null,
@@ -59,6 +65,7 @@ var leagueAndTeams = [
         'team': 'Clippers',
       },
       {
+        'id': 'grizzlies',
         'icon': Image.asset(
           "assets/icons/NBA/grizzlies.png",
           color: null,
@@ -68,6 +75,7 @@ var leagueAndTeams = [
         'team': 'Grizzlies',
       },
       {
+        'id': 'hawks',
         'icon': Image.asset(
           "assets/icons/NBA/hawks.png",
           color: null,
@@ -77,6 +85,7 @@ var leagueAndTeams = [
         'team': 'Hawks',
       },
       {
+        'id': 'heat',
         'icon': Image.asset(
           "assets/icons/NBA/heat.png",
           color: null,
@@ -86,6 +95,7 @@ var leagueAndTeams = [
         'team': 'Heat',
       },
       {
+        'id': 'hornets',
         'icon': Image.asset(
           "assets/icons/NBA/hornets.png",
           color: null,
@@ -95,6 +105,7 @@ var leagueAndTeams = [
         'team': 'Hornets',
       },
       {
+        'id': 'jazz',
         'icon': Image.asset(
           "assets/icons/NBA/jazz.png",
           color: null,
@@ -104,6 +115,7 @@ var leagueAndTeams = [
         'team': 'Jazz',
       },
       {
+        'id': 'kings',
         'icon': Image.asset(
           "assets/icons/NBA/kings.png",
           color: null,
@@ -113,6 +125,7 @@ var leagueAndTeams = [
         'team': 'Kings',
       },
       {
+        'id': 'knicks',
         'icon': Image.asset(
           "assets/icons/NBA/knicks.png",
           color: null,
@@ -122,6 +135,7 @@ var leagueAndTeams = [
         'team': 'Knicks',
       },
       {
+        'id': 'lakers',
         'icon': Image.asset(
           "assets/icons/NBA/lakers.png",
           color: null,
@@ -131,6 +145,7 @@ var leagueAndTeams = [
         'team': 'Lakers',
       },
       {
+        'id': 'magic',
         'icon': Image.asset(
           "assets/icons/NBA/magic.png",
           color: null,
@@ -140,6 +155,7 @@ var leagueAndTeams = [
         'team': 'Magic',
       },
       {
+        'id': 'mavericks',
         'icon': Image.asset(
           "assets/icons/NBA/mavericks.png",
           color: null,
@@ -149,6 +165,7 @@ var leagueAndTeams = [
         'team': 'Mavericks',
       },
       {
+        'id': 'nets',
         'icon': Image.asset(
           "assets/icons/NBA/nets.png",
           color: null,
@@ -158,6 +175,7 @@ var leagueAndTeams = [
         'team': 'Nets',
       },
       {
+        'id': 'nuggets',
         'icon': Image.asset(
           "assets/icons/NBA/nuggets.png",
           color: null,
@@ -167,6 +185,7 @@ var leagueAndTeams = [
         'team': 'Nuggets',
       },
       {
+        'id': 'pacers',
         'icon': Image.asset(
           "assets/icons/NBA/pacers.png",
           color: null,
@@ -176,6 +195,7 @@ var leagueAndTeams = [
         'team': 'Pacers',
       },
       {
+        'id': 'pelicans',
         'icon': Image.asset(
           "assets/icons/NBA/pelicans.png",
           color: null,
@@ -185,6 +205,7 @@ var leagueAndTeams = [
         'team': 'Pelicans',
       },
       {
+        'id': 'pistons',
         'icon': Image.asset(
           "assets/icons/NBA/pistons.png",
           color: null,
@@ -194,6 +215,7 @@ var leagueAndTeams = [
         'team': 'Pistons',
       },
       {
+        'id': 'raptors',
         'icon': Image.asset(
           "assets/icons/NBA/raptors.png",
           color: null,
@@ -203,6 +225,7 @@ var leagueAndTeams = [
         'team': 'Raptors',
       },
       {
+        'id': 'rockets',
         'icon': Image.asset(
           "assets/icons/NBA/rockets.png",
           color: null,
@@ -212,6 +235,7 @@ var leagueAndTeams = [
         'team': 'Rockets',
       },
       {
+        'id': 'spurs',
         'icon': Image.asset(
           "assets/icons/NBA/spurs.png",
           color: null,
@@ -221,6 +245,7 @@ var leagueAndTeams = [
         'team': 'Spurs',
       },
       {
+        'id': 'suns',
         'icon': Image.asset(
           "assets/icons/NBA/suns.png",
           color: null,
@@ -230,6 +255,7 @@ var leagueAndTeams = [
         'team': 'Suns',
       },
       {
+        'id': 'thunder',
         'icon': Image.asset(
           "assets/icons/NBA/thunder.png",
           color: null,
@@ -239,6 +265,7 @@ var leagueAndTeams = [
         'team': 'Thunder',
       },
       {
+        'id': 'timberwolves',
         'icon': Image.asset(
           "assets/icons/NBA/timberwolves.png",
           color: null,
@@ -248,6 +275,7 @@ var leagueAndTeams = [
         'team': 'Timberwolves',
       },
       {
+        'id': 'trailBlazers',
         'icon': Image.asset(
           "assets/icons/NBA/trailBlazers.png",
           color: null,
@@ -257,6 +285,7 @@ var leagueAndTeams = [
         'team': 'Trail Blazers',
       },
       {
+        'id': 'warriors',
         'icon': Image.asset(
           "assets/icons/NBA/warriors.png",
           color: null,
@@ -266,6 +295,7 @@ var leagueAndTeams = [
         'team': 'Warriors',
       },
       {
+        'id': 'wizards',
         'icon': Image.asset(
           "assets/icons/NBA/wizards.png",
           color: null,
@@ -277,3 +307,5 @@ var leagueAndTeams = [
     ],
   },
 ];
+
+int numBasketBallTeams = 30;
