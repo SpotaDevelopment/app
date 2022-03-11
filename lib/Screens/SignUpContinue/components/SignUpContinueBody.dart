@@ -4,6 +4,7 @@ import 'package:sign_ups/Components/birthday_picker.dart';
 import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Components/rounded_input_field.dart';
 import 'package:sign_ups/Components/rounded_password_field.dart';
+import 'package:sign_ups/Components/select_league.dart';
 import 'package:sign_ups/Screens/Login/login_screen.dart';
 import 'package:sign_ups/Screens/SignUpContinue/components/signUpContinueBackground.dart';
 import 'package:sign_ups/Components/skip_and_back_button.dart';
@@ -23,7 +24,7 @@ class SignUpContinueBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: size.height * 0.1),
-            SkipButton(backScreen: SignUpScreen(), skipScreen: SignUpScreen()),
+            SkipButton(backScreen: SignUpScreen(), skipScreen: SelectLeagues()),
             SizedBox(height: size.height * 0.15),
             Text(
               "Let the Games Begin",
