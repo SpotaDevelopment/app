@@ -24,7 +24,7 @@ class _SportsScoresPageState extends State<SportsScoresPage> {
   @override
   void initState() {
     super.initState();
-    //futureGames = fetchGames();
+    //futureGames = fetchGames(); //TODO: add this back in once working
   }
 
   @override
