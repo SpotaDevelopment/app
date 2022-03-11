@@ -3,10 +3,10 @@ import 'package:sign_ups/Components/already_have_an_account_check.dart';
 import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Components/rounded_password_field.dart';
 import 'package:sign_ups/Components/select_leagues_list.dart';
+import 'package:sign_ups/Components/select_teams_list.dart';
 import 'package:sign_ups/Screens/ForgotInfo/forgot_info_screen.dart';
 import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/SelectLeagues/components/background.dart';
-import 'package:sign_ups/Screens/SelectTeams/select_teams_screen.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
 import 'package:sign_ups/auth/AuthenticationService.dart';
 import 'package:sign_ups/constants.dart';
@@ -47,19 +47,28 @@ class Body extends StatelessWidget {
             ),
           ),
           SizedBox(height: size.height * 0.03),
-          SelectLeaguesList(),
+          SelectTeamsList(
+            LeagueAndTeams: [
+              {
+                'league': 'NFL Basketball',
+                'IconsAndTeams': [
+                  {'icon': 'icon'}
+                ]
+              },
+            ],
+          ),
           RoundedButton(
             //TODO: Move this down
             text: "Continue",
             pressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return SelectTeams();
-                  },
-                ),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) {
+              //       return SelectLeagues();
+              //     },
+              //   ),
+              // );
             },
             color: primaryColor,
             textColor: Colors.white,

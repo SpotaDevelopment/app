@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sign_ups/Screens/SelectLeagues/components/body.dart';
+import 'package:sign_ups/Screens/SelectTeams/components/body.dart';
 import 'package:sign_ups/Screens/SignUpContinue/signup_screen_continue.dart';
 import '../../constants.dart';
 
-class SelectLeagues extends StatelessWidget {
-  const SelectLeagues({Key? key}) : super(key: key);
+class SelectTeams extends StatelessWidget {
+  const SelectTeams({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class SelectLeagues extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return SignUpContinue(); //TODO: Change this to redirect to the choose teams page once its setup
+                  return SignUpContinue();
                 },
               ),
             );

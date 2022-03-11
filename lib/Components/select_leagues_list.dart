@@ -25,14 +25,14 @@ var iconList = [
   Icon(Icons.sports_basketball_outlined, color: Colors.black),
 ];
 
-class SelectLeagues extends StatefulWidget {
-  const SelectLeagues({Key? key}) : super(key: key);
+class SelectLeaguesList extends StatefulWidget {
+  const SelectLeaguesList({Key? key}) : super(key: key);
 
   @override
-  State<SelectLeagues> createState() => _SelectLeaguesState();
+  State<SelectLeaguesList> createState() => _SelectLeaguesListState();
 }
 
-class _SelectLeaguesState extends State<SelectLeagues> {
+class _SelectLeaguesListState extends State<SelectLeaguesList> {
   var iconToggle = [
     Icon(Icons.add_circle_outline, color: Colors.black),
     Icon(Icons.check_circle_outlined, color: Colors.black)
