@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sign_ups/Components/menu_drawer.dart';
 import 'package:sign_ups/Screens/Welcome/welcome_screen.dart';
 import 'package:sign_ups/auth/AuthenticationService.dart';
 
@@ -15,15 +16,18 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        endDrawer: MenuDrawer(),
         body: Center(
-      child: ElevatedButton(
-        child: Text("Logout"),
-        onPressed: () {
-          AuthenticationService().signOut().then((_) =>
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => WelcomeScreen())));
-        },
-      ),
-    ));
+          child: ElevatedButton(
+            child: Text("Logout"),
+            onPressed: () {
+              AuthenticationService().signOut().then((_) =>
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WelcomeScreen())));
+            },
+          ),
+        ));
   }
 }
