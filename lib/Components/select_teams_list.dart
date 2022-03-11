@@ -78,6 +78,8 @@ class _SelectTeamsListState extends State<SelectTeamsList> {
                       title: Text(
                           leagueAndTeam['IconsAndTeams'][index - 1]['team']),
                       tileColor: lightGrey,
+                      trailing: Icon(Icons.add_circle_outline_outlined),
+                      iconColor: Colors.black,
                     ),
                   );
                 },
