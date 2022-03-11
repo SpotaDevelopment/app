@@ -4,6 +4,7 @@ import 'package:sign_ups/Components/birthday_picker.dart';
 import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Components/rounded_input_field.dart';
 import 'package:sign_ups/Components/rounded_password_field.dart';
+import 'package:sign_ups/Screens/Home/home_page.dart';
 import 'package:sign_ups/Screens/Login/login_screen.dart';
 import 'package:sign_ups/Screens/SelectTeams/select_teams_screen.dart';
 import 'package:sign_ups/Screens/SignUpContinue/components/signUpContinueBackground.dart';
@@ -29,115 +30,136 @@ class Body extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: size.height * 0.1),
-            SkipButton(backScreen: SignUpScreen(), skipScreen: SignUpScreen()),
-            SizedBox(height: size.height * 0.15),
-            Text(
-              "Let the Games Begin",
-              style: TextStyle(
-                fontFamily: "Oxanium",
-                fontWeight: FontWeight.normal,
-                fontSize: 30,
-              ),
-            ),
-            SizedBox(height: 20),
-            Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
-              Spacer(flex: 1),
-              Text(
-                "First Name",
-                style: TextStyle(
+        child: SizedBox(
+          height: size.height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: (size.height * .27), bottom: 15),
+                child: const Text(
+                  "Let the Games Begin",
+                  style: TextStyle(
                     fontFamily: "Oxanium",
-                    fontWeight: FontWeight.bold), //TODO: change this font
-              ),
-              Spacer(flex: 5),
-            ]),
-            RoundedInputField(
-              controller: firstNameController,
-              hintText: "Your First Name",
-              icon: Icons.person,
-              onChanged: (value) {},
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
-              //TODO:Figure out how to shift this to the right to match figma
-              Spacer(flex: 1),
-              Text(
-                "Password",
-                style: TextStyle(
-                  fontFamily: "Oxanium",
-                  fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 30,
+                  ),
                 ),
               ),
-              Spacer(flex: 5)
-            ]),
-            RoundedInputField(
-              controller: lastNameController,
-              hintText: "Your Last Name",
-              icon: Icons.person,
-              onChanged: (value) {},
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
-              Spacer(flex: 1),
-              Text(
-                "Birthday (optional)",
-                style: TextStyle(
-                  fontFamily: "Oxanium",
-                  fontWeight: FontWeight.bold,
+              Row(
+                  children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(left: (size.width *.1)),
+                    child: const Text(
+                      "First Name",
+                      style: TextStyle(
+                          fontFamily: "Oxanium",
+                          fontWeight: FontWeight.bold), //TODO: change this font
+                    ),
+                  ),
+                ],
+              ),
+              RoundedInputField(
+                controller: firstNameController,
+                hintText: "First Name",
+                icon: Icons.person,
+                onChanged: (value) {},
+              ),
+              Row(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(left: (size.width *.1)),
+                    child: const Text(
+                      "Last Name",
+                      style: TextStyle(
+                        fontFamily: "Oxanium",
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              RoundedInputField(
+                controller: lastNameController,
+                hintText: "Last Name",
+                icon: Icons.person,
+                onChanged: (value) {},
+              ),
+              Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(left: (size.width *.1)),
+                      child: const Text(
+                        "Birthday (optional)",
+                        style: TextStyle(
+                          fontFamily: "Oxanium",
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+              ),
+              const BirthdayPicker(),
+              //const SizedBox(height: 100),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: RoundedButton(
+                    text: "Customize Account",
+                    pressed: () {
+                      UserAccount userAccount = new UserAccount(username: username,
+                          email: email, firstName: firstNameController.text.trim(),
+                          lastName: lastNameController.text.trim(),
+                          birthday: birthdayController.text.trim());
+                      AuthenticationService()
+                          .signUp(userAccount: userAccount
+                      )
+                          .then((result) {
+                        if (result == null) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const SelectTeams();
+                              },
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            //TODO: probably want to change the implentation of this?
+                            SnackBar(
+                              content: Text(
+                                result,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ),
+                          );
+                        }
+                      });
+                    },
+                    color: Colors.black,
+                    textColor: Colors.white,
+                  ),
                 ),
               ),
-              Spacer(flex: 5)
-            ]),
-            BirthdayPicker(),
-            SizedBox(height: 100),
-            RoundedButton(
-              text: "Create an Account",
-              pressed: () {
-                UserAccount userAccount = new UserAccount(username: username, email: email, 
-                firstName: firstNameController.text.trim(), lastName: lastNameController.text.trim(), birthday: birthdayController.text.trim());
-                AuthenticationService()
-                    .signUp(userAccount: userAccount
-                )
-                    .then((result) {
-                  if (result == null) {
+              Padding(
+                padding: EdgeInsets.only(bottom: (size.height *.05)),
+                child: AlreadyHaveAnAccountCheck(
+                  login: false,
+                  press: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return SelectTeams();
+                          return const LoginScreen(); //TODO: Change this to redirect to the choose teams page once its setup
                         },
                       ),
                     );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      //TODO: probably want to change the implentation of this?
-                      SnackBar(
-                        content: Text(
-                          result,
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    );
                   }
-                });
-              },
-              color: Colors.black,
-              textColor: Colors.white,
-            ),
-            AlreadyHaveAnAccountCheck(
-                login: false,
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return LoginScreen(); //TODO: Change this to redirect to the choose teams page once its setup
-                      },
-                    ),
-                  );
-                }),
-          ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
