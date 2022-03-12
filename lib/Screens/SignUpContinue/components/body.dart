@@ -114,30 +114,40 @@ class Body extends StatelessWidget {
                           firstName: firstNameController.text.trim(),
                           lastName: lastNameController.text.trim(),
                           birthday: birthdayController.text.trim());
-                      AuthenticationService()
-                          .signUp(userAccount: userAccount)
-                          .then((result) {
-                        if (result == null) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return SelectLeagues();
-                              },
-                            ),
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            //TODO: probably want to change the implentation of this?
-                            SnackBar(
-                              content: Text(
-                                result,
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                            ),
-                          );
-                        }
-                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return SelectLeagues();
+                          },
+                        ),
+                      );
+                      // AuthenticationService()
+                      //     .signUp(userAccount: userAccount)
+                      //     .then(
+                      //   (result) {
+                      //     if (result == null) {
+                      //       Navigator.push(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //           builder: (context) {
+                      //             return SelectLeagues();
+                      //           },
+                      //         ),
+                      //       );
+                      //     } else {
+                      //       ScaffoldMessenger.of(context).showSnackBar(
+                      //         //TODO: probably want to change the implentation of this?
+                      //         SnackBar(
+                      //           content: Text(
+                      //             result,
+                      //             style: const TextStyle(fontSize: 16),
+                      //           ),
+                      //         ),
+                      //       );
+                      //     }
+                      //   },
+                      // );
                     },
                     color: Colors.black,
                     textColor: Colors.white,
