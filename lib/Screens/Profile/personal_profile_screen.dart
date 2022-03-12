@@ -4,6 +4,7 @@ import 'package:sign_ups/Components/news_article_with_image.dart';
 import 'package:sign_ups/Components/spota_appbar.dart';
 import 'package:sign_ups/constants.dart';
 import '../../../Components/bottom_navigation_bar.dart';
+import '../../Components/menu_drawer.dart';
 
 class PersonalProfilePage extends StatelessWidget {
   static const String path = 'lib/Screens/Scores/scores_screen.dart';
@@ -14,6 +15,7 @@ class PersonalProfilePage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: SpotaAppBar(),
+      endDrawer: MenuDrawer(),
       body: Column(
         children: <Widget>[
           Padding(

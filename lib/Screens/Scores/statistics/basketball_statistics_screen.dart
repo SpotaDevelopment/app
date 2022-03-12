@@ -8,6 +8,7 @@ import 'package:sign_ups/constants.dart';
 import '../../../Components/ScoreCards/Basketball/future_basketball_score_card.dart';
 import '../../../Components/ScoreCards/Basketball/live_basketball_score_card.dart';
 import '../../../Components/bottom_navigation_bar.dart';
+import '../../../Components/menu_drawer.dart';
 
 class BasketBallStatisticsPage extends StatelessWidget {
   static const String path = 'lib/Screens/Scores/scores_screen.dart';
@@ -17,6 +18,7 @@ class BasketBallStatisticsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const SpotaAppBar(),
+      endDrawer: MenuDrawer(),
       body: Column(
         children: <Widget>[
           Padding(
