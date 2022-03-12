@@ -66,14 +66,13 @@ class AuthenticationService {
     }
   }
 
-  Future<String?> signUp({
-    required UserAccount userAccount
-    /*required String email,
+  Future<String?> signUp({required UserAccount userAccount
+      /*required String email,
     required String username,
     required String firstName,
     required String lastName,
     required String birthday,*/
-  }) async {
+      }) async {
     try {
       var url = Uri.parse("http://137.184.0.205:8080/users/signUp");
       /*Map data = {
