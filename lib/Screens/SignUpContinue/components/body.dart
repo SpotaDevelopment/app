@@ -108,7 +108,7 @@ class Body extends StatelessWidget {
                   child: RoundedButton(
                     text: "Customize Account",
                     pressed: () {
-                      UserAccount userAccount = new UserAccount(
+                      userAccount = new UserAccount(
                           username: username,
                           email: email,
                           firstName: firstNameController.text.trim(),
