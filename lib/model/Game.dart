@@ -140,8 +140,8 @@ Future<List<Game>> fetchGames() async {
   } else {
     //TODO: no user logged in
   }
-  final response = await http.get(
-      Uri.parse("http://" + serverDomain + "users/getScores/" + user_email));
+  final response =
+      await http.get(Uri.parse(serverDomain + "users/getScores/" + user_email));
   if (response.statusCode == 200) {
     Iterable l = json.decode(response.body);
     List<Game> returns =
