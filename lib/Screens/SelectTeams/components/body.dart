@@ -52,6 +52,7 @@ class Body extends StatelessWidget {
           RoundedButton(
             text: "Continue",
             pressed: () {
+              print(userAccount.email);
               AuthenticationService()
                   .addTeamSubscriptions(
                 selectedTeams: selectedBasketballTeams,

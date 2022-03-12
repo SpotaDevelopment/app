@@ -68,6 +68,7 @@ class AuthenticationService {
 
   Future<String?> signUp({required UserAccount userAccount}) async {
     try {
+      print(userAccount.email);
       var url = Uri.parse("http://137.184.0.205:8080/users/signUp");
       var body = jsonEncode(userAccount);
       var response = await http.post(url,
@@ -95,14 +96,13 @@ class AuthenticationService {
   Future<String?> addTeamSubscription(
       {required String teamName, required String email}) async {
     try {
-      var url = Uri.parse("http://137.184.0.205:8080{teamName}/{email}");
-      var object = {
-        'teamName': teamName,
-        'email': email,
-      };
-      var body = jsonEncode(object);
-      var response = await http.post(url,
-          headers: {"content-type": "application/json"}, body: body);
+      var url = Uri.parse("http://137.184.0.205:8080/users/teamSubscription/" +
+          teamName +
+          "/" +
+          email);
+      var response =
+          await http.post(url, headers: {"content-type": "application/json"});
+      print('Response body: ${response.body} , ${response.statusCode}');
       if (response.statusCode != 201) {
         return '${response.statusCode}';
       }
@@ -117,6 +117,7 @@ class AuthenticationService {
   Future<String?> addTeamSubscriptions(
       {required var selectedTeams, required String email}) async {
     for (int i = 0; i < selectedTeams.length; i++) {
+      print(userAccount.email);
       addTeamSubscription(teamName: selectedTeams[i], email: email);
     }
   }
