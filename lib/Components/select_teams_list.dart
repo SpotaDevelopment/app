@@ -147,6 +147,9 @@ class _SelectTeamsListState extends State<SelectTeamsList> {
             setState(() {
               isOpen = !isOpen;
             });
+            for (int i = 0; i < selectedBasketballTeams.length; i++) {
+              print(selectedBasketballTeams[i]);
+            }
           },
         ),
       ),
