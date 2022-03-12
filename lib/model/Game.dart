@@ -92,7 +92,7 @@ class Game {
 
   String toJson() => json.encode(toMap());
 
-  factory Game.fromJson(String source) => Game.fromMap(json.decode(source));
+  factory Game.fromJson(String a) => Game.fromMap(json.decode(a));
 
   @override
   String toString() {
@@ -135,19 +135,36 @@ class Game {
 
 Future<List<Game>> fetchGames() async {
   var user_email = "";
+  var link = "";
   if (FirebaseAuth.instance.currentUser != null) {
     user_email = FirebaseAuth.instance.currentUser!.email.toString();
+    link = serverDomain + "users/getScores/" + user_email;
   } else {
-    //TODO: no user logged in
+    print("went into getGeneralScores");
+    link = serverDomain + "users/getGeneralScores"; //no user is logged in
   }
-  final response =
-      await http.get(Uri.parse(serverDomain + "users/getScores/" + user_email));
+  final response = await http.get(Uri.parse(link));
   if (response.statusCode == 200) {
-    Iterable l = json.decode(response.body);
-    List<Game> returns =
-        List<Game>.from(l.map((model) => Game.fromJson(model)));
-    print(returns.length);
-    return returns;
+    //Iterable l = json.decode(response.body);
+    var jsonData = json.decode(response.body);
+    //List<Game> returns =   List<Game>.from(l.map((model) => Game.fromJson(model)));
+    List<Game> games = [];
+    for (var g in jsonData) {
+      Game game = Game(
+          homeTeamName: g["homeTeamName"],
+          homeTeamAbrv: g["homeTeamAbrv"],
+          awayTeamName: g["awayTeamName"],
+          awayTeamAbrv: g["awayTeamAbrv"],
+          date: g["date"],
+          homeTeamScore: g["homeTeamScore"],
+          awayTeamScore: g["awayTeamScore"],
+          homeTeamWins: g["homeTeamWins"],
+          homeTeamLosses: g["homeTeamLosses"],
+          awayTeamWins: g["awayTeamWins"],
+          awayTeamLosses: g["awayTeamLosses"]);
+      games.add(game);
+    }
+    return games;
   } else {
     print(response.body);
     throw Exception('Failed to load games');
