@@ -21,14 +21,14 @@ class SignUpContinue extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-      backgroundColor: Colors.transparent,
-      automaticallyImplyLeading: false,
-      centerTitle: false,
-      elevation: 0,
-      actions: <Widget>[
-        SkipButton(backScreen: const SignUpScreen(), skipScreen: const HomePage()),
-      ],
-    ),
+        backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+        centerTitle: false,
+        elevation: 0,
+        actions: <Widget>[
+          SkipButton(backScreen: const SignUpScreen(), skipScreen: HomePage()),
+        ],
+      ),
       body: Body(email: email, username: username),
     );
   }

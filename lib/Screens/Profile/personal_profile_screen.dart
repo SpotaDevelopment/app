@@ -13,7 +13,7 @@ class PersonalProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: const SpotaAppBar(),
+      appBar: SpotaAppBar(),
       body: Column(
         children: <Widget>[
           Padding(

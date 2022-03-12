@@ -4,8 +4,8 @@ import '../../Components/bottom_navigation_bar.dart';
 import '../../Components/menu_drawer.dart';
 import '../../Components/spota_appbar.dart';
 
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+class ChatPage extends StatelessWidget {
+  const ChatPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class SettingsScreen extends StatelessWidget {
       endDrawer: MenuDrawer(),
       body: const Center(
         child: Text(
-          'This is the settings screen',
+          'This is the chat page',
           style: TextStyle(fontSize: 24),
         ),
       ),

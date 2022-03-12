@@ -17,14 +17,32 @@ class MenuDrawer extends StatelessWidget {
       child: Material(
         color: primaryColor,
         child: ListView(
+          //ListView.Seperated? to include Dividers
           padding: padding,
           children: <Widget>[
-            const SizedBox(
-              height: 40,
+            Container(
+              height: 120.0,
+              child: DrawerHeader(
+                margin: EdgeInsets.all(0.0),
+                padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                decoration: BoxDecoration(color: primaryColor),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Menu',
+                        style: TextStyle(fontSize: 30, color: Colors.white)),
+                    IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon:
+                          const Icon(Icons.menu, color: Colors.white, size: 36),
+                    )
+                  ],
+                ),
+              ),
             ),
             Divider(color: Colors.white),
             const SizedBox(
-              height: 10,
+              height: 5,
             ),
             buildMenuItem(
               text: 'Notifications',
@@ -32,55 +50,55 @@ class MenuDrawer extends StatelessWidget {
               onClicked: () => selectedItem(context, 0),
             ),
             const SizedBox(
-              height: 10,
+              height: 5,
             ),
             Divider(color: Colors.white),
             const SizedBox(
-              height: 10,
+              height: 5,
             ),
             buildMenuItem(
-                text: 'Settings',
-                icon: Icons.settings,
+                text: 'Groups',
+                icon: Icons.group,
                 onClicked: () => selectedItem(context, 1)),
             const SizedBox(
-              height: 10,
+              height: 5,
             ),
             Divider(color: Colors.white),
             const SizedBox(
-              height: 10,
+              height: 5,
             ),
             buildMenuItem(
                 text: 'Favorite Posts',
                 icon: Icons.favorite,
                 onClicked: () => selectedItem(context, 2)),
             const SizedBox(
-              height: 10,
+              height: 5,
             ),
             Divider(color: Colors.white),
             const SizedBox(
-              height: 10,
+              height: 5,
             ),
             buildMenuItem(
-                text: 'Groups',
-                icon: Icons.group,
+                text: 'Settings',
+                icon: Icons.settings,
                 onClicked: () => selectedItem(context, 3)),
             const SizedBox(
-              height: 10,
+              height: 5,
             ),
             Divider(color: Colors.white),
             const SizedBox(
-              height: 10,
+              height: 5,
             ),
             buildMenuItem(
                 text: 'Sign Out',
                 icon: Icons.person,
                 onClicked: () => selectedItem(context, 4)),
             const SizedBox(
-              height: 10,
+              height: 5,
             ),
             Divider(color: Colors.white),
             const SizedBox(
-              height: 10,
+              height: 5,
             ),
           ],
         ),
@@ -103,25 +121,19 @@ class MenuDrawer extends StatelessWidget {
 
   void selectedItem(BuildContext context, int index) {
     Navigator.of(context).pop(); //closes the drawer
+    List<Widget> screens = [
+      NotificationsScreen(),
+      FavoritePostsScreen(),
+      GroupsScreen(),
+      const SettingsScreen(),
+    ];
     switch (index) {
       case 0:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => NotificationsScreen(),
-        ));
-        break;
       case 1:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const SettingsScreen(),
-        ));
-        break;
       case 2:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => FavoritePostsScreen(),
-        ));
-        break;
       case 3:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => GroupsScreen(),
+          builder: (context) => screens[index],
         ));
         break;
       case 4:
