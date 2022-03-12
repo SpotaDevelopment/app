@@ -149,6 +149,7 @@ Future<List<Game>> fetchGames() async {
     print(returns.length);
     return returns;
   } else {
+    print(response.body);
     throw Exception('Failed to load games');
   }
 }
