@@ -39,9 +39,9 @@ class Body extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Row(
-                  children: <Widget>[
+                children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(left: (size.width *.1)),
+                    padding: EdgeInsets.only(left: (size.width * .1)),
                     child: Text(
                       "Username",
                       style: TextStyle(
@@ -61,7 +61,7 @@ class Body extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(left: (size.width *.1)),
+                    padding: EdgeInsets.only(left: (size.width * .1)),
                     child: Text(
                       "Password",
                       style: TextStyle(
@@ -76,9 +76,9 @@ class Body extends StatelessWidget {
                 controller: passwordController,
               ),
               Row(
-                  children: <Widget>[
+                children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(left: (size.width *.1)),
+                    padding: EdgeInsets.only(left: (size.width * .1)),
                     child: Text(
                       "Confirm Password",
                       style: TextStyle(
@@ -92,18 +92,17 @@ class Body extends StatelessWidget {
               RoundedPasswordField(
                 controller: passwordCheckController,
               ),
-              Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(left: (size.width *.1)),
-                      child: Text(
-                        "Email",
-                        style: TextStyle(
-                          fontFamily: "Oxanium",
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+              Row(children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(left: (size.width * .1)),
+                  child: Text(
+                    "Email",
+                    style: TextStyle(
+                      fontFamily: "Oxanium",
+                      fontWeight: FontWeight.bold,
                     ),
+                  ),
+                ),
               ]),
               RoundedInputField(
                 controller: emailController,
@@ -130,7 +129,8 @@ class Body extends StatelessWidget {
                           .createUserWithEmailAndPassword(
                               email: emailController.text.trim(),
                               password: passwordController.text.trim(),
-                              passwordCheck: passwordCheckController.text.trim(),
+                              passwordCheck:
+                                  passwordCheckController.text.trim(),
                               username: usernameController.text.trim())
                           .then((result) {
                         if (result == null) {
@@ -165,7 +165,7 @@ class Body extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(bottom: (size.height *.025)),
+                padding: EdgeInsets.only(bottom: (size.height * .025)),
                 child: AlreadyHaveAnAccountCheck(
                     login: false,
                     press: () {

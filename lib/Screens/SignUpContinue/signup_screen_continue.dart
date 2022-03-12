@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sign_ups/Components/select_league.dart';
 import 'package:sign_ups/Screens/Home/home_page.dart';
 import 'package:sign_ups/Screens/SignUpContinue/components/Body.dart';
 
@@ -21,14 +20,15 @@ class SignUpContinue extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-      backgroundColor: Colors.transparent,
-      automaticallyImplyLeading: false,
-      centerTitle: false,
-      elevation: 0,
-      actions: <Widget>[
-        SkipButton(backScreen: const SignUpScreen(), skipScreen: const HomePage()),
-      ],
-    ),
+        backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+        centerTitle: false,
+        elevation: 0,
+        actions: <Widget>[
+          SkipButton(
+              backScreen: const SignUpScreen(), skipScreen: const HomePage()),
+        ],
+      ),
       body: Body(email: email, username: username),
     );
   }
