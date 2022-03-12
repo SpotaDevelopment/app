@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sign_ups/Screens/SelectTeams/components/body.dart';
+import 'package:sign_ups/Screens/SelectLeagues/components/body.dart';
 import 'package:sign_ups/Screens/SignUpContinue/signup_screen_continue.dart';
 import '../../constants.dart';
 
-class SelectTeams extends StatelessWidget {
-  var selectedBasketballTeams;
-  var colorToggleIndices;
-
-  SelectTeams({
-    Key? key,
-  }) : super(key: key);
+class SelectLeagues extends StatelessWidget {
+  const SelectLeagues({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +14,14 @@ class SelectTeams extends StatelessWidget {
         leadingWidth: 100,
         centerTitle: true,
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) {},
+            //   ),
+            // );
+          },
           child: Row(
             children: [
               Icon(
@@ -48,7 +50,14 @@ class SelectTeams extends StatelessWidget {
         actions: [
           Container(
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) {},
+                //   ),
+                // );
+              },
               child: Row(
                 children: [
                   Text(

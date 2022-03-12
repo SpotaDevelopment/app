@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
 import 'package:sign_ups/Screens/Welcome/components/body.dart';
+
+import '../../Components/skip_and_back_button.dart';
 
 class WelcomeScreen extends StatelessWidget {
   static var id = 'welcome';
@@ -8,8 +11,17 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+        centerTitle: false,
+        elevation: 0,
+        actions: <Widget>[
+          SkipButton(skipScreen: SignUpScreen(), backScreen: null,),
+        ],
+      ),
       body: Body(),
     );
   }

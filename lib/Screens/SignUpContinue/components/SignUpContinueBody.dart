@@ -5,6 +5,7 @@ import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Components/rounded_input_field.dart';
 import 'package:sign_ups/Components/rounded_password_field.dart';
 import 'package:sign_ups/Screens/Login/login_screen.dart';
+import 'package:sign_ups/Screens/SelectLeagues/select_leagues_screen.dart';
 import 'package:sign_ups/Screens/SignUpContinue/components/signUpContinueBackground.dart';
 import 'package:sign_ups/Components/skip_and_back_button.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
@@ -23,7 +24,7 @@ class SignUpContinueBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: size.height * 0.1),
-            SkipButton(backScreen: SignUpScreen(), skipScreen: SignUpScreen()),
+            SkipButton(backScreen: SignUpScreen(), skipScreen: SelectLeagues()),
             SizedBox(height: size.height * 0.15),
             Text(
               "Let the Games Begin",
@@ -68,8 +69,7 @@ class SignUpContinueBody extends StatelessWidget {
               controller: lastNameController,
               hintText: "Your Last Name",
               icon: Icons.person,
-              onChanged: (lastName) {
-              },
+              onChanged: (lastName) {},
             ),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
               //TODO:Figure out how to shift this to the right to match figma
@@ -91,7 +91,7 @@ class SignUpContinueBody extends StatelessWidget {
               pressed: () {
                 String firstName = firstNameController.text.trim();
                 String lastName = lastNameController.text.trim();
-                
+
                 // Navigator.push(
                 //   context,
                 //   MaterialPageRoute(
