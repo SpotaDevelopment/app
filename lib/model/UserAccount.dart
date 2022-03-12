@@ -12,17 +12,18 @@ class UserAccount {
       required this.email,
       required this.firstName,
       required this.lastName,
-      required this.birthday
-  });
+      required this.birthday});
   Map toJson() => {
-    'username': username,
-    'email': email,
-    'firstName': firstName,
-    'lastName': lastName,
-    'birthday': birthday
-  };
+        'username': username,
+        'email': email,
+        'firstName': firstName,
+        'lastName': lastName,
+        'birthday': birthday
+      };
 
   void addBirthday(String birthday) {
     this.birthday = birthday;
   }
 }
+
+var userAccount;

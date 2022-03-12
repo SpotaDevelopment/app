@@ -5,12 +5,14 @@ import 'package:sign_ups/Components/rounded_password_field.dart';
 import 'package:sign_ups/Components/select_leagues_list.dart';
 import 'package:sign_ups/Components/select_teams_list.dart';
 import 'package:sign_ups/Screens/ForgotInfo/forgot_info_screen.dart';
+import 'package:sign_ups/Screens/Home/home_page.dart';
 import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/SelectTeams/components/background.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
 import 'package:sign_ups/Screens/Welcome/welcome_screen.dart';
 import 'package:sign_ups/auth/AuthenticationService.dart';
 import 'package:sign_ups/constants.dart';
+import 'package:sign_ups/model/UserAccount.dart';
 import 'package:sign_ups/model/leagues.dart';
 
 import '../../../Components/rounded_input_field.dart';
@@ -50,11 +52,41 @@ class Body extends StatelessWidget {
           RoundedButton(
             text: "Continue",
             pressed: () {
+              print(userAccount.email);
+              AuthenticationService()
+                  .addTeamSubscriptions(
+                selectedTeams: selectedBasketballTeams,
+                email: userAccount.email,
+              )
+                  .then(
+                (result) {
+                  if (result == null) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return HomePage();
+                        },
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      //TODO: probably want to change the implentation of this?
+                      SnackBar(
+                        content: Text(
+                          result,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    );
+                  }
+                },
+              );
               // Navigator.push(
               //   context,
               //   MaterialPageRoute(
               //     builder: (context) {
-
+              //          return HomePage();
               //     },
               //   ),
               // );

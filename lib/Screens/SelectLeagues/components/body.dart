@@ -57,6 +57,9 @@ class Body extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
+                    colorToggleIndices = [];
+                    iconToggleIndices = [];
+                    selectedBasketballTeams = [];
                     for (int i = 0; i < basketballIconsAndTeams.length; i++) {
                       colorToggleIndices.add(0);
                       iconToggleIndices.add(0);

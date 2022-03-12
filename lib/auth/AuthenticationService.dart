@@ -66,19 +66,10 @@ class AuthenticationService {
     }
   }
 
-  Future<String?> signUp({required UserAccount userAccount
-      /*required String email,
-    required String username,
-    required String firstName,
-    required String lastName,
-    required String birthday,*/
-      }) async {
+  Future<String?> signUp({required UserAccount userAccount}) async {
     try {
+      print(userAccount.email);
       var url = Uri.parse("http://137.184.0.205:8080/users/signUp");
-      /*Map data = {
-        'email': email,
-        'username': username,
-      };*/
       var body = jsonEncode(userAccount);
       var response = await http.post(url,
           headers: {"content-type": "application/json"}, body: body);
@@ -99,6 +90,35 @@ class AuthenticationService {
       return null;
     } on FirebaseAuthException catch (e) {
       return e.message;
+    }
+  }
+
+  Future<String?> addTeamSubscription(
+      {required String teamName, required String email}) async {
+    try {
+      var url = Uri.parse("http://137.184.0.205:8080/users/teamSubscription/" +
+          teamName +
+          "/" +
+          email);
+      var response =
+          await http.post(url, headers: {"content-type": "application/json"});
+      print('Response body: ${response.body} , ${response.statusCode}');
+      if (response.statusCode != 201) {
+        return '${response.statusCode}';
+      }
+      return null;
+    } on SocketException {
+      print('No Internet connection');
+    } on FormatException {
+      print("Bad response format");
+    }
+  }
+
+  Future<String?> addTeamSubscriptions(
+      {required var selectedTeams, required String email}) async {
+    for (int i = 0; i < selectedTeams.length; i++) {
+      print(userAccount.email);
+      addTeamSubscription(teamName: selectedTeams[i], email: email);
     }
   }
 }

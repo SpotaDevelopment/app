@@ -121,7 +121,7 @@ class Body extends StatelessWidget {
                       //   context,
                       //   MaterialPageRoute(
                       //     builder: (context) {
-                      //       return SignUpContinue();
+                      //       return SignUpContinue(email: "", username: "");
                       //     },
                       //   ),
                       // );
@@ -132,32 +132,34 @@ class Body extends StatelessWidget {
                               passwordCheck:
                                   passwordCheckController.text.trim(),
                               username: usernameController.text.trim())
-                          .then((result) {
-                        if (result == null) {
-                          // Navigator.pushReplacement(context,
-                          //   MaterialPageRoute(builder: (context) => HomeScreen()));
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return SignUpContinue(
-                                    email: emailController.text.trim(),
-                                    username: usernameController.text.trim());
-                              },
-                            ),
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            //TODO: probably want to change the implentation of this?
-                            SnackBar(
-                              content: Text(
-                                result,
-                                style: TextStyle(fontSize: 16),
+                          .then(
+                        (result) {
+                          if (result == null) {
+                            // Navigator.pushReplacement(context,
+                            //   MaterialPageRoute(builder: (context) => HomeScreen()));
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return SignUpContinue(
+                                      email: emailController.text.trim(),
+                                      username: usernameController.text.trim());
+                                },
                               ),
-                            ),
-                          );
-                        }
-                      });
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              //TODO: probably want to change the implentation of this?
+                              SnackBar(
+                                content: Text(
+                                  result,
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                      );
                     },
                     color: Colors.black,
                     textColor: Colors.white,

@@ -24,10 +24,10 @@ class _SelectTeamsListState extends State<SelectTeamsList> {
       iconToggleIndices[index] = (iconToggleIndices[index] + 1) % 2;
       if (iconToggleIndices[index] == 1) {
         selectedBasketballTeams
-            .add(leagueAndTeam['IconsAndTeams'][index]['id']);
+            .add(leagueAndTeam['IconsAndTeams'][index]['team']);
       } else {
         int idx = selectedBasketballTeams
-            .indexOf(leagueAndTeam['IconsAndTeams'][index]['id']);
+            .indexOf(leagueAndTeam['IconsAndTeams'][index]['team']);
         selectedBasketballTeams.removeAt(idx);
       }
       for (int i = 0; i < selectedBasketballTeams.length; i++) {
