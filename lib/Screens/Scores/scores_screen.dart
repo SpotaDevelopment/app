@@ -25,6 +25,47 @@ class _SportsScoresPageState extends State<SportsScoresPage> {
   @override
   void initState() {
     super.initState();
+    futureGames = fetchGames(); //TODO: add this back in once working
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: SpotaAppBar(),
+      endDrawer: MenuDrawer(),
+      body: Container(
+        child: FutureBuilder(
+          future: futureGames,
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                      title: Text(snapshot.data[index].homeTeamName));
+                  //var now = DateTime.now();
+                  //if(now.isAfter(snapshot.data[index].date)) //future game
+                  //{
+
+                  //}
+                },
+              );
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            }
+            return const CircularProgressIndicator();
+          },
+        ),
+      ),
+    );
+  }
+}
+/*class _SportsScoresPageState extends State<SportsScoresPage> {
+  late Future<List<Game>> futureGames;
+
+  @override
+  void initState() {
+    super.initState();
     //futureGames = fetchGames(); //TODO: add this back in once working
   }
 
@@ -101,4 +142,4 @@ class _SportsScoresPageState extends State<SportsScoresPage> {
       bottomNavigationBar: const BottomNavBar(),
     );
   }
-}
+}*/

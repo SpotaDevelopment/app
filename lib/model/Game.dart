@@ -144,7 +144,10 @@ Future<List<Game>> fetchGames() async {
       Uri.parse("http://" + serverDomain + "users/getScores/" + user_email));
   if (response.statusCode == 200) {
     Iterable l = json.decode(response.body);
-    return List<Game>.from(l.map((model) => Game.fromJson(model)));
+    List<Game> returns =
+        List<Game>.from(l.map((model) => Game.fromJson(model)));
+    print(returns.length);
+    return returns;
   } else {
     throw Exception('Failed to load games');
   }
