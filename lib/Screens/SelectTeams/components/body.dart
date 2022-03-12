@@ -15,9 +15,6 @@ import 'package:sign_ups/model/leagues.dart';
 import '../../../Components/rounded_input_field.dart';
 
 class Body extends StatelessWidget {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final String path = "assets/icons/NBA";
   Body({
     Key? key,
   }) : super(key: key);
@@ -48,11 +45,8 @@ class Body extends StatelessWidget {
             ),
           ),
           SizedBox(height: size.height * 0.03),
-          SelectTeamsList(
-            leagueAndTeams: leagueAndTeams,
-          ),
+          SelectTeamsList(),
           RoundedButton(
-            //TODO: Move this down
             text: "Continue",
             pressed: () {
               // Navigator.push(

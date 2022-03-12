@@ -4,7 +4,12 @@ import 'package:sign_ups/Screens/SignUpContinue/signup_screen_continue.dart';
 import '../../constants.dart';
 
 class SelectTeams extends StatelessWidget {
-  const SelectTeams({Key? key}) : super(key: key);
+  var selectedBasketballTeams;
+  var colorToggleIndices;
+
+  SelectTeams({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

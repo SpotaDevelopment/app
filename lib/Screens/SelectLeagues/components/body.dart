@@ -10,6 +10,7 @@ import 'package:sign_ups/Screens/SelectTeams/select_teams_screen.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
 import 'package:sign_ups/auth/AuthenticationService.dart';
 import 'package:sign_ups/constants.dart';
+import 'package:sign_ups/model/leagues.dart';
 
 import '../../../Components/rounded_input_field.dart';
 
@@ -56,6 +57,10 @@ class Body extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
+                    for (int i = 0; i < basketballIconsAndTeams.length; i++) {
+                      colorToggleIndices.add(0);
+                      iconToggleIndices.add(0);
+                    }
                     return SelectTeams();
                   },
                 ),

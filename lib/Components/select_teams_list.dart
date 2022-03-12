@@ -1,15 +1,53 @@
 import 'package:flutter/material.dart';
-
+import 'package:sign_ups/model/leagues.dart';
 import '../constants.dart';
 
 class SelectTeamsList extends StatefulWidget {
-  var leagueAndTeams;
-  SelectTeamsList({Key? key, required this.leagueAndTeams}) : super(key: key);
+  SelectTeamsList({
+    Key? key,
+  }) : super(key: key);
   @override
   State<SelectTeamsList> createState() => _SelectTeamsListState();
 }
 
 class _SelectTeamsListState extends State<SelectTeamsList> {
+  bool isOpen = false;
+  var iconToggle = [
+    Icon(Icons.add_circle_outline, color: Colors.black),
+    Icon(Icons.check_circle_outlined, color: Colors.black)
+  ];
+  var colorToggle = [lightGrey, Colors.grey];
+  int indexChosen = -1;
+
+  Icon getIconState(int index, int indexChosen, var leagueAndTeam) {
+    if (indexChosen == index) {
+      iconToggleIndices[index] = (iconToggleIndices[index] + 1) % 2;
+      if (iconToggleIndices[index] == 1) {
+        selectedBasketballTeams
+            .add(leagueAndTeam['IconsAndTeams'][index]['id']);
+      } else {
+        int idx = selectedBasketballTeams
+            .indexOf(leagueAndTeam['IconsAndTeams'][index]['id']);
+        selectedBasketballTeams.removeAt(idx);
+      }
+      for (int i = 0; i < selectedBasketballTeams.length; i++) {
+        print(selectedBasketballTeams[i]);
+      }
+      return iconToggle[iconToggleIndices[index]];
+    } else {
+      return iconToggle[iconToggleIndices[index]];
+    }
+  }
+
+  Color getColorState(int index, int indexChosen) {
+    if (indexChosen == index) {
+      colorToggleIndices[index] = (colorToggleIndices[index] + 1) % 2;
+      return colorToggle[colorToggleIndices[index]];
+    } else {
+      return colorToggle[colorToggleIndices[index]];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -19,11 +57,11 @@ class _SelectTeamsListState extends State<SelectTeamsList> {
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         physics: BouncingScrollPhysics(),
-        itemCount: widget.leagueAndTeams.length + 2,
+        itemCount: leagueAndTeams.length + 2,
         itemBuilder: (BuildContext context, int index) {
-          if (index == 0 || index == widget.leagueAndTeams.length + 1)
+          if (index == 0 || index == leagueAndTeams.length + 1)
             return const SizedBox.shrink();
-          return buildTeamList(widget.leagueAndTeams[index - 1]);
+          return buildTeamList(leagueAndTeams[index - 1]);
         },
         separatorBuilder: (context, index) {
           return Divider(
@@ -39,7 +77,7 @@ class _SelectTeamsListState extends State<SelectTeamsList> {
   Widget buildTeamList(var leagueAndTeam) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      color: Colors.grey,
+      color: isOpen ? Colors.grey : lightGrey,
       child: Theme(
         data: Theme.of(context).copyWith(
           unselectedWidgetColor: Colors.black, // here for close state
@@ -62,7 +100,6 @@ class _SelectTeamsListState extends State<SelectTeamsList> {
           ),
           children: [
             Container(
-              color: lightGrey,
               child: ListView.separated(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
@@ -72,14 +109,27 @@ class _SelectTeamsListState extends State<SelectTeamsList> {
                   if (index == 0) return const SizedBox.shrink();
                   return SizedBox(
                     height: size.height * 0.065,
-                    child: ListTile(
-                      leading: leagueAndTeam['IconsAndTeams'][index - 1]
-                          ['icon'],
-                      title: Text(
-                          leagueAndTeam['IconsAndTeams'][index - 1]['team']),
-                      tileColor: lightGrey,
-                      trailing: Icon(Icons.add_circle_outline_outlined),
-                      iconColor: Colors.black,
+                    child: Container(
+                      color: getColorState(index - 1, indexChosen - 1),
+                      child: ListTile(
+                        leading: leagueAndTeam['IconsAndTeams'][index - 1]
+                            ['icon'],
+                        title: Text(
+                            leagueAndTeam['IconsAndTeams'][index - 1]['team']),
+                        trailing: GestureDetector(
+                          child: Container(
+                            child: getIconState(
+                                index - 1, indexChosen - 1, leagueAndTeam),
+                          ),
+                          onTap: () {
+                            setState(
+                              () {
+                                indexChosen = index;
+                              },
+                            );
+                          },
+                        ),
+                      ),
                     ),
                   );
                 },
@@ -94,10 +144,9 @@ class _SelectTeamsListState extends State<SelectTeamsList> {
             )
           ],
           onExpansionChanged: (changed) {
-            iconColor:
-            Colors.black;
-            textColor:
-            Colors.black;
+            setState(() {
+              isOpen = !isOpen;
+            });
           },
         ),
       ),
