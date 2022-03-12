@@ -4,9 +4,9 @@ import 'package:sign_ups/Components/news_article_with_image.dart';
 import 'package:sign_ups/Components/spota_appbar.dart';
 import 'package:sign_ups/constants.dart';
 import '../../../Components/bottom_navigation_bar.dart';
+import '../../Components/menu_drawer.dart';
 
-
-class PersonalProfilePage extends StatelessWidget{
+class PersonalProfilePage extends StatelessWidget {
   static const String path = 'lib/Screens/Scores/scores_screen.dart';
   PersonalProfilePage({Key? key}) : super(key: key);
 
@@ -14,31 +14,33 @@ class PersonalProfilePage extends StatelessWidget{
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: const SpotaAppBar(),
+      appBar: SpotaAppBar(),
+      endDrawer: MenuDrawer(),
       body: Column(
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: const CircleAvatar(
-              radius: 42,
-              backgroundColor: Colors.blue,
-              child: Text("KO", style: TextStyle(
-                fontSize: 42,
-                fontFamily: "Oxanium",
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),)
+                radius: 42,
+                backgroundColor: Colors.blue,
+                child: Text(
+                  "KO",
+                  style: TextStyle(
+                    fontSize: 42,
+                    fontFamily: "Oxanium",
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                )),
+          ),
+          Text(
+            "Kevin O'Brien",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
             ),
           ),
-          Text("Kevin O'Brien", style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-          ),),
-          const Divider(
-            color: Colors.black,
-            indent: 30,
-            endIndent: 30
-          ),
+          const Divider(color: Colors.black, indent: 30, endIndent: 30),
           Container(
             margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             width: size.width * 0.38,
@@ -50,15 +52,14 @@ class PersonalProfilePage extends StatelessWidget{
                   backgroundColor: const Color(0xffE3E6EE),
                   //padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                 ),
-                onPressed: (){},
-                child: Text("Edit Profile", style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 18)),
+                onPressed: () {},
+                child: Text("Edit Profile",
+                    style: const TextStyle(color: Colors.black, fontSize: 18)),
               ),
             ),
           ),
           const Divider(
-              color: Colors.black,
+            color: Colors.black,
           ),
           Container(
             margin: EdgeInsets.symmetric(vertical: 5),
@@ -70,22 +71,23 @@ class PersonalProfilePage extends StatelessWidget{
                   backgroundColor: const Color(0xffE3E6EE),
                   //padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                 ),
-                onPressed: (){},
+                onPressed: () {},
                 child: Row(
                   children: const <Widget>[
-                    Text("Friends: ", style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20),
+                    Text(
+                      "Friends: ",
+                      style: TextStyle(color: Colors.black, fontSize: 20),
                       textAlign: TextAlign.left,
                     ),
-                    Text("56", style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18),
+                    Text(
+                      "56",
+                      style: TextStyle(color: Colors.black, fontSize: 18),
                       textAlign: TextAlign.left,
                     ),
                     Spacer(),
-                    Icon(Icons.arrow_forward_ios,
-                        color: Colors.black,
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.black,
                     ),
                   ],
                 ),
@@ -102,21 +104,22 @@ class PersonalProfilePage extends StatelessWidget{
                   backgroundColor: const Color(0xffE3E6EE),
                   //padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                 ),
-                onPressed: (){},
+                onPressed: () {},
                 child: Row(
                   children: const <Widget>[
-                    Text("Achievements: ", style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20),
+                    Text(
+                      "Achievements: ",
+                      style: TextStyle(color: Colors.black, fontSize: 20),
                       textAlign: TextAlign.left,
                     ),
-                    Text("12", style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18),
+                    Text(
+                      "12",
+                      style: TextStyle(color: Colors.black, fontSize: 18),
                       textAlign: TextAlign.left,
                     ),
                     Spacer(),
-                    Icon(Icons.arrow_forward_ios,
+                    Icon(
+                      Icons.arrow_forward_ios,
                       color: Colors.black,
                     ),
                   ],
@@ -128,7 +131,7 @@ class PersonalProfilePage extends StatelessWidget{
             child: Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: ListView(
-                children : <Widget>[
+                children: <Widget>[
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 5),
                     width: size.width,
@@ -136,19 +139,20 @@ class PersonalProfilePage extends StatelessWidget{
                     child: ClipRRect(
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          //backgroundColor: const Color(0xffE3E6EE),
-                          //padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                        ),
-                        onPressed: (){},
+                            //backgroundColor: const Color(0xffE3E6EE),
+                            //padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                            ),
+                        onPressed: () {},
                         child: Column(
                           children: <Widget>[
                             const Align(
                               alignment: Alignment.topLeft,
                               child: Padding(
                                 padding: EdgeInsets.only(top: 8, bottom: 8),
-                                child: Text("Favorite Leagues: ", style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20),
+                                child: Text(
+                                  "Favorite Leagues: ",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 20),
                                   textAlign: TextAlign.left,
                                 ),
                               ),
@@ -158,7 +162,8 @@ class PersonalProfilePage extends StatelessWidget{
                               width: 50,
                               child: const Image(
                                 //child: Image.network(favorite leagues images list[index])
-                                image: AssetImage("assets/icons/NBA/_NBA_logo.png"),
+                                image: AssetImage(
+                                    "assets/icons/NBA/_NBA_logo.png"),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -174,20 +179,20 @@ class PersonalProfilePage extends StatelessWidget{
                     child: ClipRRect(
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          //backgroundColor: const Color(0xffE3E6EE),
-                          //padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                        ),
-                        onPressed: (){},
+                            //backgroundColor: const Color(0xffE3E6EE),
+                            //padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                            ),
+                        onPressed: () {},
                         child: Column(
                           children: <Widget>[
                             const Align(
-
                               alignment: Alignment.topLeft,
                               child: Padding(
                                 padding: EdgeInsets.only(top: 8, bottom: 8),
-                                child: Text("Favorite Teams: ", style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20),
+                                child: Text(
+                                  "Favorite Teams: ",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 20),
                                   textAlign: TextAlign.left,
                                 ),
                               ),
@@ -201,7 +206,8 @@ class PersonalProfilePage extends StatelessWidget{
                                     width: 75,
                                     child: Image(
                                       //child: Image.network(favorite leagues images list[index])
-                                      image: AssetImage("assets/icons/NBA/suns.png"),
+                                      image: AssetImage(
+                                          "assets/icons/NBA/suns.png"),
                                       fit: BoxFit.fill,
                                     ),
                                   ),
@@ -212,7 +218,8 @@ class PersonalProfilePage extends StatelessWidget{
                                   width: 75,
                                   child: Image(
                                     //child: Image.network(favorite leagues images list[index])
-                                    image: AssetImage("assets/icons/NBA/celtics.png"),
+                                    image: AssetImage(
+                                        "assets/icons/NBA/celtics.png"),
                                     fit: BoxFit.fill,
                                   ),
                                 ),
@@ -222,7 +229,8 @@ class PersonalProfilePage extends StatelessWidget{
                                   width: 75,
                                   child: Image(
                                     //child: Image.network(favorite leagues images list[index])
-                                    image: AssetImage("assets/icons/NBA/trailBlazers.png"),
+                                    image: AssetImage(
+                                        "assets/icons/NBA/trailblazers.png"),
                                     fit: BoxFit.fill,
                                   ),
                                 ),

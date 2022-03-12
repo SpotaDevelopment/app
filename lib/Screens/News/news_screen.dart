@@ -4,6 +4,7 @@ import 'package:sign_ups/Components/news_article_with_image.dart';
 import 'package:sign_ups/Components/spota_appbar.dart';
 import 'package:sign_ups/constants.dart';
 import '../../Components/bottom_navigation_bar.dart';
+import '../../Components/menu_drawer.dart';
 import '../../Components/news_article_without_image.dart';
 
 class SportsNewsPage extends StatelessWidget{
@@ -16,6 +17,7 @@ class SportsNewsPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SpotaAppBar(),
+      endDrawer: MenuDrawer(),
       body: Column(
         children: <Widget>[
           Padding(

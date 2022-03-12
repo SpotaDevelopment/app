@@ -6,6 +6,7 @@ import 'package:sign_ups/Components/rounded_password_field.dart';
 import 'package:sign_ups/Components/skip_and_back_button.dart';
 import 'package:sign_ups/Components/text_field_container.dart';
 import 'package:sign_ups/Screens/ForgotInfo/forgot_info_screen.dart';
+import 'package:sign_ups/Screens/Home/home_page.dart';
 
 import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/components/background.dart';
@@ -21,7 +22,8 @@ class Body extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
 
   Body({
-    Key? key, email,
+    Key? key,
+    email,
   }) : super(key: key);
 
   @override
@@ -100,8 +102,10 @@ class Body extends StatelessWidget {
                       password: passwordController.text.trim())
                   .then((result) {
                 if (result == null) {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomePage())); //changing this
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     //TODO: probably want to change the implentation of this?

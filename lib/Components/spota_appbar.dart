@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
-class SpotaAppBar extends StatelessWidget implements PreferredSizeWidget{
+class SpotaAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SpotaAppBar({
     Key? key,
   }) : super(key: key);
@@ -18,18 +18,20 @@ class SpotaAppBar extends StatelessWidget implements PreferredSizeWidget{
       centerTitle: false,
       elevation: 0,
       leadingWidth: 0,
-      title: const Text("Spota", style: TextStyle(
-        color: Colors.white,
-        fontSize: 36,
-        fontFamily: "Oxanium",
-        fontWeight: FontWeight.normal,
-      ),),
+      title: const Text(
+        "Spota",
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 36,
+          fontFamily: "Oxanium",
+          fontWeight: FontWeight.normal,
+        ),
+      ),
       actions: <Widget>[
         IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.menu,
-              color: Colors.white,
-              size: 36),
+          icon: const Icon(Icons.menu, color: Colors.white, size: 36),
+          tooltip: 'Open Menu Drawer',
+          onPressed: () => Scaffold.of(context).openEndDrawer(),
         )
       ],
     );
