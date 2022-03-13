@@ -34,6 +34,7 @@ class _SportsScoresPageState extends State<SportsScoresPage> {
       appBar: SpotaAppBar(),
       endDrawer: MenuDrawer(),
       body: Container(
+        alignment: Alignment.center,
         child: FutureBuilder(
           future: futureGames,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
