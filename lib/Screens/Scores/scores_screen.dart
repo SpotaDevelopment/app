@@ -41,13 +41,30 @@ class _SportsScoresPageState extends State<SportsScoresPage> {
               return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                      title: Text(snapshot.data[index].homeTeamName));
-                  //var now = DateTime.now();
-                  //if(now.isAfter(snapshot.data[index].date)) //future game
-                  //{
+                  var data = snapshot.data[index];
+                  // //var now = DateTime.now();
+                  // //if(now.isAfter(snapshot.data[index].date)) //future game
+                  // //{
 
-                  //}
+                  // //}
+                  return FinalBasketballScoreCard(
+                    homeTeam: data.homeTeamAbrv,
+                    homeScore: data.homeTeamScore.toString(),
+                    homeRecord: "${data.homeTeamWins}-${data.homeTeamLosses}",
+                    homeLogo: data.homeTeamName
+                        .toString()
+                        .toLowerCase()
+                        .replaceAll(' ', ''),
+                    awayTeam: data.awayTeamAbrv,
+                    awayScore: data.awayTeamScore.toString(),
+                    awayRecord: "${data.awayTeamWins}-${data.awayTeamLosses}",
+                    awayLogo: data.awayTeamName
+                        .toString()
+                        .toLowerCase()
+                        .replaceAll(' ', ''),
+                    date: data.date.toString().replaceAll(' 00:00:00',
+                        ''), //added replaceAll here to remove the time part of the date
+                  );
                 },
               );
             } else if (snapshot.hasError) {
@@ -57,6 +74,7 @@ class _SportsScoresPageState extends State<SportsScoresPage> {
           },
         ),
       ),
+      bottomNavigationBar: const BottomNavBar(),
     );
   }
 }

@@ -272,9 +272,9 @@ var basketballIconsAndTeams = [
     'team': 'Timberwolves',
   },
   {
-    'id': 'trailBlazers',
+    'id': 'trailblazers',
     'icon': Image.asset(
-      "assets/icons/NBA/trailBlazers.png",
+      "assets/icons/NBA/trailblazers.png",
       color: null,
       height: 35,
       width: 35,
