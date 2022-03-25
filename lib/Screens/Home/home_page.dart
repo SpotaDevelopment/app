@@ -42,9 +42,11 @@ class HomePage extends StatelessWidget {
                 ),
                 const FinalBasketballScoreCard(
                     homeTeam: "DEN",
+                    homeLogo: "nuggets",
                     homeRecord: "39-26",
                     homeScore: "131",
                     awayTeam: "GSW",
+                    awayLogo: "warriors",
                     awayRecord: "43-22",
                     awayScore: "124",
                     date: "Yesterday"),
