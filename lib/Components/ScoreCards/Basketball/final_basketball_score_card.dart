@@ -61,7 +61,7 @@ class FinalBasketballScoreCard extends StatelessWidget {
                       width: 61.5,
                       child: Image(
                         //child: Image.network(favorite leagues images list[index])
-                        image: AssetImage("assets/icons/NBA/${homeLogo}.png"),
+                        image: AssetImage("assets/icons/NBA/${awayLogo}.png"), //awayTeam
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -88,7 +88,7 @@ class FinalBasketballScoreCard extends StatelessWidget {
                       width: 61.5,
                       child: Image(
                         //child: Image.network(favorite leagues images list[index])
-                        image: AssetImage("assets/icons/NBA/${awayLogo}.png"),
+                        image: AssetImage("assets/icons/NBA/${homeLogo}.png"), //homeTeam
                         fit: BoxFit.fill,
                       ),
                     ),
