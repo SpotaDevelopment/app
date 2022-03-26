@@ -21,7 +21,8 @@ class FriendsScreen extends StatelessWidget {
     "Justin Rittmeyer",
     "Charles Colbourn",
     "Heewook Lee",
-    "Ming Zhao"
+    "Ming Zhao",
+    "Javier Gonzalez Sanchez",
   ];
 
   var colors = [
@@ -82,7 +83,7 @@ class FriendsScreen extends StatelessWidget {
           Container(
             color: lightGrey,
             child: SizedBox(
-              height: size.height * 0.6,
+              height: size.height * 0.675,
               child: ListView.separated(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,

@@ -22,7 +22,8 @@ class PersonalProfilePage extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: DefaultUserProfile(initials: "KO", color: Colors.blue),
+            child: DefaultUserProfile(
+                initials: "KO", color: Colors.blue, radius: 42),
           ),
           Text(
             "Kevin O'Brien",

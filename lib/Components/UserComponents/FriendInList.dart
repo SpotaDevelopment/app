@@ -31,11 +31,13 @@ class FriendInList extends StatelessWidget {
       width: double.infinity,
       child: Row(
         children: [
+          SizedBox(width: size.width * 0.02),
           DefaultUserProfile(
             initials: getInitials(name),
             color: color,
+            radius: 27,
           ),
-          Spacer(),
+          SizedBox(width: size.width * 0.1),
           Text(
             name,
             style: TextStyle(
@@ -44,7 +46,7 @@ class FriendInList extends StatelessWidget {
               fontSize: 17,
               color: Colors.black,
             ),
-          )
+          ),
         ],
       ),
     );
