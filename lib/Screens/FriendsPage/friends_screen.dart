@@ -7,6 +7,31 @@ import '../../Components/spota_appbar.dart';
 
 class FriendsScreen extends StatelessWidget {
   const FriendsScreen({Key? key}) : super(key: key);
+  var friends = [
+    "Kevin O'Brien",
+    "Matt Yost",
+    "Brian Curtis",
+    "Griffin Bourdon",
+    "Phil Bourdon",
+    "Ben Bosquet",
+    "Peter Bugala",
+    "Justin Rittmeyer",
+    "Charles Colbourn",
+    "Heewook Lee",
+    "Ming Zhao"
+  ];
+
+  String getInitials(String name) {
+    String firstInitial = name[0];
+    String secondInitial = "";
+    for (int i = 0; i < name.length; i++) {
+      if (name[i] == ' ') {
+        secondInitial = name[i + 1];
+        break;
+      }
+    }
+    return firstInitial + secondInitial;
+  }
 
   @override
   Widget build(BuildContext context) {
