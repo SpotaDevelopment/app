@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/leagues_toggle_buttons.dart';
 import 'package:sign_ups/Components/news_article_with_image.dart';
 import 'package:sign_ups/Components/spota_appbar.dart';
+import 'package:sign_ups/Screens/FriendsPage/friends_screen.dart';
 import 'package:sign_ups/constants.dart';
 import '../../../Components/bottom_navigation_bar.dart';
 import '../../Components/menu_drawer.dart';
@@ -73,7 +74,7 @@ class PersonalProfilePage extends StatelessWidget {
                 ),
                 onPressed: () {},
                 child: Row(
-                  children: const <Widget>[
+                  children: <Widget>[
                     Text(
                       "Friends: ",
                       style: TextStyle(color: Colors.black, fontSize: 20),
@@ -85,10 +86,23 @@ class PersonalProfilePage extends StatelessWidget {
                       textAlign: TextAlign.left,
                     ),
                     Spacer(),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.black,
-                    ),
+                    GestureDetector(
+                        child: Container(
+                          child: Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.black,
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return FriendsScreen();
+                              },
+                            ),
+                          );
+                        })
                   ],
                 ),
               ),
