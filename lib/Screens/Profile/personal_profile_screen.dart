@@ -5,6 +5,7 @@ import 'package:sign_ups/Components/spota_appbar.dart';
 import 'package:sign_ups/Screens/FriendsPage/friends_screen.dart';
 import 'package:sign_ups/constants.dart';
 import '../../../Components/bottom_navigation_bar.dart';
+import '../../Components/UserComponents/DefaultUserProfile.dart';
 import '../../Components/menu_drawer.dart';
 
 class PersonalProfilePage extends StatelessWidget {
@@ -21,19 +22,7 @@ class PersonalProfilePage extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: const CircleAvatar(
-              radius: 42,
-              backgroundColor: Colors.blue,
-              child: Text(
-                "KO",
-                style: TextStyle(
-                  fontSize: 42,
-                  fontFamily: "Oxanium",
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+            child: DefaultUserProfile(initials: "KO", color: Colors.blue),
           ),
           Text(
             "Kevin O'Brien",
