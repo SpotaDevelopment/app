@@ -1,12 +1,15 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/bottom_navigation_bar.dart';
 import 'package:sign_ups/constants.dart';
 
+import '../../Components/UserComponents/FriendInList.dart';
 import '../../Components/menu_drawer.dart';
 import '../../Components/spota_appbar.dart';
 
 class FriendsScreen extends StatelessWidget {
-  const FriendsScreen({Key? key}) : super(key: key);
+  FriendsScreen({Key? key}) : super(key: key);
   var friends = [
     "Kevin O'Brien",
     "Matt Yost",
@@ -21,16 +24,18 @@ class FriendsScreen extends StatelessWidget {
     "Ming Zhao"
   ];
 
-  String getInitials(String name) {
-    String firstInitial = name[0];
-    String secondInitial = "";
-    for (int i = 0; i < name.length; i++) {
-      if (name[i] == ' ') {
-        secondInitial = name[i + 1];
-        break;
-      }
-    }
-    return firstInitial + secondInitial;
+  var colors = [
+    Colors.blue,
+    Colors.red,
+    Colors.yellow,
+    Colors.green,
+    Colors.purple
+  ];
+
+  Color getRandColor() {
+    var rnd = new Random();
+    int r = rnd.nextInt(colors.length - 1);
+    return colors[r];
   }
 
   @override
@@ -78,12 +83,23 @@ class FriendsScreen extends StatelessWidget {
             color: lightGrey,
             child: SizedBox(
               height: size.height * 0.6,
-              // child: ListView.separated(
-              //   scrollDirection: Axis.vertical,
-              //   shrinkWrap: true,
-              //   physics: BouncingScrollPhysics(),
-              //   itemCount
-              // ),
+              child: ListView.separated(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                itemCount: friends.length,
+                itemBuilder: (context, index) {
+                  return FriendInList(
+                      name: friends[index], color: getRandColor());
+                },
+                separatorBuilder: (context, index) {
+                  return Divider(
+                    color: Colors.transparent,
+                    thickness: 1,
+                    height: 1,
+                  );
+                },
+              ),
             ),
           ),
         ],
