@@ -28,30 +28,30 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Background(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          // SizedBox(height:size.height*0.03), //TODO: USE SizedBox() instead of
-          Spacer(flex: 3),
-          SkipButton(backScreen: SignUpScreen(), skipScreen: SportsNewsPage()),
-          Spacer(flex: 6),
-          Text(
-            "Welcome Back",
-            style: TextStyle(
-                fontFamily: "Oxanium",
-                fontWeight: FontWeight.normal,
-                fontSize: 30),
-          ),
-          Spacer(),
-          Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
-            Spacer(flex: 1),
-            Text(
-              "Email",
-              style:
-                  TextStyle(fontFamily: "Oxanium", fontWeight: FontWeight.bold),
+          Padding(
+            padding:EdgeInsets.only(top: (size.height * .3), bottom: 15),
+            child: Text(
+              "Welcome Back",
+              style: TextStyle(
+                  fontFamily: "Oxanium",
+                  fontWeight: FontWeight.normal,
+                  fontSize: 30),
             ),
-            Spacer(flex: 5),
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(left: (size.width * .1)),
+              child: Text(
+                "Email",
+                style:
+                    TextStyle(fontFamily: "Oxanium", fontWeight: FontWeight.bold),
+              ),
+            ),
           ]),
           RoundedInputField(
             controller: emailController,
@@ -60,14 +60,14 @@ class Body extends StatelessWidget {
             icon: Icons.person,
           ),
           Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
-            //TODO:Figure out how to shift this to the right to match figma
-            Spacer(),
-            Text(
-              "Password",
-              style:
-                  TextStyle(fontFamily: "Oxanium", fontWeight: FontWeight.bold),
+            Padding(
+              padding: EdgeInsets.only(left: (size.width * .1)),
+              child: Text(
+                "Password",
+                style:
+                    TextStyle(fontFamily: "Oxanium", fontWeight: FontWeight.bold),
+              ),
             ),
-            Spacer(flex: 5),
           ]),
           RoundedPasswordField(
             controller: passwordController,
@@ -91,50 +91,55 @@ class Body extends StatelessWidget {
               ),
             ),
           ),
-          Spacer(flex: 7),
-          RoundedButton(
-            //TODO: Move this down
-            text: "Login",
-            pressed: () {
-              AuthenticationService()
-                  .signIn(
-                      email: emailController.text.trim(),
-                      password: passwordController.text.trim())
-                  .then((result) {
-                if (result == null) {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomePage())); //changing this
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    //TODO: probably want to change the implentation of this?
-                    SnackBar(
-                      content: Text(
-                        result,
-                        style: TextStyle(fontSize: 16),
-                      ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: RoundedButton(
+                text: "Login",
+                pressed: () {
+                  AuthenticationService()
+                      .signIn(
+                          email: emailController.text.trim(),
+                          password: passwordController.text.trim())
+                      .then((result) {
+                    if (result == null) {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomePage())); //changing this
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        //TODO: probably want to change the implentation of this?
+                        SnackBar(
+                          content: Text(
+                            result,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                      );
+                    }
+                  });
+                },
+                color: Colors.black,
+                textColor: Colors.white,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: (size.height * .05)),
+            child: AlreadyHaveAnAccountCheck(
+                login: true,
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return SignUpScreen(); //TODO: Change this to redirect to the choose teams page once its setup
+                      },
                     ),
                   );
-                }
-              });
-            },
-            color: Colors.black,
-            textColor: Colors.white,
+                }),
           ),
-          AlreadyHaveAnAccountCheck(
-              login: true,
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SignUpScreen(); //TODO: Change this to redirect to the choose teams page once its setup
-                    },
-                  ),
-                );
-              }),
-          Spacer(flex: 1)
         ],
       ),
     );

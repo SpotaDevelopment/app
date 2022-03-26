@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/skip_and_back_button.dart';
+import 'package:sign_ups/Screens/Home/home_page.dart';
 import 'package:sign_ups/Screens/SignUp/components/body.dart';
 import 'package:sign_ups/Screens/Welcome/welcome_screen.dart';
 
@@ -16,7 +17,7 @@ class SignUpScreen extends StatelessWidget {
         centerTitle: false,
         elevation: 0,
         actions: <Widget>[
-          SkipButton(backScreen: WelcomeScreen(), skipScreen: SignUpScreen()),
+          SkipButton(backScreen: WelcomeScreen(), skipScreen: HomePage()),
         ],
       ),
       // resizeToAvoidBottomInset: false,
