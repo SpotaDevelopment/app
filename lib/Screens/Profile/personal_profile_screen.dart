@@ -22,17 +22,18 @@ class PersonalProfilePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: const CircleAvatar(
-                radius: 42,
-                backgroundColor: Colors.blue,
-                child: Text(
-                  "KO",
-                  style: TextStyle(
-                    fontSize: 42,
-                    fontFamily: "Oxanium",
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                )),
+              radius: 42,
+              backgroundColor: Colors.blue,
+              child: Text(
+                "KO",
+                style: TextStyle(
+                  fontSize: 42,
+                  fontFamily: "Oxanium",
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ),
           Text(
             "Kevin O'Brien",
