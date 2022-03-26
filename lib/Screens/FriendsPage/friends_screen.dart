@@ -83,15 +83,47 @@ class FriendsScreen extends StatelessWidget {
           Container(
             color: lightGrey,
             child: SizedBox(
-              height: size.height * 0.675,
+              height: size.height * 0.68,
               child: ListView.separated(
+                padding: EdgeInsets.all(25),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 physics: BouncingScrollPhysics(),
-                itemCount: friends.length,
+                itemCount: friends.length + 2,
                 itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return Row(
+                      children: [
+                        SizedBox(
+                            width: size.width * 0.015,
+                            height: size.height * 0.05),
+                        Text(
+                          "Online",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                          ),
+                        )
+                      ],
+                    );
+                  } else if (index == friends.length + 1) {
+                    return Row(
+                      children: [
+                        SizedBox(
+                            width: size.width * 0.015,
+                            height: size.height * 0.05),
+                        Text(
+                          "Offline",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                          ),
+                        )
+                      ],
+                    );
+                  }
                   return FriendInList(
-                      name: friends[index], color: getRandColor());
+                      name: friends[index - 1], color: getRandColor());
                 },
                 separatorBuilder: (context, index) {
                   return Divider(
