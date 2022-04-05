@@ -4,11 +4,13 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
+import '../constants.dart';
+import '../model/Game.dart';
 import '../model/UserAccount.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  static final String spotaIP = "http://137.184.0.205";
+  //static final String spotaIP = "http://137.184.0.205";
   var client = http.Client();
 
   get user => _firebaseAuth.currentUser;
@@ -119,6 +121,31 @@ class AuthenticationService {
     for (int i = 0; i < selectedTeams.length; i++) {
       print(userAccount.email);
       addTeamSubscription(teamName: selectedTeams[i], email: email);
+    }
+    //return null; //@mattyost00 do we want to add this here?
+  }
+
+  ///fetchGames() calls the backend to get all the games from the database and returns a list of games.
+  Future<List<Game>> fetchGames() async {
+    var user_email = "";
+    var link = "";
+    if (FirebaseAuth.instance.currentUser != null) {
+      user_email = FirebaseAuth.instance.currentUser!.email.toString();
+      link = serverDomain + "users/getScores/" + user_email;
+    } else {
+      print("went into getGeneralScores");
+      link = serverDomain + "users/getGeneralScores"; //no user is logged in
+    }
+    final response = await http.get(Uri.parse(link));
+    if (response.statusCode == 200) {
+      List<Game> games = (json.decode(response.body) as List)
+          .map((i) => Game.fromJson(i))
+          .toList();
+
+      return games;
+    } else {
+      print(response.body);
+      throw Exception('Failed to load games');
     }
   }
 }

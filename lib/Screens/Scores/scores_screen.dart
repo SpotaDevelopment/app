@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/ScoreCards/Basketball/final_basketball_score_card.dart';
 import 'package:sign_ups/Components/leagues_toggle_buttons.dart';
@@ -10,6 +11,7 @@ import '../../Components/bottom_navigation_bar.dart';
 import '../../Components/menu_drawer.dart';
 import '../../Components/news_article_without_image.dart';
 import '../../model/Game.dart';
+import '../../auth/AuthenticationService.dart';
 
 class SportsScoresPage extends StatefulWidget {
   static const String path = 'lib/Screens/Scores/scores_screen.dart';
@@ -25,7 +27,7 @@ class _SportsScoresPageState extends State<SportsScoresPage> {
   @override
   void initState() {
     super.initState();
-    futureGames = fetchGames(); //TODO: add this back in once working
+    futureGames = AuthenticationService().fetchGames();
   }
 
   @override
@@ -83,7 +85,7 @@ class _SportsScoresPageState extends State<SportsScoresPage> {
   Future<void> _pull() async {
     await Future.delayed(Duration(seconds: 1));
     setState(() {
-      futureGames = fetchGames();
+      futureGames = AuthenticationService().fetchGames();
     });
   }
 }
