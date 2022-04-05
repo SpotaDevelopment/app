@@ -79,16 +79,6 @@ class _SportsNewsPageState extends State<SportsNewsPage> {
               },
             );
           }
-          // return NewsArticleWithImage(
-          //   title: data.title,
-          //   source: data.source,
-          //   url: data.url,
-          //   //on pressed show url in browser
-          //   pressed: () {
-          //     launch(data.url);
-          //   },
-          //   //imageUrl: data.imageUrl,
-          // );
         },
       );
     } else if (snapshot.hasError) {
