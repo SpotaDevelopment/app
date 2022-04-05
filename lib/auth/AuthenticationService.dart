@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants.dart';
 import '../model/Game.dart';
@@ -11,7 +13,9 @@ import '../model/UserAccount.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  //static final String spotaIP = "http://137.184.0.205";
+  //final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  //final SharedPreferences prefs = SharedPreferences.getInstance();
+
   var client = http.Client();
 
   get user => _firebaseAuth.currentUser;
