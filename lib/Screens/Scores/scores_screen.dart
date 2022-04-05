@@ -83,7 +83,7 @@ class _SportsScoresPageState extends State<SportsScoresPage> {
   }
 
   Future<void> _pull() async {
-    await Future.delayed(Duration(seconds: 1));
+    //await Future.delayed(Duration(seconds: 1));
     setState(() {
       futureGames = AuthenticationService().fetchGames();
     });

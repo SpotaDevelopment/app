@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 import '../constants.dart';
 import '../model/Game.dart';
+import '../model/NewsPost.dart';
 import '../model/UserAccount.dart';
 
 class AuthenticationService {
@@ -143,6 +144,37 @@ class AuthenticationService {
           .toList();
 
       return games;
+    } else {
+      print(response.body);
+      throw Exception('Failed to load games');
+    }
+  }
+
+  ///fetchNewsPosts() calls the backend to get all the posts from the database and returns a list of news posts.
+  Future<List<NewsPost>> fetchNewsPosts() async {
+    var user_email = "";
+    var link = "";
+    if (FirebaseAuth.instance.currentUser != null) {
+      user_email = FirebaseAuth.instance.currentUser!.email.toString();
+      link = serverDomain + "users/getNews/" + user_email;
+    } else {
+      print("went into getGeneralNews");
+      link = serverDomain + "users/getGeneralNews"; //no user is logged in
+    }
+    final response = await http.get(Uri.parse(link));
+    if (response.statusCode == 200) {
+      List<NewsPost> posts = (json.decode(response.body) as List)
+          .map((i) => NewsPost.fromJson(i))
+          .toList();
+      //print all posts and attributes in the list of NewsPosts
+      for (int i = 0; i < posts.length; i++) {
+        print(posts[i].title);
+        print(posts[i].url);
+        print(posts[i].image);
+        print("\n");
+      }
+
+      return posts;
     } else {
       print(response.body);
       throw Exception('Failed to load games');

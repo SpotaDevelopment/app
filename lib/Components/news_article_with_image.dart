@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NewsArticleWithImage extends StatelessWidget {
-  final String title, date, source, newsImage, url;
+  final String title, date, source, newsImage, image, url;
   //final Image image;
   final VoidCallback pressed;
 
@@ -10,8 +10,9 @@ class NewsArticleWithImage extends StatelessWidget {
     this.title = "",
     this.date = "",
     this.source = "",
-    this.newsImage = "assets/images/SpotaLogo.jpeg",
-    this.url= "",
+    this.newsImage = "",
+    this.image = "",
+    this.url = "",
     //AssetImage("assets/images/SpotaLogo.jpeg")
     required this.pressed,
   }) : super(key: key);
@@ -19,7 +20,7 @@ class NewsArticleWithImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0, bottom:8.0),
+      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
       child: Card(
         elevation: 5.0,
         shape: RoundedRectangleBorder(
@@ -37,35 +38,40 @@ class NewsArticleWithImage extends StatelessWidget {
                       right: BorderSide(color: Colors.white, width: 16.0),
                       left: BorderSide(color: Colors.white, width: 16.0),
                     ),
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(newsImage),
-                    ),
+                    image: imagePicker(),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Text(title,
+                  child: Text(
+                    title,
                     style: const TextStyle(
                       color: Colors.black87,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
-                    ),),
+                    ),
+                  ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0,
-                      vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 8.0),
                   child: Row(
                     children: <Widget>[
-                      Text(date, style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14.0,
-                      ),),
+                      Text(
+                        date,
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14.0,
+                        ),
+                      ),
                       Spacer(),
-                      Text(source, style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14.0,
-                      ),),
+                      Text(
+                        source,
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14.0,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -75,5 +81,19 @@ class NewsArticleWithImage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  DecorationImage imagePicker() {
+    if (image == "") {
+      return DecorationImage(
+        image: AssetImage("assets/images/SpotaLogo.jpeg"),
+        fit: BoxFit.fill,
+      );
+    } else {
+      return DecorationImage(
+        image: NetworkImage(image),
+        fit: BoxFit.fill,
+      );
+    }
   }
 }

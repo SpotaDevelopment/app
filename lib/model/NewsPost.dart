@@ -1,9 +1,24 @@
-// import 'dart:ui';
+class NewsPost {
+  String? url;
+  String? title;
+  String? source;
+  String? image;
 
-// import 'Post.dart';
+  NewsPost({this.url, this.title, this.source});
 
-// class NewsPost extends Post {
-//   int postID;
-//   String body;
-//   Image photo;
-// }
+  NewsPost.fromJson(Map<String, dynamic> json) {
+    url = json['url'];
+    title = json['title'];
+    source = json['source'];
+    image = json['image'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['url'] = this.url;
+    data['title'] = this.title;
+    data['source'] = this.source;
+    data['image'] = this.image;
+    return data;
+  }
+}

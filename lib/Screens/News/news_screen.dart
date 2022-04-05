@@ -1,19 +1,115 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:sign_ups/Components/leagues_toggle_buttons.dart';
 import 'package:sign_ups/Components/news_article_with_image.dart';
 import 'package:sign_ups/Components/spota_appbar.dart';
 import 'package:sign_ups/constants.dart';
+
 import '../../Components/bottom_navigation_bar.dart';
 import '../../Components/menu_drawer.dart';
 import '../../Components/news_article_without_image.dart';
+import '../../auth/AuthenticationService.dart';
+import '../../model/NewsPost.dart';
 
-class SportsNewsPage extends StatelessWidget{
+class SportsNewsPage extends StatefulWidget {
   static const String path = 'lib/Screens/News/news_screen.dart';
 
   const SportsNewsPage({Key? key}) : super(key: key);
 
+  @override
+  State<SportsNewsPage> createState() => _SportsNewsPageState();
+}
+
+class _SportsNewsPageState extends State<SportsNewsPage> {
+  late Future<List<NewsPost>> futureNewsPosts;
 
   @override
+  void initState() {
+    super.initState();
+    futureNewsPosts = AuthenticationService().fetchNewsPosts();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: SpotaAppBar(),
+      endDrawer: MenuDrawer(),
+      body: Container(
+        alignment: Alignment.center,
+        child: FutureBuilder(
+          future: futureNewsPosts,
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            return RefreshIndicator(
+                child: _newsView(snapshot), onRefresh: _pull);
+          },
+        ),
+      ),
+      bottomNavigationBar: BottomNavBar(),
+    );
+  }
+
+  Widget _newsView(AsyncSnapshot snapshot) {
+    if (snapshot.hasData) {
+      return ListView.builder(
+        itemCount: snapshot.data!.length,
+        itemBuilder: (BuildContext context, int index) {
+          var data = snapshot.data[index];
+          if (data.image == null ||
+              data.image == "" ||
+              data.image == "null" ||
+              data.image == " ") {
+            return NewsArticleWithoutImage(
+              title: data.title,
+              //date: data.date,
+              source: data.source,
+              pressed: () {
+                Navigator.pushNamed(context, data.url);
+              },
+            );
+          } else {
+            return NewsArticleWithImage(
+              title: data.title,
+              //date: data.date,
+              image: data.image,
+              source: data.source,
+              url: data.url,
+              pressed: () {
+                Navigator.pushNamed(context, data.url);
+              },
+            );
+          }
+          // return NewsArticleWithImage(
+          //   title: data.title,
+          //   source: data.source,
+          //   url: data.url,
+          //   //on pressed show url in browser
+          //   pressed: () {
+          //     launch(data.url);
+          //   },
+          //   //imageUrl: data.imageUrl,
+          // );
+        },
+      );
+    } else if (snapshot.hasError) {
+      return Text('${snapshot.error}');
+    } else {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+  }
+
+  Future<void> _pull() async {
+    setState(() {
+      futureNewsPosts = AuthenticationService().fetchNewsPosts();
+    });
+  }
+}
+
+
+/*
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SpotaAppBar(),
@@ -58,5 +154,4 @@ class SportsNewsPage extends StatelessWidget{
       bottomNavigationBar: BottomNavBar(),
     );
   }
-}
-
+}*/
