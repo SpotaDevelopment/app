@@ -26,58 +26,62 @@ class NewsArticleWithImage extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        child: Stack(
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Container(
-                  height: 200.0,
-                  decoration: BoxDecoration(
-                    border: Border(
-                      top: BorderSide(color: Colors.white, width: 16.0),
-                      right: BorderSide(color: Colors.white, width: 16.0),
-                      left: BorderSide(color: Colors.white, width: 16.0),
-                    ),
-                    image: imagePicker(),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      color: Colors.black87,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
+        child: InkWell(
+          //added inkwell to add onTap functionality
+          onTap: pressed,
+          child: Stack(
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Container(
+                    height: 200.0,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        top: BorderSide(color: Colors.white, width: 16.0),
+                        right: BorderSide(color: Colors.white, width: 16.0),
+                        left: BorderSide(color: Colors.white, width: 16.0),
+                      ),
+                      image: imagePicker(),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 8.0),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        date,
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 14.0,
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        color: Colors.black87,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Spacer(),
-                      Text(
-                        source,
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 14.0,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8.0),
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          date,
+                          style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14.0,
+                          ),
+                        ),
+                        Spacer(),
+                        Text(
+                          source,
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

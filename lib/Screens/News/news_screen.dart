@@ -64,7 +64,7 @@ class _SportsNewsPageState extends State<SportsNewsPage> {
               //date: data.date,
               source: data.source,
               pressed: () {
-                Navigator.pushNamed(context, data.url);
+                launch(data.url);
               },
             );
           } else {
@@ -75,7 +75,7 @@ class _SportsNewsPageState extends State<SportsNewsPage> {
               source: data.source,
               url: data.url,
               pressed: () {
-                Navigator.pushNamed(context, data.url);
+                launch(data.url);
               },
             );
           }
