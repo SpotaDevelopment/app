@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../constants.dart';
+import '../constants/all_constants.dart';
 import '../model/Game.dart';
 import '../model/NewsPost.dart';
 import '../model/UserAccount.dart';

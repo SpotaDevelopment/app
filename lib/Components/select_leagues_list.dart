@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../constants.dart';
+import '/constants/all_constants.dart';
 
 var leagueNames = [
   'NFL Football',

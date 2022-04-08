@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sign_ups/model/leagues.dart';
-import '../constants.dart';
+import '/constants/all_constants.dart';
 
 class SelectTeamsList extends StatefulWidget {
   SelectTeamsList({

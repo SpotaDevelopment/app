@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sign_ups/Components/already_have_an_account_check.dart';
 import 'package:sign_ups/Components/rounded_button.dart';
-import 'package:sign_ups/Components/rounded_password_field.dart';
 import 'package:sign_ups/Components/select_leagues_list.dart';
-import 'package:sign_ups/Screens/ForgotInfo/forgot_info_screen.dart';
-import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/SelectLeagues/components/background.dart';
 import 'package:sign_ups/Screens/SelectTeams/select_teams_screen.dart';
-import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
-import 'package:sign_ups/auth/AuthenticationService.dart';
-import 'package:sign_ups/constants.dart';
 import 'package:sign_ups/model/leagues.dart';
+import '/constants/all_constants.dart';
 
-import '../../../Components/rounded_input_field.dart';
 
 class Body extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();

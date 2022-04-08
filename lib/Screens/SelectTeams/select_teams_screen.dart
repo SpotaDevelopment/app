@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Screens/SelectTeams/components/body.dart';
-import 'package:sign_ups/Screens/SignUpContinue/signup_screen_continue.dart';
-import '../../constants.dart';
+import '/constants/all_constants.dart';
 
 class SelectTeams extends StatelessWidget {
   var selectedBasketballTeams;
