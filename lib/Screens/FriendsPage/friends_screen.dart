@@ -7,6 +7,7 @@ import 'package:sign_ups/constants.dart';
 import '../../Components/UserComponents/FriendInList.dart';
 import '../../Components/menu_drawer.dart';
 import '../../Components/spota_appbar.dart';
+import '../../HelperFunctions/functions.dart';
 
 class FriendsScreen extends StatelessWidget {
   FriendsScreen({Key? key}) : super(key: key);
@@ -24,20 +25,6 @@ class FriendsScreen extends StatelessWidget {
     "Ming Zhao",
     "Javier Gonzalez Sanchez",
   ];
-
-  var colors = [
-    Colors.blue,
-    Colors.red,
-    Colors.yellow,
-    Colors.green,
-    Colors.purple
-  ];
-
-  Color getRandColor() {
-    var rnd = new Random();
-    int r = rnd.nextInt(colors.length - 1);
-    return colors[r];
-  }
 
   @override
   Widget build(BuildContext context) {
