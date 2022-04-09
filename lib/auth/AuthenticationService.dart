@@ -76,7 +76,7 @@ class AuthenticationService {
   Future<String?> signUp({required UserAccount userAccount}) async {
     try {
       print(userAccount.email);
-      var url = Uri.parse("http://137.184.0.205:8080/users/signUp");
+      var url = Uri.parse(serverDomain + "/users/signUp");
       var body = jsonEncode(userAccount);
       var response = await http.post(url,
           headers: {"content-type": "application/json"}, body: body);
@@ -103,10 +103,8 @@ class AuthenticationService {
   Future<String?> addTeamSubscription(
       {required String teamName, required String email}) async {
     try {
-      var url = Uri.parse("http://137.184.0.205:8080/users/teamSubscription/" +
-          teamName +
-          "/" +
-          email);
+      var url = Uri.parse(serverDomain + "/users/teamSubscription/" +
+          teamName + "/" + email);
       var response =
           await http.post(url, headers: {"content-type": "application/json"});
       print('Response body: ${response.body} , ${response.statusCode}');
