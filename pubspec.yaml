@@ -60,6 +60,7 @@ dependencies:
   country_code_picker: ^2.0.2
   equatable: ^2.0.3
   cached_network_image: ^3.2.0
+  google_sign_in: ^5.2.4
 dev_dependencies:
   flutter_test:
     sdk: flutter

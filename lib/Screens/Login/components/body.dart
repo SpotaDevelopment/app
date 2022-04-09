@@ -13,7 +13,7 @@ import 'package:sign_ups/Screens/Login/components/background.dart';
 import 'package:sign_ups/Screens/News/news_screen.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
 import 'package:sign_ups/auth/AuthenticationService.dart';
-import 'package:sign_ups/constants.dart';
+
 
 import '../../../Components/rounded_input_field.dart';
 

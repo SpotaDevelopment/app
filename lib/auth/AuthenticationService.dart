@@ -181,7 +181,7 @@ class AuthenticationService {
       return posts;
     } else {
       print(response.body);
-      throw Exception('Failed to load games');
+      throw Exception('Failed to get news posts');
     }
   }
 }

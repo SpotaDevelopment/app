@@ -4,7 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:sign_ups/Components/leagues_toggle_buttons.dart';
 import 'package:sign_ups/Components/news_article_with_image.dart';
 import 'package:sign_ups/Components/spota_appbar.dart';
-import 'package:sign_ups/constants.dart';
+
 
 import '../../Components/bottom_navigation_bar.dart';
 import '../../Components/menu_drawer.dart';

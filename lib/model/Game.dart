@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
-import '../constants.dart';
 class Game {
   String? homeTeamName;
   String? awayTeamName;

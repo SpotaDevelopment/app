@@ -4,7 +4,7 @@ import 'package:sign_ups/Components/ScoreCards/Basketball/final_basketball_score
 import 'package:sign_ups/Components/leagues_toggle_buttons.dart';
 import 'package:sign_ups/Components/news_article_with_image.dart';
 import 'package:sign_ups/Components/spota_appbar.dart';
-import 'package:sign_ups/constants.dart';
+
 import '../../Components/ScoreCards/Basketball/future_basketball_score_card.dart';
 import '../../Components/ScoreCards/Basketball/live_basketball_score_card.dart';
 import '../../Components/bottom_navigation_bar.dart';
