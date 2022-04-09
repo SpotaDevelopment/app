@@ -235,7 +235,7 @@ class PersonalProfilePage extends StatelessWidget {
                                   child: Image(
                                     //child: Image.network(favorite leagues images list[index])
                                     image: AssetImage(
-                                        "assets/icons/NBA/trailBlazers.png"),
+                                        "assets/icons/NBA/trailblazers.png"),
                                     fit: BoxFit.fill,
                                   ),
                                 ),

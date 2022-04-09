@@ -274,7 +274,7 @@ var basketballIconsAndTeams = [
   {
     'id': 'trailBlazers',
     'icon': Image.asset(
-      "assets/icons/NBA/trailBlazers.png",
+      "assets/icons/NBA/trailblazers.png",
       color: null,
       height: 35,
       width: 35,
