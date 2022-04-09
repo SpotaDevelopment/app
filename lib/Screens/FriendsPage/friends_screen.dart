@@ -3,10 +3,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/bottom_navigation_bar.dart';
 import 'package:sign_ups/constants/all_constants.dart';
+
 import '../../Components/UserComponents/FriendInList.dart';
 import '../../Components/menu_drawer.dart';
 import '../../Components/spota_appbar.dart';
 import '../../HelperFunctions/functions.dart';
+import '../../constants/color_constants.dart';
 import '../Profile/personal_profile_screen.dart';
 
 class FriendsScreen extends StatelessWidget {
