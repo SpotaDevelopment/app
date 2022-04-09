@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sign_ups/Screens/FavoritePosts/favoritePosts_screen.dart';
 import 'package:sign_ups/Screens/Groups/groups_screen.dart';
 import 'package:sign_ups/Screens/Settings/settings_screen.dart';
+import '../Screens/FindFriendsPage/find_friends_screen.dart';
 import '/constants/all_constants.dart';
 import '../Screens/Notifications/notifications_screen.dart';
 import '../Screens/Welcome/welcome_screen.dart';
@@ -80,7 +81,7 @@ class MenuDrawer extends StatelessWidget {
             buildMenuItem(
                 text: 'Find Friends',
                 icon: Icons.search,
-                onClicked: () => selectedItem(context, 4)),
+                onClicked: () => selectedItem(context, 3)),
             const SizedBox(
               height: 5,
             ),
@@ -91,7 +92,7 @@ class MenuDrawer extends StatelessWidget {
             buildMenuItem(
                 text: 'Settings',
                 icon: Icons.settings,
-                onClicked: () => selectedItem(context, 3)),
+                onClicked: () => selectedItem(context, 4)),
             const SizedBox(
               height: 5,
             ),
@@ -102,7 +103,7 @@ class MenuDrawer extends StatelessWidget {
             buildMenuItem(
                 text: 'Sign Out',
                 icon: Icons.person,
-                onClicked: () => selectedItem(context, 4)),
+                onClicked: () => selectedItem(context, 5)),
             const SizedBox(
               height: 5,
             ),
@@ -135,6 +136,7 @@ class MenuDrawer extends StatelessWidget {
       NotificationsScreen(),
       GroupsScreen(),
       FavoritePostsScreen(),
+      FindFriendsScreen(),
       const SettingsScreen(),
     ];
     switch (index) {
@@ -142,11 +144,12 @@ class MenuDrawer extends StatelessWidget {
       case 1:
       case 2:
       case 3:
+      case 4:
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => screens[index],
         ));
         break;
-      case 4:
+      case 5:
         AuthenticationService().signOut().then((_) => Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const WelcomeScreen())));
