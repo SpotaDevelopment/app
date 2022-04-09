@@ -8,6 +8,7 @@ import '../../Components/UserComponents/FriendInList.dart';
 import '../../Components/menu_drawer.dart';
 import '../../Components/spota_appbar.dart';
 import '../../HelperFunctions/functions.dart';
+import '../Profile/personal_profile_screen.dart';
 
 class FriendsScreen extends StatelessWidget {
   FriendsScreen({Key? key}) : super(key: key);
@@ -46,9 +47,21 @@ class FriendsScreen extends StatelessWidget {
             child: Row(
               children: [
                 SizedBox(width: size.width * 0.02),
-                Icon(
-                  Icons.chevron_left_outlined,
-                  size: 35,
+                GestureDetector(
+                  child: Icon(
+                    Icons.chevron_left_outlined,
+                    size: 35,
+                  ),
+                  onTap: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return PersonalProfilePage();
+                        },
+                      ),
+                    )
+                  },
                 ),
                 Spacer(),
                 Text(
