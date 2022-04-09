@@ -14,6 +14,8 @@ import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
 import 'package:sign_ups/auth/AuthenticationService.dart';
 import 'package:sign_ups/model/UserAccount.dart';
 
+import '../../../HelperFunctions/functions.dart';
+
 class Body extends StatelessWidget {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
@@ -109,11 +111,13 @@ class Body extends StatelessWidget {
                     text: "Customize Account",
                     pressed: () {
                       userAccount = new UserAccount(
-                          username: username,
-                          email: email,
-                          firstName: firstNameController.text.trim(),
-                          lastName: lastNameController.text.trim(),
-                          birthday: birthdayController.text.trim());
+                        username: username,
+                        email: email,
+                        firstName: firstNameController.text.trim(),
+                        lastName: lastNameController.text.trim(),
+                        birthday: birthdayController.text.trim(),
+                        profilePicColor: getRandColorString(),
+                      );
                       // Navigator.push(
                       //   context,
                       //   MaterialPageRoute(
