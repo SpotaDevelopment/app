@@ -36,9 +36,8 @@ dependencies:
   #Cloud Firestore
   cloud_firestore: ^3.1.8
 
-  #Google Sign In
+  #Sign in with Firebase Auth
   firebase_auth: ^3.3.7
-  google_sign_in: ^5.2.3
 
   #Google Icon
   font_awesome_flutter: ^9.0.0
@@ -51,6 +50,17 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^0.17.4
   http: ^0.13.4
+  url_launcher: ^6.0.20
+  firebase_storage: ^10.2.10
+  fluttertoast: ^8.0.9
+  image_picker: ^0.8.4+11
+  shared_preferences: ^2.0.13
+  intl: ^0.17.0
+  photo_view: ^0.13.0
+  country_code_picker: ^2.0.2
+  equatable: ^2.0.3
+  cached_network_image: ^3.2.0
+  google_sign_in: ^5.2.4
 dev_dependencies:
   flutter_test:
     sdk: flutter

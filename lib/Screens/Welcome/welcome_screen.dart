@@ -20,7 +20,10 @@ class WelcomeScreen extends StatelessWidget {
         centerTitle: false,
         elevation: 0,
         actions: <Widget>[
-          SkipButton(skipScreen: HomePage(), backScreen: null,),
+          SkipButton(
+            skipScreen: HomePage(),
+            backScreen: null,
+          ),
         ],
       ),
       body: Body(),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../constants.dart';
+import '/constants/all_constants.dart';
 
 class SpotaAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SpotaAppBar({

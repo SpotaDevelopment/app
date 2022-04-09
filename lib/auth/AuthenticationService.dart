@@ -1,14 +1,21 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../constants/all_constants.dart';
+import '../model/Game.dart';
+import '../model/NewsPost.dart';
 import '../model/UserAccount.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  static final String spotaIP = "http://137.184.0.205";
+  //final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  //final SharedPreferences prefs = SharedPreferences.getInstance();
+
   var client = http.Client();
 
   get user => _firebaseAuth.currentUser;
@@ -69,7 +76,7 @@ class AuthenticationService {
   Future<String?> signUp({required UserAccount userAccount}) async {
     try {
       print(userAccount.email);
-      var url = Uri.parse("http://137.184.0.205:8080/users/signUp");
+      var url = Uri.parse(serverDomain + "/users/signUp");
       var body = jsonEncode(userAccount);
       var response = await http.post(url,
           headers: {"content-type": "application/json"}, body: body);
@@ -96,10 +103,8 @@ class AuthenticationService {
   Future<String?> addTeamSubscription(
       {required String teamName, required String email}) async {
     try {
-      var url = Uri.parse("http://137.184.0.205:8080/users/teamSubscription/" +
-          teamName +
-          "/" +
-          email);
+      var url = Uri.parse(serverDomain + "/users/teamSubscription/" +
+          teamName + "/" + email);
       var response =
           await http.post(url, headers: {"content-type": "application/json"});
       print('Response body: ${response.body} , ${response.statusCode}');
@@ -119,6 +124,62 @@ class AuthenticationService {
     for (int i = 0; i < selectedTeams.length; i++) {
       print(userAccount.email);
       addTeamSubscription(teamName: selectedTeams[i], email: email);
+    }
+    //return null; //@mattyost00 do we want to add this here?
+  }
+
+  ///fetchGames() calls the backend to get all the games from the database and returns a list of games.
+  Future<List<Game>> fetchGames() async {
+    var user_email = "";
+    var link = "";
+    if (FirebaseAuth.instance.currentUser != null) {
+      user_email = FirebaseAuth.instance.currentUser!.email.toString();
+      link = serverDomain + "users/getScores/" + user_email;
+    } else {
+      print("went into getGeneralScores");
+      link = serverDomain + "users/getGeneralScores"; //no user is logged in
+    }
+    final response = await http.get(Uri.parse(link));
+    if (response.statusCode == 200) {
+      List<Game> games = (json.decode(response.body) as List)
+          .map((i) => Game.fromJson(i))
+          .toList();
+
+      return games;
+    } else {
+      print(response.body);
+      throw Exception('Failed to load games');
+    }
+  }
+
+  ///fetchNewsPosts() calls the backend to get all the posts from the database and returns a list of news posts.
+  Future<List<NewsPost>> fetchNewsPosts() async {
+    var user_email = "";
+    var link = "";
+    if (FirebaseAuth.instance.currentUser != null) {
+      user_email = FirebaseAuth.instance.currentUser!.email.toString();
+      link = serverDomain + "users/getNews/" + user_email;
+    } else {
+      print("went into getGeneralNews");
+      link = serverDomain + "users/getGeneralNews"; //no user is logged in
+    }
+    final response = await http.get(Uri.parse(link));
+    if (response.statusCode == 200) {
+      List<NewsPost> posts = (json.decode(response.body) as List)
+          .map((i) => NewsPost.fromJson(i))
+          .toList();
+      //print all posts and attributes in the list of NewsPosts
+      for (int i = 0; i < posts.length; i++) {
+        print(posts[i].title);
+        print(posts[i].url);
+        print(posts[i].image);
+        print("\n");
+      }
+
+      return posts;
+    } else {
+      print(response.body);
+      throw Exception('Failed to get news posts');
     }
   }
 }

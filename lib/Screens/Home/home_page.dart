@@ -3,7 +3,7 @@ import 'package:sign_ups/Components/leagues_toggle_buttons.dart';
 import 'package:sign_ups/Components/menu_drawer.dart';
 import 'package:sign_ups/Components/news_article_with_image.dart';
 import 'package:sign_ups/Components/spota_appbar.dart';
-import 'package:sign_ups/constants.dart';
+
 import '../../Components/ScoreCards/Basketball/final_basketball_score_card.dart';
 import '../../Components/ScoreCards/Basketball/future_basketball_score_card.dart';
 import '../../Components/ScoreCards/Basketball/live_basketball_score_card.dart';
@@ -42,9 +42,11 @@ class HomePage extends StatelessWidget {
                 ),
                 const FinalBasketballScoreCard(
                     homeTeam: "DEN",
+                    homeLogo: "nuggets",
                     homeRecord: "39-26",
                     homeScore: "131",
                     awayTeam: "GSW",
+                    awayLogo: "warriors",
                     awayRecord: "43-22",
                     awayScore: "124",
                     date: "Yesterday"),

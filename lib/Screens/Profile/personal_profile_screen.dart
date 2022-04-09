@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/leagues_toggle_buttons.dart';
 import 'package:sign_ups/Components/news_article_with_image.dart';
 import 'package:sign_ups/Components/spota_appbar.dart';
-import 'package:sign_ups/constants.dart';
 import '../../../Components/bottom_navigation_bar.dart';
+import '../../Components/UserComponents/DefaultUserProfile.dart';
 import '../../Components/menu_drawer.dart';
+import '../FriendsPage/friends_screen.dart';
 
 class PersonalProfilePage extends StatelessWidget {
   static const String path = 'lib/Screens/Scores/scores_screen.dart';
@@ -20,19 +21,8 @@ class PersonalProfilePage extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: const CircleAvatar(
-              radius: 42,
-              backgroundColor: Colors.blue,
-              child: Text(
-                "KO",
-                style: TextStyle(
-                  fontSize: 42,
-                  fontFamily: "Oxanium",
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              )
-            ),
+            child: DefaultUserProfile(
+                initials: "KO", color: Colors.blue, radius: 42),
           ),
           Text(
             "Kevin O'Brien",
@@ -74,7 +64,7 @@ class PersonalProfilePage extends StatelessWidget {
                 ),
                 onPressed: () {},
                 child: Row(
-                  children: const <Widget>[
+                  children: <Widget>[
                     Text(
                       "Friends: ",
                       style: TextStyle(color: Colors.black, fontSize: 20),
@@ -86,10 +76,23 @@ class PersonalProfilePage extends StatelessWidget {
                       textAlign: TextAlign.left,
                     ),
                     Spacer(),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.black,
-                    ),
+                    GestureDetector(
+                        child: Container(
+                          child: Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.black,
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return FriendsScreen();
+                              },
+                            ),
+                          );
+                        })
                   ],
                 ),
               ),
@@ -231,7 +234,7 @@ class PersonalProfilePage extends StatelessWidget {
                                   child: Image(
                                     //child: Image.network(favorite leagues images list[index])
                                     image: AssetImage(
-                                        "assets/icons/NBA/trailBlazers.png"),
+                                        "assets/icons/NBA/trailblazers.png"),
                                     fit: BoxFit.fill,
                                   ),
                                 ),

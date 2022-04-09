@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sign_ups/Screens/FavoritePosts/favoritePosts_screen.dart';
 import 'package:sign_ups/Screens/Groups/groups_screen.dart';
 import 'package:sign_ups/Screens/Settings/settings_screen.dart';
-import 'package:sign_ups/constants.dart';
-
+import '/constants/all_constants.dart';
 import '../Screens/Notifications/notifications_screen.dart';
 import '../Screens/Welcome/welcome_screen.dart';
 import '../auth/AuthenticationService.dart';
@@ -134,8 +133,8 @@ class MenuDrawer extends StatelessWidget {
     Navigator.of(context).pop(); //closes the drawer
     List<Widget> screens = [
       NotificationsScreen(),
-      FavoritePostsScreen(),
       GroupsScreen(),
+      FavoritePostsScreen(),
       const SettingsScreen(),
     ];
     switch (index) {

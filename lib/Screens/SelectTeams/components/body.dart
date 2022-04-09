@@ -1,21 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:sign_ups/Components/already_have_an_account_check.dart';
 import 'package:sign_ups/Components/rounded_button.dart';
-import 'package:sign_ups/Components/rounded_password_field.dart';
-import 'package:sign_ups/Components/select_leagues_list.dart';
 import 'package:sign_ups/Components/select_teams_list.dart';
-import 'package:sign_ups/Screens/ForgotInfo/forgot_info_screen.dart';
 import 'package:sign_ups/Screens/Home/home_page.dart';
-import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/SelectTeams/components/background.dart';
-import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
-import 'package:sign_ups/Screens/Welcome/welcome_screen.dart';
 import 'package:sign_ups/auth/AuthenticationService.dart';
-import 'package:sign_ups/constants.dart';
 import 'package:sign_ups/model/UserAccount.dart';
 import 'package:sign_ups/model/leagues.dart';
-
-import '../../../Components/rounded_input_field.dart';
+import '/constants/all_constants.dart';
 
 class Body extends StatelessWidget {
   Body({

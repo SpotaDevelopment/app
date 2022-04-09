@@ -6,7 +6,6 @@ import 'package:sign_ups/Screens/Login/login_screen.dart';
 import 'package:sign_ups/Screens/News/news_screen.dart';
 import 'package:sign_ups/Screens/Profile/personal_profile_screen.dart';
 import 'package:sign_ups/Screens/Scores/scores_screen.dart';
-import 'package:sign_ups/constants.dart';
 
 int current = 0;
 

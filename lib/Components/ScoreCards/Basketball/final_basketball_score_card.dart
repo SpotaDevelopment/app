@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 
 class FinalBasketballScoreCard extends StatelessWidget {
-  final String homeTeam, awayTeam, homeScore, awayScore, homeLogo, awayLogo,
-  homeRecord, awayRecord, date;
+  final String homeTeam,
+      awayTeam,
+      homeScore,
+      awayScore,
+      homeLogo,
+      awayLogo,
+      homeRecord,
+      awayRecord,
+      date;
 
   const FinalBasketballScoreCard({
     Key? key,
@@ -21,7 +28,8 @@ class FinalBasketballScoreCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-      child: Container (
+      child: Container(
+        alignment: Alignment.center,
         height: 129,
         child: Card(
           elevation: 4.0,
@@ -41,8 +49,9 @@ class FinalBasketballScoreCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Text(awayTeam, style: TextStyle(fontSize: 16,
-                            fontWeight: FontWeight.bold)),
+                        Text(awayTeam,
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold)),
                         Text(awayRecord, style: TextStyle(fontSize: 12)),
                       ],
                     ),
@@ -52,13 +61,14 @@ class FinalBasketballScoreCard extends StatelessWidget {
                       width: 61.5,
                       child: Image(
                         //child: Image.network(favorite leagues images list[index])
-                        image: AssetImage("assets/icons/NBA/warriors.png"),
+                        image: AssetImage("assets/icons/NBA/${awayLogo}.png"), //awayTeam
                         fit: BoxFit.fill,
                       ),
                     ),
                     Spacer(),
-                    Text(awayScore, style: TextStyle(fontSize: 24,
-                        fontWeight: FontWeight.bold)),
+                    Text(awayScore,
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold)),
                     Spacer(),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -69,15 +79,16 @@ class FinalBasketballScoreCard extends StatelessWidget {
                       ],
                     ),
                     Spacer(),
-                    Text(homeScore, style: TextStyle(fontSize: 24,
-                        fontWeight: FontWeight.bold)),
+                    Text(homeScore,
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold)),
                     Spacer(),
                     SizedBox(
                       height: 61.5,
                       width: 61.5,
                       child: Image(
                         //child: Image.network(favorite leagues images list[index])
-                        image: AssetImage("assets/icons/NBA/nuggets.png"),
+                        image: AssetImage("assets/icons/NBA/${homeLogo}.png"), //homeTeam
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -86,8 +97,9 @@ class FinalBasketballScoreCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Text(homeTeam, style: TextStyle(fontSize: 16,
-                            fontWeight: FontWeight.bold)),
+                        Text(homeTeam,
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold)),
                         Text(homeRecord, style: TextStyle(fontSize: 12)),
                       ],
                     ),
@@ -96,7 +108,7 @@ class FinalBasketballScoreCard extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0,16,0,0),
+                padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -106,11 +118,11 @@ class FinalBasketballScoreCard extends StatelessWidget {
                       height: 35.5,
                       decoration: BoxDecoration(
                         color: Colors.grey.shade200,
-                        borderRadius:
-                        BorderRadius.only(bottomLeft: Radius.circular(10.0)),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(10.0)),
                       ),
-                      child: Text("Stats", style:
-                          TextStyle(fontSize: 16),
+                      child: Text("Stats",
+                          style: TextStyle(fontSize: 16),
                           textAlign: TextAlign.center),
                     ),
                     const VerticalDivider(
@@ -124,11 +136,11 @@ class FinalBasketballScoreCard extends StatelessWidget {
                       height: 35.5,
                       decoration: BoxDecoration(
                         color: Colors.grey.shade200,
-                        borderRadius:
-                        BorderRadius.only(bottomRight: Radius.circular(10.0)),
+                        borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(10.0)),
                       ),
-                      child: Text("Highlights", style:
-                          TextStyle(fontSize: 16),
+                      child: Text("Highlights",
+                          style: TextStyle(fontSize: 16),
                           textAlign: TextAlign.center),
                     ),
                   ],
