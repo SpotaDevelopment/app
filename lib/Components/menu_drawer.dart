@@ -78,6 +78,17 @@ class MenuDrawer extends StatelessWidget {
               height: 5,
             ),
             buildMenuItem(
+                text: 'Find Friends',
+                icon: Icons.search,
+                onClicked: () => selectedItem(context, 4)),
+            const SizedBox(
+              height: 5,
+            ),
+            Divider(color: Colors.white),
+            const SizedBox(
+              height: 5,
+            ),
+            buildMenuItem(
                 text: 'Settings',
                 icon: Icons.settings,
                 onClicked: () => selectedItem(context, 3)),
