@@ -5,6 +5,7 @@ import 'package:sign_ups/Components/spota_appbar.dart';
 import '../../../Components/bottom_navigation_bar.dart';
 import '../../Components/UserComponents/DefaultUserProfile.dart';
 import '../../Components/menu_drawer.dart';
+import '../FriendsPage/friends_screen.dart';
 
 class PersonalProfilePage extends StatelessWidget {
   static const String path = 'lib/Screens/Scores/scores_screen.dart';
