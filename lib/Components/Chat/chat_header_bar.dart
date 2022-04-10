@@ -4,7 +4,6 @@ import 'package:sign_ups/Screens/Chat/chat_page.dart';
 class ChatHeaderBar extends StatelessWidget {
   final String title;
 
-
   const ChatHeaderBar({
     Key? key,
     this.title = "",
@@ -29,26 +28,28 @@ class ChatHeaderBar extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return ChatPage();
-                  },
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => ChatPage(),
+                  transitionDuration: const Duration(seconds: 0),
                 ),
               );
             },
           ),
-          Text(title, style: const TextStyle(
-            color: Colors.black,
-            fontSize: 24.0,
-            fontWeight: FontWeight.bold,
-          ),),
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           IconButton(
             padding: EdgeInsets.only(right: 8),
             iconSize: 28,
             constraints: BoxConstraints(),
             icon: Icon(Icons.info_outlined),
             color: Colors.black,
-            onPressed: () {  }, //TODO: add information view like people in chat
+            onPressed: () {}, //TODO: add information view like people in chat
           ),
         ],
       ),

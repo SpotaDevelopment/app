@@ -7,7 +7,6 @@ class ChatDescBar extends StatelessWidget {
   final String title;
   final String lastText;
 
-
   const ChatDescBar({
     Key? key,
     this.title = "",
@@ -21,10 +20,9 @@ class ChatDescBar extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) {
-              return InChatPage();  //TODO: This will go in the chat when you tap on it
-            },
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => InChatPage(),
+            transitionDuration: const Duration(seconds: 0),
           ),
         );
       },
@@ -47,19 +45,24 @@ class ChatDescBar extends StatelessWidget {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
-                  child: Text(title, style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                  ),),
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 20),
-                  child: Text(lastText,
+                  child: Text(
+                    lastText,
                     style: TextStyle(
-                    color: Colors.blueGrey,
-                    fontSize: 16.0,
-                  ),),
+                      color: Colors.blueGrey,
+                      fontSize: 16.0,
+                    ),
+                  ),
                 ),
               ],
             ),
