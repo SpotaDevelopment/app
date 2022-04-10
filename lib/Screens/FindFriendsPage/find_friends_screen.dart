@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/bottom_navigation_bar.dart';
+import 'package:sign_ups/Components/rounded_input_field.dart';
 
 import '../../Components/menu_drawer.dart';
 import '../../Components/spota_appbar.dart';
@@ -8,6 +9,8 @@ import '../Profile/personal_profile_screen.dart';
 
 class FindFriendsScreen extends StatelessWidget {
   FindFriendsScreen({Key? key}) : super(key: key);
+  final TextEditingController findFriendsController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -28,41 +31,37 @@ class FindFriendsScreen extends StatelessWidget {
             child: Row(
               children: [
                 SizedBox(width: size.width * 0.02),
-                GestureDetector(
-                  child: Icon(
-                    Icons.chevron_left_outlined,
-                    size: 35,
-                  ),
-                  onTap: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return PersonalProfilePage();
-                        },
-                      ),
-                    )
-                  },
+                RoundedInputField(
+                  controller: findFriendsController,
+                  hintText: "Search by username or email",
+                  icon: Icons.search,
+                  onChanged: (value) {},
                 ),
-                Spacer(),
-                Text(
-                  "Find Friends",
-                  style: TextStyle(
-                    fontFamily: "Oxanium",
-                    fontWeight: FontWeight.bold,
-                    fontSize: 21,
-                    letterSpacing: 1.1,
-                    color: Colors.black,
-                  ),
-                ),
-                Spacer(),
-                Icon(Icons.search_outlined, size: 35),
-                SizedBox(width: size.width * 0.02),
               ],
             ),
           ),
           Container(
             color: lightGrey,
+            child: SizedBox(
+              height: size.height * 0.68,
+              child: ListView.separated(
+                padding: EdgeInsets.all(25),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                itemCount: 1,
+                itemBuilder: (context, index) {
+                  return Container();
+                },
+                separatorBuilder: (context, index) {
+                  return Divider(
+                    color: Colors.transparent,
+                    thickness: 1,
+                    height: 1,
+                  );
+                },
+              ),
+            ),
           ),
         ],
       ),
