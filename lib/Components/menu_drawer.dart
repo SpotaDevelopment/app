@@ -3,6 +3,7 @@ import 'package:sign_ups/Screens/FavoritePosts/favoritePosts_screen.dart';
 import 'package:sign_ups/Screens/Groups/groups_screen.dart';
 import 'package:sign_ups/Screens/Settings/settings_screen.dart';
 import '../Screens/FindFriendsPage/find_friends_screen.dart';
+import '../model/UserAccount.dart';
 import '/constants/all_constants.dart';
 import '../Screens/Notifications/notifications_screen.dart';
 import '../Screens/Welcome/welcome_screen.dart';
@@ -101,9 +102,13 @@ class MenuDrawer extends StatelessWidget {
               height: 5,
             ),
             buildMenuItem(
-                text: 'Sign Out',
-                icon: Icons.person,
-                onClicked: () => selectedItem(context, 5)),
+              text: 'Sign Out',
+              icon: Icons.person,
+              onClicked: () {
+                selectedItem(context, 5);
+                globalUserAccount = null;
+              },
+            ),
             const SizedBox(
               height: 5,
             ),
