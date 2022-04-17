@@ -5,11 +5,10 @@ import 'package:sign_ups/Components/rounded_input_field.dart';
 import '../../Components/UserComponents/FriendInList.dart';
 import '../../Components/menu_drawer.dart';
 import '../../Components/spota_appbar.dart';
-import '../../FriendServices/friendServices.dart';
 import '../../HelperFunctions/functions.dart';
+import '../../UserServices/userServices.dart';
 import '../../constants/color_constants.dart';
 import '../../model/UserAccount.dart';
-import '../Profile/personal_profile_screen.dart';
 
 class FindFriendsScreen extends StatefulWidget {
   FindFriendsScreen({Key? key}) : super(key: key);
