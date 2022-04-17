@@ -110,7 +110,7 @@ class Body extends StatelessWidget {
                   child: RoundedButton(
                     text: "Customize Account",
                     pressed: () {
-                      userAccount = new UserAccount(
+                      globalUserAccount = new UserAccount(
                         username: username,
                         email: email,
                         firstName: firstNameController.text.trim(),
@@ -118,16 +118,8 @@ class Body extends StatelessWidget {
                         birthday: birthdayController.text.trim(),
                         profilePicColor: getRandColorString(),
                       );
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) {
-                      //       return SelectLeagues();
-                      //     },
-                      //   ),
-                      // );
                       AuthenticationService()
-                          .signUp(userAccount: userAccount)
+                          .signUp(userAccount: globalUserAccount)
                           .then(
                         (result) {
                           if (result == null) {
@@ -141,7 +133,6 @@ class Body extends StatelessWidget {
                             );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              //TODO: probably want to change the implentation of this?
                               SnackBar(
                                 content: Text(
                                   result,
@@ -161,17 +152,18 @@ class Body extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(bottom: (size.height * .05)),
                 child: AlreadyHaveAnAccountCheck(
-                    login: false,
-                    press: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const LoginScreen(); //TODO: Change this to redirect to the choose teams page once its setup
-                          },
-                        ),
-                      );
-                    }),
+                  login: false,
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const LoginScreen(); //TODO: Change this to redirect to the choose teams page once its setup
+                        },
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ),
