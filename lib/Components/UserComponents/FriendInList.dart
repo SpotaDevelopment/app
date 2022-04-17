@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/UserComponents/DefaultUserProfile.dart';
 
 class FriendInList extends StatelessWidget {
-  final String name;
-  final Color color;
+  String? name;
+  Color? color;
 
-  const FriendInList({
+  FriendInList({
     Key? key,
-    required this.name,
-    required this.color,
+    this.name,
+    this.color,
   }) : super(key: key);
 
   String getInitials(String name) {
@@ -33,13 +33,13 @@ class FriendInList extends StatelessWidget {
         children: [
           SizedBox(width: size.width * 0.02),
           DefaultUserProfile(
-            initials: getInitials(name),
-            color: color,
+            initials: getInitials(name!),
+            color: color!,
             radius: 27,
           ),
           SizedBox(width: size.width * 0.1),
           Text(
-            name,
+            name!,
             style: TextStyle(
               fontFamily: "Oxanium",
               fontWeight: FontWeight.bold,

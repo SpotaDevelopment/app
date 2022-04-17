@@ -113,7 +113,7 @@ class AuthenticationService {
   Future<String?> addTeamSubscriptions(
       {required var selectedTeams, required String email}) async {
     for (int i = 0; i < selectedTeams.length; i++) {
-      print(userAccount.email);
+      print(globalUserAccount.email);
       addTeamSubscription(teamName: selectedTeams[i], email: email);
     }
     //return null; //@mattyost00 do we want to add this here?
