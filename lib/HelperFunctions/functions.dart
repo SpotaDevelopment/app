@@ -1,7 +1,16 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
+// Will be used for the purposes of mock data
 var colorStrings = ["blue", "black", "green", "yellow", "red", "purple"];
+var colors = [
+  Colors.blue,
+  Colors.black,
+  Colors.green,
+  Colors.yellow,
+  Colors.red,
+  Colors.purple
+];
 
 var colorStringsToColors = {
   'blue': Colors.blue,
@@ -17,16 +26,6 @@ String getRandColorString() {
   int r = rnd.nextInt(colorStrings.length - 1);
   return colorStrings[r];
 }
-
-// Will be used for the purposes of mock data
-var colors = [
-  Colors.blue,
-  Colors.black,
-  Colors.green,
-  Colors.yellow,
-  Colors.red,
-  Colors.purple
-];
 
 Color getRandColor() {
   var rnd = new Random();
