@@ -57,15 +57,6 @@ class AuthenticationService {
 
         FirebaseAuth.instance.currentUser?.updateDisplayName(
             username); //adds users username to their account
-        //var url = Uri.parse("http://137.184.0.205:8080/users/signUp");
-        /*Map data = {
-          'email': email,
-          'username': username,
-        };*/
-        //var body = json.encode(data);
-        /*var response = await http.post(url,
-            headers: {"content-type": "application/json"}, body: body);*/
-        //print('Response body: ${response.body} , ${response.statusCode}');
         return null;
       } on FirebaseAuthException catch (e) {
         return e.message;
@@ -75,12 +66,12 @@ class AuthenticationService {
 
   Future<String?> signUp({required UserAccount userAccount}) async {
     try {
-      print(userAccount.email);
-      var url = Uri.parse(serverDomain + "/users/signUp");
+      var url = Uri.parse(serverDomain + "users/signUp");
       var body = jsonEncode(userAccount);
       var response = await http.post(url,
           headers: {"content-type": "application/json"}, body: body);
       if (response.statusCode != 201) {
+        print(response.body);
         return '${response.statusCode}';
       }
       return null;
@@ -103,8 +94,8 @@ class AuthenticationService {
   Future<String?> addTeamSubscription(
       {required String teamName, required String email}) async {
     try {
-      var url = Uri.parse(serverDomain + "/users/teamSubscription/" +
-          teamName + "/" + email);
+      var url = Uri.parse(
+          serverDomain + "/users/teamSubscription/" + teamName + "/" + email);
       var response =
           await http.post(url, headers: {"content-type": "application/json"});
       print('Response body: ${response.body} , ${response.statusCode}');

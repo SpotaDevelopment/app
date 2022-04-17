@@ -22,7 +22,6 @@ class UserAccount {
         'firstName': firstName,
         'lastName': lastName,
         'birthday': birthday,
-        'profile_pic': "",
         'profile_color': profilePicColor,
       };
 
@@ -31,4 +30,5 @@ class UserAccount {
   }
 }
 
+// Global object for when the user is creating their account
 var userAccount;

@@ -7,10 +7,14 @@ import '../../Components/spota_appbar.dart';
 import '../../constants/color_constants.dart';
 import '../Profile/personal_profile_screen.dart';
 
-class FindFriendsScreen extends StatelessWidget {
+class FindFriendsScreen extends StatefulWidget {
   FindFriendsScreen({Key? key}) : super(key: key);
-  final TextEditingController findFriendsController = TextEditingController();
+  @override
+  State<FindFriendsScreen> createState() => _FindFriendsScreenState();
+}
 
+class _FindFriendsScreenState extends State<FindFriendsScreen> {
+  final TextEditingController findFriendsController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
