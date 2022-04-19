@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/bottom_navigation_bar.dart';
+import 'package:sign_ups/constants/all_constants.dart';
 
 import '../../Components/UserComponents/FriendInList.dart';
 import '../../Components/menu_drawer.dart';

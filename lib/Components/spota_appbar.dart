@@ -27,10 +27,13 @@ class SpotaAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.menu, color: Colors.white, size: 36),
-          tooltip: 'Open Menu Drawer',
-          onPressed: () => Scaffold.of(context).openEndDrawer(),
+        Padding(
+          padding: const EdgeInsets.only(right: 16),
+          child: IconButton(
+            icon: const Icon(Icons.menu, color: Colors.white, size: 36),
+            tooltip: 'Open Menu Drawer',
+            onPressed: () => Scaffold.of(context).openEndDrawer(),
+          ),
         )
       ],
     );

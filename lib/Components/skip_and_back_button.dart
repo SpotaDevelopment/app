@@ -40,7 +40,7 @@ class SkipButton extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return backScreen; //TODO: Change this to redirect to the choose teams page once its setup
+                                  return backScreen;
                                 },
                               ),
                             );
@@ -85,7 +85,7 @@ class SkipButton extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return skipScreen; //TODO: Change this to redirect to the choose teams page once its setup
+                                  return skipScreen;
                                 },
                               ),
                             );
@@ -102,7 +102,7 @@ class SkipButton extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return skipScreen; //TODO: Change this to redirect to the choose teams page once its setup
+                                  return skipScreen;
                                 },
                               ),
                             );
