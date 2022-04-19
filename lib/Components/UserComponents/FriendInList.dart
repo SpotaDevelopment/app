@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/UserComponents/DefaultUserProfile.dart';
 
+import '../../HelperFunctions/functions.dart';
+
 class FriendInList extends StatelessWidget {
   String? name;
   Color? color;
@@ -10,18 +12,6 @@ class FriendInList extends StatelessWidget {
     this.name,
     this.color,
   }) : super(key: key);
-
-  String getInitials(String name) {
-    String firstInitial = name[0];
-    String secondInitial = "";
-    for (int i = 0; i < name.length; i++) {
-      if (name[i] == ' ') {
-        secondInitial = name[i + 1];
-        break;
-      }
-    }
-    return firstInitial + secondInitial;
-  }
 
   @override
   Widget build(BuildContext context) {

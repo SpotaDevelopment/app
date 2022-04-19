@@ -21,6 +21,18 @@ var colorStringsToColors = {
   'purple': Colors.purple,
 };
 
+String getInitials(String name) {
+  String firstInitial = name[0];
+  String secondInitial = "";
+  for (int i = 0; i < name.length; i++) {
+    if (name[i] == ' ') {
+      secondInitial = name[i + 1];
+      break;
+    }
+  }
+  return firstInitial + secondInitial;
+}
+
 String getRandColorString() {
   var rnd = new Random();
   int r = rnd.nextInt(colorStrings.length - 1);
