@@ -12,8 +12,9 @@ import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/components/background.dart';
 import 'package:sign_ups/Screens/News/news_screen.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
+import 'package:sign_ups/UserServices/userServices.dart';
 import 'package:sign_ups/auth/AuthenticationService.dart';
-
+import 'package:sign_ups/model/UserAccount.dart';
 
 import '../../../Components/rounded_input_field.dart';
 
@@ -34,7 +35,7 @@ class Body extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Padding(
-            padding:EdgeInsets.only(top: (size.height * .3), bottom: 15),
+            padding: EdgeInsets.only(top: (size.height * .3), bottom: 15),
             child: Text(
               "Welcome Back",
               style: TextStyle(
@@ -48,8 +49,8 @@ class Body extends StatelessWidget {
               padding: EdgeInsets.only(left: (size.width * .1)),
               child: Text(
                 "Email",
-                style:
-                    TextStyle(fontFamily: "Oxanium", fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontFamily: "Oxanium", fontWeight: FontWeight.bold),
               ),
             ),
           ]),
@@ -64,8 +65,8 @@ class Body extends StatelessWidget {
               padding: EdgeInsets.only(left: (size.width * .1)),
               child: Text(
                 "Password",
-                style:
-                    TextStyle(fontFamily: "Oxanium", fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontFamily: "Oxanium", fontWeight: FontWeight.bold),
               ),
             ),
           ]),
@@ -103,13 +104,13 @@ class Body extends StatelessWidget {
                           password: passwordController.text.trim())
                       .then((result) {
                     if (result == null) {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => HomePage())); //changing this
+                      globalUserAccount =
+                          getUserAccountByEmail(emailController.text.trim());
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => HomePage()));
                     } else {
+                      // Handling error display
                       ScaffoldMessenger.of(context).showSnackBar(
-                        //TODO: probably want to change the implentation of this?
                         SnackBar(
                           content: Text(
                             result,

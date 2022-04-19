@@ -43,11 +43,11 @@ class Body extends StatelessWidget {
           RoundedButton(
             text: "Continue",
             pressed: () {
-              print(userAccount.email);
+              print(globalUserAccount.email);
               AuthenticationService()
                   .addTeamSubscriptions(
                 selectedTeams: selectedBasketballTeams,
-                email: userAccount.email,
+                email: globalUserAccount.email,
               )
                   .then(
                 (result) {
