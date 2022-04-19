@@ -5,12 +5,11 @@ import 'package:sign_ups/Components/leagues_toggle_buttons.dart';
 import 'package:sign_ups/Components/news_article_with_image.dart';
 import 'package:sign_ups/Components/spota_appbar.dart';
 
-
 import '../../Components/bottom_navigation_bar.dart';
 import '../../Components/menu_drawer.dart';
 import '../../Components/news_article_without_image.dart';
 import '../../auth/AuthenticationService.dart';
-import '../../model/NewsPost.dart';
+import '../../model/News.dart';
 
 class SportsNewsPage extends StatefulWidget {
   static const String path = 'lib/Screens/News/news_screen.dart';
@@ -22,7 +21,7 @@ class SportsNewsPage extends StatefulWidget {
 }
 
 class _SportsNewsPageState extends State<SportsNewsPage> {
-  late Future<List<NewsPost>> futureNewsPosts;
+  late Future<List<News>> futureNewsPosts;
 
   @override
   void initState() {
