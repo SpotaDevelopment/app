@@ -95,7 +95,7 @@ class AuthenticationService {
       {required String teamName, required String email}) async {
     try {
       var url = Uri.parse(
-          serverDomain + "/users/teamSubscription/" + teamName + "/" + email);
+          serverDomain + "users/teamSubscription/" + teamName + "/" + email);
       var response =
           await http.post(url, headers: {"content-type": "application/json"});
       print('Response body: ${response.body} , ${response.statusCode}');
