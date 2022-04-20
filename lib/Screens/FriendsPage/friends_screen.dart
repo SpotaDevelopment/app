@@ -67,6 +67,7 @@ class FriendsScreen extends StatelessWidget {
                               isPersonal: true,
                               identifier: globalUserAccount.firstName != ""
                                   ? globalUserAccount.firstName +
+                                      " " +
                                       globalUserAccount.lastName
                                   : globalUserAccount.email);
                         },

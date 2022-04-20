@@ -101,6 +101,7 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                                 identifier:
                                     searchedUsers![index].firstName != ""
                                         ? searchedUsers![index].firstName! +
+                                            " " +
                                             searchedUsers![index].lastName!
                                         : searchedUsers![index].email);
                           },
