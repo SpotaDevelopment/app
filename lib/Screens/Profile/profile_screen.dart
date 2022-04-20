@@ -5,11 +5,15 @@ import 'package:sign_ups/Components/spota_appbar.dart';
 import '../../../Components/bottom_navigation_bar.dart';
 import '../../Components/UserComponents/DefaultUserProfile.dart';
 import '../../Components/menu_drawer.dart';
+import '../../HelperFunctions/functions.dart';
 import '../FriendsPage/friends_screen.dart';
 
 class ProfilePage extends StatelessWidget {
   static const String path = 'lib/Screens/Scores/scores_screen.dart';
-  ProfilePage({Key? key}) : super(key: key);
+  // If user signed up with a name, then name will be displayed, else username.
+  final String identifier;
+
+  ProfilePage({Key? key, required this.identifier}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,9 @@ class ProfilePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: DefaultUserProfile(
-                initials: "KO", color: Colors.blue, radius: 42),
+                initials: getInitials(identifier),
+                color: Colors.blue,
+                radius: 42),
           ),
           Text(
             "Kevin O'Brien",
