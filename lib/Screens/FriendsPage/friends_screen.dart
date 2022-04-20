@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/bottom_navigation_bar.dart';
+import 'package:sign_ups/UserServices/userServices.dart';
 import 'package:sign_ups/constants/all_constants.dart';
 
 import '../../Components/UserComponents/FriendInList.dart';
@@ -9,6 +10,7 @@ import '../../Components/menu_drawer.dart';
 import '../../Components/spota_appbar.dart';
 import '../../HelperFunctions/functions.dart';
 import '../../constants/color_constants.dart';
+import '../../model/UserAccount.dart';
 import '../Profile/profile_screen.dart';
 
 class FriendsScreen extends StatelessWidget {
@@ -53,15 +55,23 @@ class FriendsScreen extends StatelessWidget {
                     Icons.chevron_left_outlined,
                     size: 35,
                   ),
-                  onTap: () => {
+                  onTap: () async {
+                    List<UserAccount?> friendList =
+                        await getFriendsByEmail(globalUserAccount.email);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return ProfilePage();
+                          return ProfilePage(
+                              friendCount: friendList.length,
+                              isPersonal: true,
+                              identifier: globalUserAccount.firstName != ""
+                                  ? globalUserAccount.firstName +
+                                      globalUserAccount.lastName
+                                  : globalUserAccount.email);
                         },
                       ),
-                    )
+                    );
                   },
                 ),
                 Spacer(),
