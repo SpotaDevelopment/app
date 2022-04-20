@@ -39,3 +39,18 @@ Future<UserAccount?> getUserAccountByEmail(String email) async {
       (json.decode(response.body)).map((i) => UserAccount.fromJson(i));
   return userAccount;
 }
+
+// Get all friends of the user who has an email 'email'
+Future<List<UserAccount?>> getFriendsByEmail(String email) async {
+  var url = Uri.parse(serverDomain + "users/getFriends/" + email);
+  final response = await http.get(url);
+  if (response.statusCode != 200) {
+    print(response.statusCode);
+    print(response.body);
+    throw Exception(response.statusCode);
+  }
+  List<UserAccount> friendAccounts = (json.decode(response.body) as List)
+      .map((i) => UserAccount.fromJson(i))
+      .toList();
+  return friendAccounts;
+}
