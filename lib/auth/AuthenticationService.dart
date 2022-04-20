@@ -8,7 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/all_constants.dart';
 import '../model/Game.dart';
-import '../model/NewsPost.dart';
+import '../model/News.dart';
+import '../model/NewsResult.dart';
 import '../model/UserAccount.dart';
 
 class AuthenticationService {
@@ -91,7 +92,7 @@ class AuthenticationService {
     }
   }
 
-  Future<String?> addTeamSubscription(
+  /*Future<String?> addTeamSubscription(
       {required String teamName, required String email}) async {
     try {
       var url = Uri.parse(
@@ -117,6 +118,26 @@ class AuthenticationService {
       addTeamSubscription(teamName: selectedTeams[i], email: email);
     }
     //return null; //@mattyost00 do we want to add this here?
+  }*/
+
+//adds all team subscriptions to the user's account in the database
+  Future<String?> addTeamSubscriptions(
+      {required var selectedTeams, required String email}) async {
+    try {
+      var url = Uri.parse(serverDomain + "users/addTeamSubscriptions/" + email);
+      var response = await http.post(url,
+          headers: {"content-type": "application/json"},
+          body: jsonEncode(selectedTeams));
+      print('Response body: ${response.body} , ${response.statusCode}');
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        return null;
+      }
+      return '${response.statusCode}';
+    } on SocketException {
+      print('No Internet connection');
+    } on FormatException {
+      print("Bad response format");
+    }
   }
 
   ///fetchGames() calls the backend to get all the games from the database and returns a list of games.
@@ -144,33 +165,60 @@ class AuthenticationService {
   }
 
   ///fetchNewsPosts() calls the backend to get all the posts from the database and returns a list of news posts.
-  Future<List<NewsPost>> fetchNewsPosts() async {
+  Future<List<News>> fetchNewsPosts() async {
     var user_email = "";
     var link = "";
-    if (FirebaseAuth.instance.currentUser != null) {
+    /*if (FirebaseAuth.instance.currentUser != null) {
       user_email = FirebaseAuth.instance.currentUser!.email.toString();
       link = serverDomain + "users/getNews/" + user_email;
+      return fetchUserNews(link);
     } else {
       print("went into getGeneralNews");
       link = serverDomain + "users/getGeneralNews"; //no user is logged in
-    }
-    final response = await http.get(Uri.parse(link));
-    if (response.statusCode == 200) {
-      List<NewsPost> posts = (json.decode(response.body) as List)
-          .map((i) => NewsPost.fromJson(i))
-          .toList();
-      //print all posts and attributes in the list of NewsPosts
-      for (int i = 0; i < posts.length; i++) {
-        print(posts[i].title);
-        print(posts[i].url);
-        print(posts[i].image);
-        print("\n");
-      }
+      return fetchGeneralNews(link);
+    }*/
+    print("went into getGeneralNews");
+    link = serverDomain + "users/getGeneralNews"; //no user is logged in
+    return fetchGeneralNews(link);
+  }
+}
 
-      return posts;
-    } else {
-      print(response.body);
-      throw Exception('Failed to get news posts');
+//fetchUserNews() calls the backend to get all the posts of the users team subscriptions from the database and returns a list of news posts.
+Future<List<News>> fetchUserNews(String link) async {
+  print(link);
+  final response = await http.get(Uri.parse(link));
+  if (response.statusCode == 200) {
+    List<NewsResults> newsResults = (json.decode(response.body) as List)
+        .map((i) => NewsResults.fromJson(i))
+        .toList();
+    List<News>? news = [];
+    for (var a in newsResults) {
+      print(a.newsList);
     }
+    return [];
+  } else {
+    print(response.body);
+    throw Exception('Failed to get news posts');
+  }
+}
+
+//fetchGeneralNews() calls the backend to get all the posts from the database and returns a list of news posts.
+Future<List<News>> fetchGeneralNews(String link) async {
+  final response = await http.get(Uri.parse(link));
+  if (response.statusCode == 200) {
+    List<News> posts = (json.decode(response.body) as List)
+        .map((i) => News.fromJson(i))
+        .toList();
+    //print all posts and attributes in the list of NewsPosts
+    for (int i = 0; i < posts.length; i++) {
+      print(posts[i].title);
+      print(posts[i].url);
+      print(posts[i].image);
+      print("\n");
+    }
+    return posts;
+  } else {
+    print(response.body);
+    throw Exception('Failed to get news posts');
   }
 }
