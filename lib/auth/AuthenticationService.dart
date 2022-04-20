@@ -27,6 +27,7 @@ class AuthenticationService {
 
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
+    client.close();
   }
 
   Future<String?> signIn(
@@ -69,7 +70,7 @@ class AuthenticationService {
     try {
       var url = Uri.parse(serverDomain + "users/signUp");
       var body = jsonEncode(userAccount);
-      var response = await http.post(url,
+      var response = await client.post(url,
           headers: {"content-type": "application/json"}, body: body);
       if (response.statusCode != 201) {
         print(response.body);
@@ -98,7 +99,7 @@ class AuthenticationService {
       var url = Uri.parse(
           serverDomain + "users/teamSubscription/" + teamName + "/" + email);
       var response =
-          await http.post(url, headers: {"content-type": "application/json"});
+          await client.post(url, headers: {"content-type": "application/json"});
       print('Response body: ${response.body} , ${response.statusCode}');
       if (response.statusCode != 201) {
         return '${response.statusCode}';
@@ -125,7 +126,7 @@ class AuthenticationService {
       {required var selectedTeams, required String email}) async {
     try {
       var url = Uri.parse(serverDomain + "users/addTeamSubscriptions/" + email);
-      var response = await http.post(url,
+      var response = await client.post(url,
           headers: {"content-type": "application/json"},
           body: jsonEncode(selectedTeams));
       print('Response body: ${response.body} , ${response.statusCode}');
@@ -151,7 +152,7 @@ class AuthenticationService {
       print("went into getGeneralScores");
       link = serverDomain + "users/getGeneralScores"; //no user is logged in
     }
-    final response = await http.get(Uri.parse(link));
+    final response = await client.get(Uri.parse(link));
     if (response.statusCode == 200) {
       List<Game> games = (json.decode(response.body) as List)
           .map((i) => Game.fromJson(i))
@@ -186,7 +187,7 @@ class AuthenticationService {
 //fetchUserNews() calls the backend to get all the posts of the users team subscriptions from the database and returns a list of news posts.
 Future<List<News>> fetchUserNews(String link) async {
   print(link);
-  final response = await http.get(Uri.parse(link));
+  final response = await AuthenticationService().client.get(Uri.parse(link));
   if (response.statusCode == 200) {
     List<NewsResults> newsResults = (json.decode(response.body) as List)
         .map((i) => NewsResults.fromJson(i))
@@ -204,7 +205,7 @@ Future<List<News>> fetchUserNews(String link) async {
 
 //fetchGeneralNews() calls the backend to get all the posts from the database and returns a list of news posts.
 Future<List<News>> fetchGeneralNews(String link) async {
-  final response = await http.get(Uri.parse(link));
+  final response = await AuthenticationService().client.get(Uri.parse(link));
   if (response.statusCode == 200) {
     List<News> posts = (json.decode(response.body) as List)
         .map((i) => News.fromJson(i))

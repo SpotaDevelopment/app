@@ -31,7 +31,7 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
       body: Column(
         children: [
           Container(
-            height: size.height * 0.075,
+            height: size.height * 0.073,
             decoration: BoxDecoration(
               color: Colors.grey,
               border: Border(
@@ -40,6 +40,8 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
               ),
             ),
             child: Row(
+                mainAxisAlignment: MainAxisAlignment.center, 
+                crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(width: size.width * 0.02),
                 RoundedInputField(
