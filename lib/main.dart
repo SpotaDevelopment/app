@@ -1,19 +1,68 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:stomp_dart_client/stomp.dart';
+import 'package:stomp_dart_client/stomp_config.dart';
+import 'package:stomp_dart_client/stomp_frame.dart';
+
 import 'package:sign_ups/Screens/Home/home_screen.dart';
+import 'package:sign_ups/Screens/Welcome/welcome_screen.dart';
+
+import '/constants/all_constants.dart';
 import 'Screens/Home/home_page.dart';
 import 'firebase_options.dart';
-import 'package:flutter/material.dart';
-import 'package:sign_ups/Screens/Welcome/welcome_screen.dart';
-import '/constants/all_constants.dart';
+import 'model/Chat/chat_message.dart';
+
+StreamController<List<String>> streamController = StreamController();
+StreamController<List<ChatMessage>> streamController2 = StreamController();
+//String destination = "/topic/messages";
+//String message_destination = "/ws/message";
+var _listMessage = <String>[];
+var _listMessages = <ChatMessage>[];
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(MyApp());
 }
+
+void onConnect(StompFrame frame) {
+  print("connected");
+  print(FirebaseAuth.instance.currentUser!.displayName!);
+  stompClient.subscribe(
+    destination: '/user/' +
+        FirebaseAuth.instance.currentUser!.displayName! +
+        '/messages',
+    callback: (frame) {
+      Map<String, dynamic> result = json.decode(frame.body!);
+      ChatMessage? result2 = ChatMessage.fromJson(frame.body!);
+      //receive Message from topic
+      _listMessage.add(result['content']);
+
+      //Observe list message
+      streamController.sink.add(_listMessage);
+      streamController2.sink.add(_listMessages);
+    },
+  );
+}
+
+final stompClient = StompClient(
+  config: StompConfig.SockJS(
+    url: ws_url,
+    onConnect: onConnect,
+    beforeConnect: () async {
+      print('waiting to connect...');
+      await Future.delayed(const Duration(milliseconds: 200));
+      print('connecting...');
+    },
+    onWebSocketError: (dynamic error) => print(error.toString()),
+    stompConnectHeaders: {'Connection': 'upgrade', 'Upgrade': 'websocket'},
+    webSocketConnectHeaders: {'Connection': 'upgrade', 'Upgrade': 'websocket'},
+  ),
+);
 
 class MyApp extends StatefulWidget {
   // This widget is the root of your application.
@@ -30,6 +79,9 @@ class _MyAppState extends State<MyApp> {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
+        // stompClient.activate(); //activate the stomp client connection
+        //streamController.add(_listMessage); //Observe list message changes
+        //streamController2.add(_listMessages); //Observe list message changes
       }
     });
   }
