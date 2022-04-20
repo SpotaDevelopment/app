@@ -41,8 +41,8 @@ Future<UserAccount?> getUserAccountByEmail(String email) async {
 }
 
 // Get all friends of the user who has an email 'email'
-Future<List<UserAccount?>> getFriendsByEmail(String email) async {
-  var url = Uri.parse(serverDomain + "users/getFriends/" + email);
+Future<List<UserAccount?>> getFriendsByEmail(String? email) async {
+  var url = Uri.parse(serverDomain + "users/getFriends/" + email!);
   final response = await http.get(url);
   if (response.statusCode != 200) {
     print(response.statusCode);

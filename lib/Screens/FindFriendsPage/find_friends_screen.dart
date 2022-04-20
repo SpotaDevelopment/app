@@ -11,6 +11,7 @@ import '../../HelperFunctions/functions.dart';
 import '../../UserServices/userServices.dart';
 import '../../constants/color_constants.dart';
 import '../../model/UserAccount.dart';
+import '../Profile/profile_screen.dart';
 
 class FindFriendsScreen extends StatefulWidget {
   FindFriendsScreen({Key? key}) : super(key: key);
@@ -87,12 +88,21 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                           searchedUsers![index].profilePicColor],
                       addIcon: true,
                     ),
-                    onTap: () {
+                    onTap: () async {
+                      List<UserAccount?> friendList =
+                          await getFriendsByEmail(searchedUsers![index].email);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return SignUpScreen();
+                            return ProfilePage(
+                                friendCount: friendList.length,
+                                isPersonal: false,
+                                identifier:
+                                    searchedUsers![index].firstName != null
+                                        ? searchedUsers![index].firstName! +
+                                            searchedUsers![index].lastName!
+                                        : searchedUsers![index].email);
                           },
                         ),
                       );
