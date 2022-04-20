@@ -12,8 +12,12 @@ class ProfilePage extends StatelessWidget {
   static const String path = 'lib/Screens/Scores/scores_screen.dart';
   // If user signed up with a name, then name will be displayed, else username.
   final String identifier;
-
-  ProfilePage({Key? key, required this.identifier}) : super(key: key);
+  final bool isPersonal;
+  ProfilePage({
+    Key? key,
+    required this.identifier,
+    required this.isPersonal,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,30 +35,33 @@ class ProfilePage extends StatelessWidget {
                 radius: 42),
           ),
           Text(
-            "Kevin O'Brien",
+            identifier,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 24,
             ),
           ),
           const Divider(color: Colors.black, indent: 30, endIndent: 30),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            width: size.width * 0.38,
-            height: 36,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: const Color(0xffE3E6EE),
-                  //padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+          // Only let the profile be editable if its user profile.
+          if (isPersonal)
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              width: size.width * 0.38,
+              height: 36,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: const Color(0xffE3E6EE),
+                    //padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                  ),
+                  onPressed: () {},
+                  child: Text("Edit Profile",
+                      style:
+                          const TextStyle(color: Colors.black, fontSize: 18)),
                 ),
-                onPressed: () {},
-                child: Text("Edit Profile",
-                    style: const TextStyle(color: Colors.black, fontSize: 18)),
               ),
             ),
-          ),
           const Divider(
             color: Colors.black,
           ),
