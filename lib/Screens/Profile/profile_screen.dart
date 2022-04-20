@@ -7,9 +7,9 @@ import '../../Components/UserComponents/DefaultUserProfile.dart';
 import '../../Components/menu_drawer.dart';
 import '../FriendsPage/friends_screen.dart';
 
-class PersonalProfilePage extends StatelessWidget {
+class ProfilePage extends StatelessWidget {
   static const String path = 'lib/Screens/Scores/scores_screen.dart';
-  PersonalProfilePage({Key? key}) : super(key: key);
+  ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,22 +77,23 @@ class PersonalProfilePage extends StatelessWidget {
                     ),
                     Spacer(),
                     GestureDetector(
-                        child: Container(
-                          child: Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.black,
-                          ),
+                      child: Container(
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.black,
                         ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return FriendsScreen();
-                              },
-                            ),
-                          );
-                        })
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return FriendsScreen();
+                            },
+                          ),
+                        );
+                      },
+                    )
                   ],
                 ),
               ),

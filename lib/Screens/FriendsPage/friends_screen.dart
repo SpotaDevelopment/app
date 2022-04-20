@@ -9,7 +9,7 @@ import '../../Components/menu_drawer.dart';
 import '../../Components/spota_appbar.dart';
 import '../../HelperFunctions/functions.dart';
 import '../../constants/color_constants.dart';
-import '../Profile/personal_profile_screen.dart';
+import '../Profile/profile_screen.dart';
 
 class FriendsScreen extends StatelessWidget {
   FriendsScreen({Key? key}) : super(key: key);
@@ -58,7 +58,7 @@ class FriendsScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return PersonalProfilePage();
+                          return ProfilePage();
                         },
                       ),
                     )
