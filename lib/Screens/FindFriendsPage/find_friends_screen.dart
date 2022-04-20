@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/bottom_navigation_bar.dart';
 import 'package:sign_ups/Components/rounded_input_field.dart';
+import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
 
+import '../../Components/UserComponents/DefaultUserProfile.dart';
 import '../../Components/UserComponents/FriendInList.dart';
 import '../../Components/menu_drawer.dart';
 import '../../Components/spota_appbar.dart';
@@ -75,12 +77,27 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                 physics: BouncingScrollPhysics(),
                 itemCount: searchedUsers != null ? searchedUsers!.length : 0,
                 itemBuilder: (context, index) {
-                  return FriendInList(
+                  return GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    child: FriendInList(
                       name: searchedUsers![index].username!.isNotEmpty
                           ? searchedUsers![index].username
                           : searchedUsers![index].email,
                       color: colorStringsToColors[
-                          searchedUsers![index].profilePicColor]);
+                          searchedUsers![index].profilePicColor],
+                      addIcon: true,
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return SignUpScreen();
+                          },
+                        ),
+                      );
+                    },
+                  );
                 },
                 separatorBuilder: (context, index) {
                   return Divider(
