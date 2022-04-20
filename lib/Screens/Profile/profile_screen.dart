@@ -13,10 +13,13 @@ class ProfilePage extends StatelessWidget {
   // If user signed up with a name, then name will be displayed, else username.
   final String identifier;
   final bool isPersonal;
+  final int friendCount;
+
   ProfilePage({
     Key? key,
     required this.identifier,
     required this.isPersonal,
+    required this.friendCount,
   }) : super(key: key);
 
   @override
@@ -84,7 +87,7 @@ class ProfilePage extends StatelessWidget {
                       textAlign: TextAlign.left,
                     ),
                     Text(
-                      "56",
+                      '$friendCount',
                       style: TextStyle(color: Colors.black, fontSize: 18),
                       textAlign: TextAlign.left,
                     ),
@@ -131,7 +134,7 @@ class ProfilePage extends StatelessWidget {
                       textAlign: TextAlign.left,
                     ),
                     Text(
-                      "12",
+                      "Coming Soon",
                       style: TextStyle(color: Colors.black, fontSize: 18),
                       textAlign: TextAlign.left,
                     ),
