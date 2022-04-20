@@ -1,46 +1,46 @@
 import 'dart:convert';
 
 class ChatMessage {
-  String? message;
+  String? messageContent;
   String? senderId;
   String? recipientId;
-  String? chatId;
+  String? groupChat;
   ChatMessage({
-    required this.message,
-    this.senderId,
-    this.recipientId,
-    this.chatId,
+    required this.messageContent,
+    required this.senderId,
+    required this.recipientId,
+    required this.groupChat,
   });
 
   ChatMessage copyWith({
-    String? message,
+    String? messageContent,
     String? senderId,
     String? recipientId,
-    String? chatId,
+    String? groupChat,
   }) {
     return ChatMessage(
-      message: message ?? this.message,
+      messageContent: messageContent ?? this.messageContent,
       senderId: senderId ?? this.senderId,
       recipientId: recipientId ?? this.recipientId,
-      chatId: chatId ?? this.chatId,
+      groupChat: groupChat ?? this.groupChat,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'message': message,
+      'messageContent': messageContent,
       'senderId': senderId,
       'recipientId': recipientId,
-      'chatId': chatId,
+      'groupChat': groupChat,
     };
   }
 
   factory ChatMessage.fromMap(Map<String, dynamic> map) {
     return ChatMessage(
-      message: map['message'],
+      messageContent: map['messageContent'],
       senderId: map['senderId'],
       recipientId: map['recipientId'],
-      chatId: map['chatId'],
+      groupChat: map['groupChat'],
     );
   }
 
@@ -51,7 +51,7 @@ class ChatMessage {
 
   @override
   String toString() {
-    return 'ChatMessage(message: $message, senderId: $senderId, recipientId: $recipientId, chatId: $chatId)';
+    return 'ChatMessage(messageContent: $messageContent, senderId: $senderId, recipientId: $recipientId, groupChat: $groupChat)';
   }
 
   @override
@@ -59,17 +59,17 @@ class ChatMessage {
     if (identical(this, other)) return true;
 
     return other is ChatMessage &&
-        other.message == message &&
+        other.messageContent == messageContent &&
         other.senderId == senderId &&
         other.recipientId == recipientId &&
-        other.chatId == chatId;
+        other.groupChat == groupChat;
   }
 
   @override
   int get hashCode {
-    return message.hashCode ^
+    return messageContent.hashCode ^
         senderId.hashCode ^
         recipientId.hashCode ^
-        chatId.hashCode;
+        groupChat.hashCode;
   }
 }

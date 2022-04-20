@@ -3,22 +3,18 @@ import 'dart:convert';
 class ChatNotification {
   String? id;
   String? senderId;
-  String? senderName;
-  ChatNotification({
-    this.id,
-    this.senderId,
-    this.senderName,
-  });
+  String? date;
+  ChatNotification({this.id, this.senderId, this.date});
 
   ChatNotification copyWith({
     String? id,
     String? senderId,
-    String? senderName,
+    String? date,
   }) {
     return ChatNotification(
       id: id ?? this.id,
       senderId: senderId ?? this.senderId,
-      senderName: senderName ?? this.senderName,
+      date: date ?? this.date,
     );
   }
 
@@ -26,7 +22,7 @@ class ChatNotification {
     return {
       'id': id,
       'senderId': senderId,
-      'senderName': senderName,
+      'date': date,
     };
   }
 
@@ -34,7 +30,7 @@ class ChatNotification {
     return ChatNotification(
       id: map['id'],
       senderId: map['senderId'],
-      senderName: map['senderName'],
+      date: map['date'],
     );
   }
 
@@ -45,7 +41,7 @@ class ChatNotification {
 
   @override
   String toString() =>
-      'ChatNotification(id: $id, senderId: $senderId, senderName: $senderName)';
+      'ChatNotification(id: $id, senderId: $senderId, date: $date)';
 
   @override
   bool operator ==(Object other) {
@@ -54,9 +50,9 @@ class ChatNotification {
     return other is ChatNotification &&
         other.id == id &&
         other.senderId == senderId &&
-        other.senderName == senderName;
+        other.date == date;
   }
 
   @override
-  int get hashCode => id.hashCode ^ senderId.hashCode ^ senderName.hashCode;
+  int get hashCode => id.hashCode ^ senderId.hashCode ^ date.hashCode;
 }
