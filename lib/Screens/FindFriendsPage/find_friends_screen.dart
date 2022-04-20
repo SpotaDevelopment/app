@@ -99,7 +99,7 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                                 friendCount: friendList.length,
                                 isPersonal: false,
                                 identifier:
-                                    searchedUsers![index].firstName != null
+                                    searchedUsers![index].firstName != ""
                                         ? searchedUsers![index].firstName! +
                                             searchedUsers![index].lastName!
                                         : searchedUsers![index].email);

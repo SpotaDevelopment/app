@@ -11,7 +11,7 @@ import '../FriendsPage/friends_screen.dart';
 class ProfilePage extends StatelessWidget {
   static const String path = 'lib/Screens/Scores/scores_screen.dart';
   // If user signed up with a name, then name will be displayed, else username.
-  final String identifier;
+  final String? identifier;
   final bool isPersonal;
   final int friendCount;
 
@@ -33,12 +33,12 @@ class ProfilePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: DefaultUserProfile(
-                initials: getInitials(identifier),
+                initials: getInitials(identifier!),
                 color: Colors.blue,
                 radius: 42),
           ),
           Text(
-            identifier,
+            identifier!,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 24,
