@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sign_ups/main.dart';
 
 import '../constants/all_constants.dart';
 import '../model/Game.dart';
@@ -26,8 +27,9 @@ class AuthenticationService {
       .idTokenChanges(); //used to go to home page or authentication page (listen in the widget tree)
 
   Future<void> signOut() async {
-    await _firebaseAuth.signOut();
-    client.close();
+    await _firebaseAuth.signOut(); //sign the user out
+    client.close(); //close the http client
+    stompClient.deactivate(); //deactivate stomp client
   }
 
   Future<String?> signIn(
