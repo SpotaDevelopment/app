@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Screens/Chat/chat_page.dart';
 import 'package:sign_ups/Screens/Home/home_page.dart';
 import 'package:sign_ups/Screens/Home/home_screen.dart';
@@ -7,7 +9,7 @@ import 'package:sign_ups/Screens/News/news_screen.dart';
 import 'package:sign_ups/Screens/Profile/profile_screen.dart';
 import 'package:sign_ups/Screens/Scores/scores_screen.dart';
 import 'package:sign_ups/UserServices/userServices.dart';
-
+import 'package:sign_ups/constants/all_constants.dart';
 import '../model/UserAccount.dart';
 
 int current = 0;
@@ -79,9 +81,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
         setState(() {
           currentIndex = index;
         });
-        if (index != 4)
-          _onTap();
-        else {
+        if (index == 0 || index == 1 || index == 2) {
+          return _onTap();
+        } else if (FirebaseAuth.instance.currentUser != null) {
           List<UserAccount?> friendList =
               await getFriendsByEmail(globalUserAccount.email.trim());
           List<String?> favoriteTeamList =
@@ -103,8 +105,72 @@ class _BottomNavBarState extends State<BottomNavBar> {
               },
             ),
           );
+        } else {
+          showAlertDialog(context);
         }
       },
     );
   }
+}
+
+showAlertDialog(BuildContext context) {
+  Future.delayed(
+    Duration.zero,
+    () {
+      return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text(
+              "You need an account to access this feature.",
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+              ),
+            ),
+            backgroundColor: primaryColor,
+            actions: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RoundedButton(
+                      width: 0.25,
+                      text: "Sign In",
+                      vertical1: 10,
+                      horizontal1: 10,
+                      vertical2: 0,
+                      horizontal2: 10,
+                      fontSize: 12,
+                      pressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return LoginScreen();
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                    RoundedButton(
+                      width: 0.25,
+                      text: "Close",
+                      vertical1: 10,
+                      horizontal1: 10,
+                      vertical2: 0,
+                      horizontal2: 10,
+                      fontSize: 12,
+                      pressed: () => Navigator.pop(context),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          );
+        },
+      );
+    },
+  );
 }
