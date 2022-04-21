@@ -39,14 +39,31 @@ void onConnect(StompFrame frame) {
     callback: (frame) {
       Map<String, dynamic> result = json.decode(frame.body!);
       ChatMessage? result2 = ChatMessage.fromJson(frame.body!);
+      print(frame.body);
       //receive Message from topic
       _listMessage.add(result['content']);
 
       //Observe list message
       streamController.sink.add(_listMessage);
+      //receive Message from ws
+      //if payload received is user added to group chat then add to list
       streamController2.sink.add(_listMessages);
     },
   );
+  Timer.periodic(const Duration(seconds: 5), (_) {
+    ChatMessage chatMessage = ChatMessage(
+      messageContent: 'Hello, Griffin!',
+      senderId: '2',
+      recipientId: 'spota',
+      //chatId: '1',
+      groupChat: 'groupName',
+    );
+    stompClient.send(
+      destination: '/app/chat',
+      // headers: {},
+      body: json.encode(chatMessage.toMap()),
+    );
+  });
 }
 
 final stompClient = StompClient(
@@ -79,9 +96,9 @@ class _MyAppState extends State<MyApp> {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
-        // stompClient.activate(); //activate the stomp client connection
-        //streamController.add(_listMessage); //Observe list message changes
-        //streamController2.add(_listMessages); //Observe list message changes
+        stompClient.activate(); //activate the stomp client connection
+        streamController.add(_listMessage); //Observe list message changes
+        streamController2.add(_listMessages); //Observe list message changes
       }
     });
   }
