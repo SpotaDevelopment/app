@@ -83,7 +83,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           _onTap();
         else {
           List<UserAccount?> friendList =
-              await getFriendsByEmail(globalUserAccount.email.trim());
+              await getFriendsByEmail(globalUserAccount.email);
           List<String?> favoriteTeamList =
               await getFavoriteTeams(globalUserAccount.email.trim());
           Navigator.push(

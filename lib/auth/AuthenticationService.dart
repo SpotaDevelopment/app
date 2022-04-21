@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_ups/main.dart';
 
 import '../constants/all_constants.dart';
+import '../model/Chat/conversation.dart';
 import '../model/Game.dart';
 import '../model/News.dart';
 import '../model/NewsResult.dart';
@@ -110,6 +111,26 @@ class AuthenticationService {
       print('No Internet connection');
     } on FormatException {
       print("Bad response format");
+    }
+  }
+
+  Future<List<Conversation>> fetchConversations() async {
+    if (globalUserAccount == null) {
+      throw Exception('Error: User account not found');
+    }
+
+    var url = Uri.parse(serverDomain + "users/getConversations");
+    final response = await client.post(url,
+        headers: {"content-type": "application/json"},
+        body: jsonEncode(globalUserAccount));
+    print('Response body: ${response.body} , ${response.statusCode}');
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      List<Conversation> conversations = (json.decode(response.body) as List)
+          .map((i) => Conversation.fromJson(i))
+          .toList();
+      return conversations;
+    } else {
+      throw Exception('Failed to load conversations');
     }
   }
 

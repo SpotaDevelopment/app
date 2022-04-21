@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +19,13 @@ import 'model/Chat/chat_message.dart';
 
 StreamController<List<String>> streamController = StreamController();
 StreamController<List<ChatMessage>> streamController2 = StreamController();
+//Map<Conversation,List<Chat<Messages>>>
 //String destination = "/topic/messages";
 //String message_destination = "/ws/message";
 var _listMessage = <String>[];
 var _listMessages = <ChatMessage>[];
-
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<
+    NavigatorState>(); //allows for navigating anywhere without context
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -39,7 +42,9 @@ void onConnect(StompFrame frame) {
     callback: (frame) {
       Map<String, dynamic> result = json.decode(frame.body!);
       ChatMessage? result2 = ChatMessage.fromJson(frame.body!);
-      print(frame.body);
+      //print(frame);
+      //display a dialog popup once the user receives a call back anywhere in the app
+
       //receive Message from topic
       _listMessage.add(result['content']);
 
@@ -126,6 +131,7 @@ class _MyAppState extends State<MyApp> {
         HomePage.id: (context) => HomePage(),
       },
       home: WelcomeScreen(),
+      navigatorKey: navigatorKey,
     );
   }
 }

@@ -8,6 +8,7 @@ import '../../Components/bottom_navigation_bar.dart';
 import '../../Components/menu_drawer.dart';
 import '../../Components/spota_appbar.dart';
 import '../../auth/AuthenticationService.dart';
+import '../../model/Chat/conversation.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -17,12 +18,20 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  late Future<List<Conversation>> futureConversations;
+  @override
+  void initState() {
+    super.initState();
+    futureConversations = AuthenticationService().fetchConversations();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: SpotaAppBar(),
       endDrawer: MenuDrawer(),
+      //TODO: Change this to implement a Stack with a SingleChildScrollView and a positioned element whose child is the Floating Action Button and put it in the correct spot.
       body: SingleChildScrollView(
         child: SizedBox(
           height: size.height,
@@ -47,6 +56,17 @@ class _ChatPageState extends State<ChatPage> {
                 ),
               ),
               Expanded(
+                child: FutureBuilder(
+                  future: futureConversations,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    return RefreshIndicator(
+                      child: _conversationView(snapshot),
+                      onRefresh: _pull,
+                    );
+                  },
+                ),
+              ),
+              /*Expanded(
                 child: ListView(
                   children: <Widget>[
                     //this is where chat descriptions go, like
@@ -54,7 +74,7 @@ class _ChatPageState extends State<ChatPage> {
                     lastText: "Did you see Shohei Ohtani last night?!"),*/
                   ],
                 ),
-              ),
+              ),*/
             ],
           ),
         ),
@@ -137,5 +157,35 @@ class _ChatPageState extends State<ChatPage> {
         );
       },
     );
+  }
+
+  Widget _conversationView(AsyncSnapshot snapshot) {
+    if (snapshot.hasData) {
+      return ListView.builder(
+        reverse: true,
+        itemCount: snapshot.data.length,
+        itemBuilder: (BuildContext context, int index) {
+          return ChatDescBar(
+            conversation: snapshot.data[index],
+            title: snapshot.data[index].groupChatName,
+            lastText: snapshot
+                .data[index]
+                .messageList[snapshot.data[index].messageList.length - 1]
+                .messageContent,
+            //lastTime: DateFormat.yMMMd().format(snapshot.data[index].messageList[snapshot.data[index].messageList.length -1].chatTimeStamp),
+          );
+        },
+      );
+    } else if (snapshot.hasError) {
+      return Text("${snapshot.error}");
+    }
+    return const CircularProgressIndicator();
+  }
+
+  Future<void> _pull() async {
+    await Future.delayed(Duration(seconds: 1));
+    setState(() {
+      futureConversations = AuthenticationService().fetchConversations();
+    });
   }
 }

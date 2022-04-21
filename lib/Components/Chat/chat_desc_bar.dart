@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:sign_ups/Screens/Chat/chat_page.dart';
 import 'package:sign_ups/Screens/Chat/in_chat.dart';
 
+import '../../model/Chat/conversation.dart';
+
 class ChatDescBar extends StatelessWidget {
   final String title;
   final String lastText;
+  final Conversation conversation;
 
-  const ChatDescBar({
-    Key? key,
-    this.title = "",
-    this.lastText = "",
-  }) : super(key: key);
+  const ChatDescBar(
+      {Key? key,
+      this.title = "",
+      this.lastText = "",
+      required this.conversation})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
