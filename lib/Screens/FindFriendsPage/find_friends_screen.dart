@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/bottom_navigation_bar.dart';
 import 'package:sign_ups/Components/rounded_input_field.dart';
+import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
 
+import '../../Components/UserComponents/DefaultUserProfile.dart';
 import '../../Components/UserComponents/FriendInList.dart';
 import '../../Components/menu_drawer.dart';
 import '../../Components/spota_appbar.dart';
@@ -9,6 +11,7 @@ import '../../HelperFunctions/functions.dart';
 import '../../UserServices/userServices.dart';
 import '../../constants/color_constants.dart';
 import '../../model/UserAccount.dart';
+import '../Profile/profile_screen.dart';
 
 class FindFriendsScreen extends StatefulWidget {
   FindFriendsScreen({Key? key}) : super(key: key);
@@ -37,8 +40,8 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
               ),
             ),
             child: Row(
-                mainAxisAlignment: MainAxisAlignment.center, 
-                crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(width: size.width * 0.02),
                 RoundedInputField(
@@ -77,12 +80,40 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                 physics: BouncingScrollPhysics(),
                 itemCount: searchedUsers != null ? searchedUsers!.length : 0,
                 itemBuilder: (context, index) {
-                  return FriendInList(
+                  return GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    child: FriendInList(
                       name: searchedUsers![index].username!.isNotEmpty
                           ? searchedUsers![index].username
                           : searchedUsers![index].email,
                       color: colorStringsToColors[
-                          searchedUsers![index].profilePicColor]);
+                          searchedUsers![index].profilePicColor],
+                      addIcon: true,
+                    ),
+                    onTap: () async {
+                      List<UserAccount?> friendList =
+                          await getFriendsByEmail(searchedUsers![index].email);
+                      List<String?> favoriteTeams =
+                          await getFavoriteTeams(searchedUsers![index].email);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return ProfilePage(
+                              friendCount: friendList.length,
+                              isPersonal: false,
+                              identifier: searchedUsers![index].firstName != ""
+                                  ? searchedUsers![index].firstName! +
+                                      " " +
+                                      searchedUsers![index].lastName!
+                                  : searchedUsers![index].email,
+                              favoriteTeamList: favoriteTeams,
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  );
                 },
                 separatorBuilder: (context, index) {
                   return Divider(

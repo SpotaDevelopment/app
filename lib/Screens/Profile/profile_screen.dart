@@ -1,19 +1,56 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/leagues_toggle_buttons.dart';
 import 'package:sign_ups/Components/news_article_with_image.dart';
 import 'package:sign_ups/Components/spota_appbar.dart';
+import 'package:sign_ups/constants/all_constants.dart';
 import '../../../Components/bottom_navigation_bar.dart';
 import '../../Components/UserComponents/DefaultUserProfile.dart';
 import '../../Components/menu_drawer.dart';
+import '../../HelperFunctions/functions.dart';
 import '../FriendsPage/friends_screen.dart';
 
-class PersonalProfilePage extends StatelessWidget {
+class ProfilePage extends StatelessWidget {
   static const String path = 'lib/Screens/Scores/scores_screen.dart';
-  PersonalProfilePage({Key? key}) : super(key: key);
+  // If user signed up with a name, then name will be displayed, else username.
+  final String? identifier;
+  final bool isPersonal;
+  final int friendCount;
+  final List<String?> favoriteTeamList;
+
+  ProfilePage({
+    Key? key,
+    required this.identifier,
+    required this.isPersonal,
+    required this.friendCount,
+    required this.favoriteTeamList,
+  }) : super(key: key);
+
+  List<Widget> getMaxOfThreeTeams() {
+    final children = <Widget>[];
+    for (int i = 0; i < min(favoriteTeamList.length, 3); i++) {
+      String currTeam = favoriteTeamList[i]!.toLowerCase();
+      children.add(
+        SizedBox(
+          height: 75,
+          width: 75,
+          child: Image(
+            //child: Image.network(favorite leagues images list[index])
+            image: AssetImage('assets/icons/NBA/$currTeam.png'),
+            fit: BoxFit.fill,
+          ),
+        ),
+      );
+      children.add(Spacer());
+    }
+    return children;
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    int remainingTeams = favoriteTeamList.length - 3;
     return Scaffold(
       appBar: SpotaAppBar(),
       endDrawer: MenuDrawer(),
@@ -22,33 +59,38 @@ class PersonalProfilePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: DefaultUserProfile(
-                initials: "KO", color: Colors.blue, radius: 42),
+                initials: getInitials(identifier!),
+                color: Colors.blue,
+                radius: 42),
           ),
           Text(
-            "Kevin O'Brien",
+            identifier!,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 24,
             ),
           ),
           const Divider(color: Colors.black, indent: 30, endIndent: 30),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            width: size.width * 0.38,
-            height: 36,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: const Color(0xffE3E6EE),
-                  //padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+          // Only let the profile be editable if its user profile.
+          if (isPersonal)
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              width: size.width * 0.38,
+              height: 36,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: const Color(0xffE3E6EE),
+                    //padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                  ),
+                  onPressed: () {},
+                  child: Text("Edit Profile",
+                      style:
+                          const TextStyle(color: Colors.black, fontSize: 18)),
                 ),
-                onPressed: () {},
-                child: Text("Edit Profile",
-                    style: const TextStyle(color: Colors.black, fontSize: 18)),
               ),
             ),
-          ),
           const Divider(
             color: Colors.black,
           ),
@@ -71,28 +113,29 @@ class PersonalProfilePage extends StatelessWidget {
                       textAlign: TextAlign.left,
                     ),
                     Text(
-                      "56",
+                      '$friendCount',
                       style: TextStyle(color: Colors.black, fontSize: 18),
                       textAlign: TextAlign.left,
                     ),
                     Spacer(),
                     GestureDetector(
-                        child: Container(
-                          child: Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.black,
-                          ),
+                      child: Container(
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.black,
                         ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return FriendsScreen();
-                              },
-                            ),
-                          );
-                        })
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return FriendsScreen();
+                            },
+                          ),
+                        );
+                      },
+                    )
                   ],
                 ),
               ),
@@ -117,7 +160,7 @@ class PersonalProfilePage extends StatelessWidget {
                       textAlign: TextAlign.left,
                     ),
                     Text(
-                      "12",
+                      "Coming Soon",
                       style: TextStyle(color: Colors.black, fontSize: 18),
                       textAlign: TextAlign.left,
                     ),
@@ -202,42 +245,23 @@ class PersonalProfilePage extends StatelessWidget {
                               ),
                             ),
                             Row(
-                              children: const [
+                              children: [
                                 Spacer(),
-                                Center(
-                                  child: SizedBox(
-                                    height: 75,
-                                    width: 75,
-                                    child: Image(
-                                      //child: Image.network(favorite leagues images list[index])
-                                      image: AssetImage(
-                                          "assets/icons/NBA/suns.png"),
-                                      fit: BoxFit.fill,
+                                ...getMaxOfThreeTeams(),
+                                if (favoriteTeamList.length > 3)
+                                  CircleAvatar(
+                                    radius: 20,
+                                    backgroundColor: Colors.grey,
+                                    child: Text(
+                                      '+$remainingTeams',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontFamily: "Oxanium",
+                                        fontWeight: FontWeight.bold,
+                                        color: lightGrey,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Spacer(),
-                                SizedBox(
-                                  height: 75,
-                                  width: 75,
-                                  child: Image(
-                                    //child: Image.network(favorite leagues images list[index])
-                                    image: AssetImage(
-                                        "assets/icons/NBA/celtics.png"),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                Spacer(),
-                                SizedBox(
-                                  height: 75,
-                                  width: 75,
-                                  child: Image(
-                                    //child: Image.network(favorite leagues images list[index])
-                                    image: AssetImage(
-                                        "assets/icons/NBA/trailblazers.png"),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
                                 Spacer(),
                               ],
                             ),

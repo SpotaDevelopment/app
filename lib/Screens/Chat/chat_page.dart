@@ -23,37 +23,41 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       appBar: SpotaAppBar(),
       endDrawer: MenuDrawer(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, size.height * .667, 16, 8),
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: FloatingActionButton(
-                //new chat button
-                backgroundColor: secondaryColor,
-                onPressed: () {
-                  createAlertDialog(context);
-                },
-                child: const Icon(
-                  Icons.add_comment_outlined,
-                  size: 35,
-                  color: Colors.black,
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: size.height,
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, size.height * .667, 16, 8),
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: FloatingActionButton(
+                    //new chat button
+                    backgroundColor: secondaryColor,
+                    onPressed: () {
+                      createAlertDialog(context);
+                    },
+                    child: const Icon(
+                      Icons.add_comment_outlined,
+                      size: 35,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-          Expanded(
-            child: ListView(
-              children: <Widget>[
-                //this is where chat descriptions go, like
-                /*ChatDescBar(title: "The Boys",
+              Expanded(
+                child: ListView(
+                  children: <Widget>[
+                    //this is where chat descriptions go, like
+                    /*ChatDescBar(title: "The Boys",
                     lastText: "Did you see Shohei Ohtani last night?!"),*/
-              ],
-            ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
       bottomNavigationBar: BottomNavBar(),
     );

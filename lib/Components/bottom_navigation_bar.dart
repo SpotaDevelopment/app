@@ -4,8 +4,11 @@ import 'package:sign_ups/Screens/Home/home_page.dart';
 import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/login_screen.dart';
 import 'package:sign_ups/Screens/News/news_screen.dart';
-import 'package:sign_ups/Screens/Profile/personal_profile_screen.dart';
+import 'package:sign_ups/Screens/Profile/profile_screen.dart';
 import 'package:sign_ups/Screens/Scores/scores_screen.dart';
+import 'package:sign_ups/UserServices/userServices.dart';
+
+import '../model/UserAccount.dart';
 
 int current = 0;
 
@@ -24,7 +27,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
     SportsScoresPage(),
     HomePage(),
     ChatPage(),
-    PersonalProfilePage(),
   ];
 
   _onTap() {
@@ -40,44 +42,69 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        iconSize: 36,
-        currentIndex: currentIndex,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.newspaper_outlined, color: Colors.black),
-            label: 'News',
-            activeIcon: Icon(Icons.newspaper_sharp, color: Colors.black),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.scoreboard_outlined, color: Colors.black),
-            label: 'Scores',
-            activeIcon: Icon(Icons.scoreboard, color: Colors.black),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined, color: Colors.black),
-            label: 'Home',
-            activeIcon: Icon(Icons.home, color: Colors.black),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_outlined, color: Colors.black),
-            label: 'Chat',
-            activeIcon: Icon(Icons.chat, color: Colors.black),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outlined, color: Colors.black),
-            label: 'Profile',
-            activeIcon: Icon(Icons.person, color: Colors.black),
-          ),
-        ],
-        onTap: (index) {
-          // this has changed
-          setState(() {
-            currentIndex = index;
-          });
-          _onTap();
+      type: BottomNavigationBarType.fixed,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      iconSize: 36,
+      currentIndex: currentIndex,
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.newspaper_outlined, color: Colors.black),
+          label: 'News',
+          activeIcon: Icon(Icons.newspaper_sharp, color: Colors.black),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.scoreboard_outlined, color: Colors.black),
+          label: 'Scores',
+          activeIcon: Icon(Icons.scoreboard, color: Colors.black),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home_outlined, color: Colors.black),
+          label: 'Home',
+          activeIcon: Icon(Icons.home, color: Colors.black),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.chat_outlined, color: Colors.black),
+          label: 'Chat',
+          activeIcon: Icon(Icons.chat, color: Colors.black),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person_outlined, color: Colors.black),
+          label: 'Profile',
+          activeIcon: Icon(Icons.person, color: Colors.black),
+        ),
+      ],
+      onTap: (index) async {
+        // this has changed
+        setState(() {
+          currentIndex = index;
         });
+        if (index != 4)
+          _onTap();
+        else {
+          List<UserAccount?> friendList =
+              await getFriendsByEmail(globalUserAccount.email.trim());
+          List<String?> favoriteTeamList =
+              await getFavoriteTeams(globalUserAccount.email.trim());
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return ProfilePage(
+                  friendCount: friendList.length,
+                  isPersonal: true,
+                  identifier: globalUserAccount.firstName != ""
+                      ? globalUserAccount.firstName +
+                          " " +
+                          globalUserAccount.lastName
+                      : globalUserAccount.email,
+                  favoriteTeamList: favoriteTeamList,
+                );
+              },
+            ),
+          );
+        }
+      },
+    );
   }
 }
