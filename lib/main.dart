@@ -50,11 +50,11 @@ void onConnect(StompFrame frame) {
       streamController2.sink.add(_listMessages);
     },
   );
-  Timer.periodic(const Duration(seconds: 5), (_) {
+  Timer.periodic(const Duration(seconds: 10), (_) {
     ChatMessage chatMessage = ChatMessage(
       messageContent: 'Hello, Griffin!',
-      senderId: '2',
-      recipientId: 'spota',
+      senderId: '2', //username
+      recipientId: 'spota', //recipent user name
       //chatId: '1',
       groupChat: 'groupName',
     );
