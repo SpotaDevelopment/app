@@ -83,7 +83,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           _onTap();
         else {
           List<UserAccount?> friendList =
-              await getFriendsByEmail(globalUserAccount.email);
+              await getFriendsByEmail(globalUserAccount.email.trim());
           Navigator.push(
             context,
             MaterialPageRoute(

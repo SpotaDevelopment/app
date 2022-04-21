@@ -102,10 +102,10 @@ class Body extends StatelessWidget {
                       .signIn(
                           email: emailController.text.trim(),
                           password: passwordController.text.trim())
-                      .then((result) {
+                      .then((result) async {
                     if (result == null) {
-                      globalUserAccount =
-                          getUserAccountByEmail(emailController.text.trim());
+                      globalUserAccount = await getUserAccountByEmail(
+                          emailController.text.trim());
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) => HomePage()));
                     } else {
