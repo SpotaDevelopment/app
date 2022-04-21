@@ -57,19 +57,23 @@ class FriendsScreen extends StatelessWidget {
                   ),
                   onTap: () async {
                     List<UserAccount?> friendList =
-                        await getFriendsByEmail(globalUserAccount.email);
+                        await getFriendsByEmail(globalUserAccount.email.trim());
+                    List<String?> favoriteTeamList =
+                        await getFavoriteTeams(globalUserAccount.email.trim());
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
                           return ProfilePage(
-                              friendCount: friendList.length,
-                              isPersonal: true,
-                              identifier: globalUserAccount.firstName != ""
-                                  ? globalUserAccount.firstName! +
-                                      " " +
-                                      globalUserAccount.lastName
-                                  : globalUserAccount.email);
+                            friendCount: friendList.length,
+                            isPersonal: true,
+                            identifier: globalUserAccount.firstName != ""
+                                ? globalUserAccount.firstName! +
+                                    " " +
+                                    globalUserAccount.lastName
+                                : globalUserAccount.email,
+                            favoriteTeamList: favoriteTeamList,
+                          );
                         },
                       ),
                     );

@@ -15,12 +15,14 @@ class ProfilePage extends StatelessWidget {
   final String? identifier;
   final bool isPersonal;
   final int friendCount;
+  final List<String?> favoriteTeamList;
 
   ProfilePage({
     Key? key,
     required this.identifier,
     required this.isPersonal,
     required this.friendCount,
+    required this.favoriteTeamList,
   }) : super(key: key);
 
   @override
