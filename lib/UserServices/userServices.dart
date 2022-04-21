@@ -56,13 +56,16 @@ Future<List<UserAccount?>> getFriendsByEmail(String? email) async {
 
 // Get all favorite teams of user with email 'email'
 Future<List<String?>> getFavoriteTeams(String? email) async {
-  var url = Uri.parse(serverDomain + "users/getFriends/" + email!);
+  var url = Uri.parse(serverDomain + "users/getFavoriteTeams/" + email!);
   final response = await http.get(url);
   if (response.statusCode != 200) {
     print(response.statusCode);
     print(response.body);
     throw Exception(response.statusCode);
   }
-  List<String> friendAccounts = json.decode(response.body);
+  print(response.body);
+  List<String> friendAccounts =
+      (jsonDecode(response.body) as List<dynamic>).cast<String>();
+
   return friendAccounts;
 }

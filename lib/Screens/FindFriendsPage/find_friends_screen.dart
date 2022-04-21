@@ -40,8 +40,8 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
               ),
             ),
             child: Row(
-                mainAxisAlignment: MainAxisAlignment.center, 
-                crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(width: size.width * 0.02),
                 RoundedInputField(
@@ -93,19 +93,22 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                     onTap: () async {
                       List<UserAccount?> friendList =
                           await getFriendsByEmail(searchedUsers![index].email);
+                      List<String?> favoriteTeams =
+                          await getFavoriteTeams(searchedUsers![index].email);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
                             return ProfilePage(
-                                friendCount: friendList.length,
-                                isPersonal: false,
-                                identifier:
-                                    searchedUsers![index].firstName != ""
-                                        ? searchedUsers![index].firstName! +
-                                            " " +
-                                            searchedUsers![index].lastName!
-                                        : searchedUsers![index].email);
+                              friendCount: friendList.length,
+                              isPersonal: false,
+                              identifier: searchedUsers![index].firstName != ""
+                                  ? searchedUsers![index].firstName! +
+                                      " " +
+                                      searchedUsers![index].lastName!
+                                  : searchedUsers![index].email,
+                              favoriteTeamList: favoriteTeams,
+                            );
                           },
                         ),
                       );

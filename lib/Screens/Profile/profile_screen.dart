@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/leagues_toggle_buttons.dart';
 import 'package:sign_ups/Components/news_article_with_image.dart';
@@ -25,9 +27,30 @@ class ProfilePage extends StatelessWidget {
     required this.favoriteTeamList,
   }) : super(key: key);
 
+  List<Widget> getMaxOfThreeTeams() {
+    final children = <Widget>[];
+    for (int i = 0; i < min(favoriteTeamList.length, 3); i++) {
+      String currTeam = favoriteTeamList[i]!.toLowerCase();
+      children.add(
+        SizedBox(
+          height: 75,
+          width: 75,
+          child: Image(
+            //child: Image.network(favorite leagues images list[index])
+            image: AssetImage('assets/icons/NBA/$currTeam.png'),
+            fit: BoxFit.fill,
+          ),
+        ),
+      );
+      children.add(Spacer());
+    }
+    return children;
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    int remainingTeams = favoriteTeamList.length - 3;
     return Scaffold(
       appBar: SpotaAppBar(),
       endDrawer: MenuDrawer(),
@@ -222,56 +245,23 @@ class ProfilePage extends StatelessWidget {
                               ),
                             ),
                             Row(
-                              children: const [
+                              children: [
                                 Spacer(),
-                                Center(
-                                  child: SizedBox(
-                                    height: 75,
-                                    width: 75,
-                                    child: Image(
-                                      //child: Image.network(favorite leagues images list[index])
-                                      image: AssetImage(
-                                          "assets/icons/NBA/suns.png"),
-                                      fit: BoxFit.fill,
+                                ...getMaxOfThreeTeams(),
+                                if (favoriteTeamList.length > 3)
+                                  CircleAvatar(
+                                    radius: 20,
+                                    backgroundColor: Colors.grey,
+                                    child: Text(
+                                      '+$remainingTeams',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontFamily: "Oxanium",
+                                        fontWeight: FontWeight.bold,
+                                        color: lightGrey,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Spacer(),
-                                SizedBox(
-                                  height: 75,
-                                  width: 75,
-                                  child: Image(
-                                    //child: Image.network(favorite leagues images list[index])
-                                    image: AssetImage(
-                                        "assets/icons/NBA/celtics.png"),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                Spacer(),
-                                SizedBox(
-                                  height: 75,
-                                  width: 75,
-                                  child: Image(
-                                    //child: Image.network(favorite leagues images list[index])
-                                    image: AssetImage(
-                                        "assets/icons/NBA/trailblazers.png"),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                Spacer(),
-                                CircleAvatar(
-                                  radius: 20,
-                                  backgroundColor: Colors.grey,
-                                  child: Text(
-                                    '+5',
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: "Oxanium",
-                                      fontWeight: FontWeight.bold,
-                                      color: lightGrey,
-                                    ),
-                                  ),
-                                ),
                                 Spacer(),
                               ],
                             ),
