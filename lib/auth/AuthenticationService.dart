@@ -85,6 +85,32 @@ class AuthenticationService {
     }
   }
 
+  Future<String?> createChat(
+      {required String chatName, required String user}) async {
+    try {
+      var url = Uri.parse(serverDomain +
+          "users/createGroupChat/" +
+          chatName +
+          "/" +
+          _firebaseAuth.currentUser!.email! +
+          "/" +
+          user);
+      print(url);
+      var body = jsonEncode({"user": user});
+      var response = await client.post(url,
+          headers: {"content-type": "application/json"}, body: body);
+      print(user);
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        return null;
+      }
+      return '${response.body}';
+    } on SocketException {
+      print('No Internet connection');
+    } on FormatException {
+      print("Bad response format");
+    }
+  }
+
   Future<String?> passwordReset({required String email}) async {
     try {
       final user = await _firebaseAuth.sendPasswordResetEmail(email: email);
