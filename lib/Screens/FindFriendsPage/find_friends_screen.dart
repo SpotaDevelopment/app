@@ -28,104 +28,112 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
     return Scaffold(
       appBar: SpotaAppBar(),
       endDrawer: MenuDrawer(),
-      body: Column(
-        children: [
-          Container(
-            height: size.height * 0.073,
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              border: Border(
-                top: BorderSide(width: 2, color: Colors.black),
-                bottom: BorderSide(width: 2, color: Colors.black),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(width: size.width * 0.02),
-                RoundedInputField(
-                  controller: findFriendsController,
-                  hintText: "Search by username or email",
-                  icon: Icons.search,
-                  onChanged: (value) async {
-                    if (value != "") {
-                      bool isEmail = value.contains('@');
-                      searchedUsers =
-                          await getUsersByPrefixService(value, isEmail);
-                      setState(() {
-                        searchedUsers;
-                      });
-                      if (searchedUsers?.length == 0) {
-                        print("No users found");
-                      }
-                    } else {
-                      setState(() {
-                        searchedUsers = [];
-                      });
-                    }
-                  },
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: size.height,
+          child: Column(
+            children: [
+              Container(
+                height: size.height * 0.073,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  border: Border(
+                    top: BorderSide(width: 2, color: Colors.black),
+                    bottom: BorderSide(width: 2, color: Colors.black),
+                  ),
                 ),
-              ],
-            ),
-          ),
-          Container(
-            color: lightGrey,
-            child: SizedBox(
-              height: size.height * 0.68,
-              child: ListView.separated(
-                padding: EdgeInsets.all(25),
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
-                itemCount: searchedUsers != null ? searchedUsers!.length : 0,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    child: FriendInList(
-                      name: searchedUsers![index].username!.isNotEmpty
-                          ? searchedUsers![index].username
-                          : searchedUsers![index].email,
-                      color: colorStringsToColors[
-                          searchedUsers![index].profilePicColor],
-                      addIcon: true,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(width: size.width * 0.02),
+                    RoundedInputField(
+                      controller: findFriendsController,
+                      hintText: "Search by username or email",
+                      icon: Icons.search,
+                      onChanged: (value) async {
+                        if (value != "") {
+                          bool isEmail = value.contains('@');
+                          searchedUsers =
+                              await getUsersByPrefixService(value, isEmail);
+                          setState(() {
+                            searchedUsers;
+                          });
+                          if (searchedUsers?.length == 0) {
+                            print("No users found");
+                          }
+                        } else {
+                          setState(() {
+                            searchedUsers = [];
+                          });
+                        }
+                      },
                     ),
-                    onTap: () async {
-                      List<UserAccount?> friendList =
-                          await getFriendsByEmail(searchedUsers![index].email);
-                      List<String?> favoriteTeams =
-                          await getFavoriteTeams(searchedUsers![index].email);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return ProfilePage(
-                              friendCount: friendList.length,
-                              isPersonal: false,
-                              identifier: searchedUsers![index].firstName != ""
-                                  ? searchedUsers![index].firstName! +
-                                      " " +
-                                      searchedUsers![index].lastName!
-                                  : searchedUsers![index].email,
-                              favoriteTeamList: favoriteTeams,
-                            );
-                          },
+                  ],
+                ),
+              ),
+              Container(
+                color: lightGrey,
+                child: SizedBox(
+                  height: size.height * 0.68,
+                  child: ListView.separated(
+                    padding: EdgeInsets.all(25),
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
+                    itemCount:
+                        searchedUsers != null ? searchedUsers!.length : 0,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        child: FriendInList(
+                          name: searchedUsers![index].username!.isNotEmpty
+                              ? searchedUsers![index].username
+                              : searchedUsers![index].email,
+                          color: colorStringsToColors[
+                              searchedUsers![index].profilePicColor],
+                          addIcon: true,
                         ),
+                        onTap: () async {
+                          List<UserAccount?> friendList =
+                              await getFriendsByEmail(
+                                  searchedUsers![index].email);
+                          List<String?> favoriteTeams = await getFavoriteTeams(
+                              searchedUsers![index].email);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ProfilePage(
+                                  friendCount: friendList.length,
+                                  isPersonal: false,
+                                  identifier:
+                                      searchedUsers![index].firstName != ""
+                                          ? searchedUsers![index].firstName! +
+                                              " " +
+                                              searchedUsers![index].lastName!
+                                          : searchedUsers![index].email,
+                                  favoriteTeamList: favoriteTeams,
+                                );
+                              },
+                            ),
+                          );
+                        },
                       );
                     },
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return Divider(
-                    color: Colors.transparent,
-                    thickness: 1,
-                    height: 1,
-                  );
-                },
+                    separatorBuilder: (context, index) {
+                      return Divider(
+                        color: Colors.transparent,
+                        thickness: 1,
+                        height: 1,
+                      );
+                    },
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
       bottomNavigationBar: BottomNavBar(),
     );
