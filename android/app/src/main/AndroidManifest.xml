@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sign_ups">
    <application
-        android:label="sign_ups"
+        android:label="Spota"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

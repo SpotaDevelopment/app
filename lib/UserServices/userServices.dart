@@ -35,6 +35,6 @@ Future<UserAccount?> getUserAccountByEmail(String email) async {
     throw Exception(response.statusCode);
   }
   print(response.body);
-  var userAccount = UserAccount.fromJson(json.decode(response.body));
+  UserAccount userAccount = UserAccount.fromJson(json.decode(response.body));
   return userAccount;
 }

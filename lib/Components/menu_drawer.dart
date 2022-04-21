@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Screens/FavoritePosts/favoritePosts_screen.dart';
 import 'package:sign_ups/Screens/Groups/groups_screen.dart';
+import 'package:sign_ups/Screens/Login/login_screen.dart';
 import 'package:sign_ups/Screens/Settings/settings_screen.dart';
 import '../Screens/FindFriendsPage/find_friends_screen.dart';
 import '../model/UserAccount.dart';
@@ -102,11 +104,17 @@ class MenuDrawer extends StatelessWidget {
               height: 5,
             ),
             buildMenuItem(
-              text: 'Sign Out',
+              text: FirebaseAuth.instance.currentUser != null
+                  ? 'Sign Out'
+                  : 'Sign In',
               icon: Icons.person,
               onClicked: () {
-                selectedItem(context, 5);
-                globalUserAccount = null;
+                if (FirebaseAuth.instance.currentUser != null) {
+                  selectedItem(context, 6);
+                  globalUserAccount = null;
+                } else {
+                  selectedItem(context, 5);
+                }
               },
             ),
             const SizedBox(
@@ -143,18 +151,19 @@ class MenuDrawer extends StatelessWidget {
       FavoritePostsScreen(),
       FindFriendsScreen(),
       const SettingsScreen(),
+      const LoginScreen()
     ];
     switch (index) {
       case 0:
       case 1:
       case 2:
       case 3:
-      case 4:
+      case 5:
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => screens[index],
         ));
         break;
-      case 5:
+      case 6:
         AuthenticationService().signOut().then((_) => Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const WelcomeScreen())));
