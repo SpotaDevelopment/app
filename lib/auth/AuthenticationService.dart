@@ -115,14 +115,17 @@ class AuthenticationService {
   }
 
   Future<List<Conversation>> fetchConversations() async {
-    if (globalUserAccount == null) {
+    if (user == null) {
       throw Exception('Error: User account not found');
     }
 
-    var url = Uri.parse(serverDomain + "users/getConversations");
-    final response = await client.post(url,
-        headers: {"content-type": "application/json"},
-        body: jsonEncode(globalUserAccount));
+    var url = Uri.parse(serverDomain +
+        "users/getConversations/" +
+        _firebaseAuth.currentUser!.email!);
+    final response = await client.get(
+      url,
+      headers: {"content-type": "application/json"},
+    );
     print('Response body: ${response.body} , ${response.statusCode}');
     if (response.statusCode == 201 || response.statusCode == 200) {
       List<Conversation> conversations = (json.decode(response.body) as List)

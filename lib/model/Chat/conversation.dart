@@ -32,24 +32,29 @@ class Conversation {
   factory Conversation.fromMap(Map<String, dynamic> map) {
     return Conversation(
       groupChatName: map['groupChatName'],
-      messageList: map['messageList'] != null ? List<ChatMessage>.from(map['messageList']?.map((x) => ChatMessage.fromMap(x))) : null,
+      messageList: map['messageList'] != null
+          ? List<ChatMessage>.from(
+              map['messageList']?.map((x) => ChatMessage.fromMap(x)))
+          : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Conversation.fromJson(String source) => Conversation.fromMap(json.decode(source));
+  factory Conversation.fromJson(String source) =>
+      Conversation.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Conversation(groupChatName: $groupChatName, messageList: $messageList)';
+  String toString() =>
+      'Conversation(groupChatName: $groupChatName, messageList: $messageList)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Conversation &&
-      other.groupChatName == groupChatName &&
-      listEquals(other.messageList, messageList);
+        other.groupChatName == groupChatName &&
+        listEquals(other.messageList, messageList);
   }
 
   @override

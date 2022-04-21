@@ -55,7 +55,7 @@ void onConnect(StompFrame frame) {
       streamController2.sink.add(_listMessages);
     },
   );
-  Timer.periodic(const Duration(seconds: 10), (_) {
+  /* Timer.periodic(const Duration(seconds: 10), (_) {
     ChatMessage chatMessage = ChatMessage(
       messageContent: 'Hello, Griffin!',
       senderId: '2', //username
@@ -68,7 +68,7 @@ void onConnect(StompFrame frame) {
       // headers: {},
       body: json.encode(chatMessage.toMap()),
     );
-  });
+  });*/
 }
 
 final stompClient = StompClient(
