@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/leagues_toggle_buttons.dart';
 import 'package:sign_ups/Components/news_article_with_image.dart';
 import 'package:sign_ups/Components/spota_appbar.dart';
+import 'package:sign_ups/constants/all_constants.dart';
 import '../../../Components/bottom_navigation_bar.dart';
 import '../../Components/UserComponents/DefaultUserProfile.dart';
 import '../../Components/menu_drawer.dart';
@@ -253,6 +254,20 @@ class ProfilePage extends StatelessWidget {
                                     image: AssetImage(
                                         "assets/icons/NBA/trailblazers.png"),
                                     fit: BoxFit.fill,
+                                  ),
+                                ),
+                                Spacer(),
+                                CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: Colors.grey,
+                                  child: Text(
+                                    '+5',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: "Oxanium",
+                                      fontWeight: FontWeight.bold,
+                                      color: lightGrey,
+                                    ),
                                   ),
                                 ),
                                 Spacer(),
