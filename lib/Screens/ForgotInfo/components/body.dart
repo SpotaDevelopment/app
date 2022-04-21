@@ -17,89 +17,89 @@ class Body extends StatelessWidget {
         .size; //This size provides us total height and width of our screen
     return Background(
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(
-              height: size.height * 0.05,
-            ),
-            SkipButton(backScreen: SignUpScreen(), skipScreen: SignUpScreen()),
-            SizedBox(
-              height: size.height * 0.2,
-            ),
-            const Text(
-              "No worries, \n We wouldn't forget about you",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: "Oxanium",
-                fontWeight: FontWeight.normal,
-                fontSize: 27,
+        child: SizedBox(
+        height: size.height,
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: (size.height * .32), bottom: 15),
+                child: const Text(
+                  "No worries, \n We wouldn't forget about you",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: "Oxanium",
+                    fontWeight: FontWeight.normal,
+                    fontSize: 27,
+                  ),
+                ),
               ),
-            ),
-            SizedBox(
-              height: size.height * 0.05,
-            ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: const <Widget>[
-                  //TODO:Figure out how to shift this to the right to match figma
-                  Spacer(flex: 1),
-                  Text(
+              Row(children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(left: (size.width * .1), top: 32),
+                  child: Text(
                     "Email",
                     style: TextStyle(
                       fontFamily: "Oxanium",
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Spacer(flex: 5)
-                ]),
-            RoundedInputField(
-              controller: emailController,
-              hintText: "Your Email",
-              onChanged: (value) {},
-              icon: Icons.email,
-            ),
-            SizedBox(
-              height: size.height * 0.2,
-            ),
-            RoundedButton(
-              //TODO: Move this down
-              text: "Send Email",
-              pressed: () {
-                AuthenticationService()
-                    .passwordReset(email: emailController.text.trim())
-                    .then((result) {
-                  if (result == null) {
-                    showAlertDialog(context);
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      //TODO: probably want to change the implentation of this?
-                      SnackBar(
-                        content: Text(
-                          result,
-                          style: TextStyle(fontSize: 16),
+                ),
+              ]),
+              RoundedInputField(
+                controller: emailController,
+                hintText: "Your Email",
+                onChanged: (value) {},
+                icon: Icons.email,
+              ),
+
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: RoundedButton(
+                    //TODO: Move this down
+                    text: "Send Email",
+                    pressed: () {
+                      AuthenticationService()
+                          .passwordReset(email: emailController.text.trim())
+                          .then((result) {
+                        if (result == null) {
+                          showAlertDialog(context);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            //TODO: probably want to change the implentation of this?
+                            SnackBar(
+                              content: Text(
+                                result,
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ),
+                          );
+                        }
+                      });
+                    },
+                    color: Colors.black,
+                    textColor: Colors.white,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: (size.height * .05)),
+                child: AlreadyHaveAnAccountCheck(
+                    login: true,
+                    press: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const SignUpScreen();
+                          },
                         ),
-                      ),
-                    );
-                  }
-                });
-              },
-              color: Colors.black,
-              textColor: Colors.white,
-            ),
-            AlreadyHaveAnAccountCheck(
-                login: true,
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const SignUpScreen();
-                      },
-                    ),
-                  );
-                }),
-          ],
+                      );
+                    }),
+              ),
+            ],
+          ),
         ),
       ),
     );

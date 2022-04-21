@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sign_ups/Screens/Home/home_page.dart';
+import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/SelectTeams/components/body.dart';
+import '../SelectLeagues/select_leagues_screen.dart';
+import '../SignUpContinue/signup_screen_continue.dart';
 import '/constants/all_constants.dart';
 
 class SelectTeams extends StatelessWidget {
@@ -18,7 +22,16 @@ class SelectTeams extends StatelessWidget {
         leadingWidth: 100,
         centerTitle: true,
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return const SelectLeagues();
+                },
+              ),
+            );
+          },
           child: Row(
             children: [
               Icon(
@@ -47,7 +60,16 @@ class SelectTeams extends StatelessWidget {
         actions: [
           Container(
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return HomePage(); //Todo: the sign up continue page requires these parameters but they are not in this page
+                    },
+                  ),
+                );
+              },
               child: Row(
                 children: [
                   Text(
@@ -65,7 +87,7 @@ class SelectTeams extends StatelessWidget {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
       body: Body(),
