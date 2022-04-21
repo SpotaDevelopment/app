@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sign_ups/Components/ScoreCards/Basketball/final_basketball_score_card.dart';
 import 'package:sign_ups/Components/leagues_toggle_buttons.dart';
 import 'package:sign_ups/Components/news_article_with_image.dart';
@@ -71,8 +72,8 @@ class _SportsScoresPageState extends State<SportsScoresPage> {
             awayRecord: "${data.awayTeamWins}-${data.awayTeamLosses}",
             awayLogo:
                 data.awayTeamName.toString().toLowerCase().replaceAll(' ', ''),
-            date: data.date.toString().replaceAll(' 00:00:00',
-                ''), //added replaceAll here to remove the time part of the date
+            date: format_date(data.date.toString().replaceAll(' 00:00:00',
+                '')), //added replaceAll here to remove the time part of the date
           );
         },
       );
@@ -88,4 +89,11 @@ class _SportsScoresPageState extends State<SportsScoresPage> {
       futureGames = AuthenticationService().fetchGames();
     });
   }
+}
+
+//formats the date as MMM day
+String format_date(String date) {
+  var dateFormatted = DateTime.parse(date);
+  var formatter = new DateFormat('MMM d');
+  return formatter.format(dateFormatted);
 }
