@@ -30,10 +30,10 @@ class AuthenticationService {
     await _firebaseAuth.signOut(); //sign the user out
     client.close(); //close the http client
     stompClient.deactivate(); //deactivate stomp client
-    streamController.done;
+    //streamController.done;
     streamController2.done;
 
-    streamController.close();
+    //streamController.close();
     streamController2.close();
   }
 

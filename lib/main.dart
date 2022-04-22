@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:sign_ups/Screens/Chat/in_chat.dart';
 import 'package:sign_ups/auth/AuthenticationService.dart';
 import 'package:stomp_dart_client/stomp.dart';
 import 'package:stomp_dart_client/stomp_config.dart';
@@ -18,8 +19,20 @@ import 'Screens/Home/home_page.dart';
 import 'firebase_options.dart';
 import 'model/Chat/chat_message.dart';
 
-StreamController<List<String>> streamController = StreamController();
-StreamController<List<Message>> streamController2 = StreamController();
+//StreamController<List<String>> streamController = StreamController();
+StreamController<List<Message>> streamController2 =
+    StreamController<List<Message>>.broadcast(
+  onListen: () {
+    print("listening");
+    print(listMessages);
+  },
+  onCancel: () {
+    print("Cancelled");
+    print(listMessages);
+  },
+);
+// StreamController<List<Message>> controller =
+//     StreamController<List<Message>>.broadcast();
 //Map<Conversation,List<Chat<Messages>>>
 //String destination = "/topic/messages";
 //String message_destination = "/ws/message";
@@ -41,16 +54,18 @@ void onConnect(StompFrame frame) {
         FirebaseAuth.instance.currentUser!.displayName! +
         '/messages',
     callback: (frame) {
-      Map<String, dynamic> result = json.decode(frame.body!);
+      print("callback: received a message");
+      //Map<String, dynamic> result = json.decode(frame.body!);
       Message? result2 = Message.fromJson(frame.body!);
       //print(frame);
       //display a dialog popup once the user receives a call back anywhere in the app
 
       //receive Message from topic
-      _listMessage.add(result['content']);
+      //InChatPage.conversation.messageList!.add(result2);
+      // _listMessage.add(result['content']);
       listMessages.add(result2);
       //Observe list message
-      streamController.sink.add(_listMessage);
+      //streamController.sink.add(_listMessage);
       //receive Message from ws
       //if payload received is user added to group chat then add to list
       streamController2.sink.add(listMessages);
@@ -103,8 +118,8 @@ class _MyAppState extends State<MyApp> {
       } else {
         print('User is signed in!');
         stompClient.activate(); //activate the stomp client connection
-        streamController.add(_listMessage); //Observe list message changes
-        streamController2.add(listMessages); //Observe list message changes
+        //streamController.add(_listMessage); //Observe list message changes
+        //streamController2.add(listMessages); //Observe list message changes
       }
     });
   }

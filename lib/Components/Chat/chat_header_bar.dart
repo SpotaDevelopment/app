@@ -31,8 +31,8 @@ class ChatHeaderBar extends StatelessWidget {
             icon: Icon(Icons.chevron_left_rounded),
             color: Colors.black,
             onPressed: () {
-              streamController2.close();
-              streamController2 = StreamController<List<Message>>();
+              //streamController2.close();
+              //streamController2 = StreamController<List<Message>>();
               //streamController2.sink.add(listMessages);
               Navigator.push(
                 context,
