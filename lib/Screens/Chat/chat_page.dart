@@ -180,7 +180,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Future<void> _pull() async {
-    await Future.delayed(Duration(seconds: 1));
+    //await Future.delayed(Duration(seconds: 1));
     setState(() {
       futureConversations = AuthenticationService().fetchConversations();
     });

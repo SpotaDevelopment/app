@@ -6,7 +6,7 @@ import 'package:sign_ups/model/Chat/chat_message.dart';
 
 class Conversation {
   String? groupChatName;
-  List<ChatMessage>? messageList;
+  List<Message>? messageList;
   Conversation({
     this.groupChatName,
     this.messageList,
@@ -14,7 +14,7 @@ class Conversation {
 
   Conversation copyWith({
     String? groupChatName,
-    List<ChatMessage>? messageList,
+    List<Message>? messageList,
   }) {
     return Conversation(
       groupChatName: groupChatName ?? this.groupChatName,
@@ -33,8 +33,8 @@ class Conversation {
     return Conversation(
       groupChatName: map['groupChatName'],
       messageList: map['messageList'] != null
-          ? List<ChatMessage>.from(
-              map['messageList']?.map((x) => ChatMessage.fromMap(x)))
+          ? List<Message>.from(
+              map['messageList']?.map((x) => Message.fromMap(x)))
           : null,
     );
   }

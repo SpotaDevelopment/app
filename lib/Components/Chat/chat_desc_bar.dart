@@ -25,7 +25,7 @@ class ChatDescBar extends StatelessWidget {
         Navigator.push(
           context,
           PageRouteBuilder(
-            pageBuilder: (_, __, ___) => InChatPage(),
+            pageBuilder: (_, __, ___) => InChatPage(conversation: conversation),
             transitionDuration: const Duration(seconds: 0),
           ),
         );

@@ -1,13 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_ups/main.dart';
 
 import '../constants/all_constants.dart';
+import '../model/Chat/chat_message.dart';
 import '../model/Chat/conversation.dart';
 import '../model/Game.dart';
 import '../model/News.dart';
@@ -239,6 +238,10 @@ class AuthenticationService {
     print("went into getGeneralNews");
     link = serverDomain + "users/getGeneralNews"; //no user is logged in
     return fetchGeneralNews(link);
+  }
+
+  Future<List<Message>> fetchMessages({required var chatId}) async {
+    return [];
   }
 }
 

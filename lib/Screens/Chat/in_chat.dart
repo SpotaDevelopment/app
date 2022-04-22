@@ -1,14 +1,35 @@
 import 'package:flutter/material.dart';
+
 import 'package:sign_ups/Components/Chat/chat_header_bar.dart';
-import 'package:sign_ups/Components/Chat/chat_message.dart';
 import 'package:sign_ups/Screens/Chat/message_box.dart';
 
+import '../../Components/Chat/chat_message.dart';
 import '../../Components/bottom_navigation_bar.dart';
 import '../../Components/menu_drawer.dart';
 import '../../Components/spota_appbar.dart';
+import '../../auth/AuthenticationService.dart';
+import '../../model/Chat/chat_message.dart';
+import '../../model/Chat/conversation.dart';
 
-class InChatPage extends StatelessWidget {
-  const InChatPage({Key? key}) : super(key: key);
+class InChatPage extends StatefulWidget {
+  Conversation conversation;
+  InChatPage({
+    Key? key,
+    required this.conversation,
+  }) : super(key: key);
+
+  @override
+  State<InChatPage> createState() => _InChatPageState();
+}
+
+class _InChatPageState extends State<InChatPage> {
+  late Future<List<Message>> futureMessages;
+  @override
+  void initState() {
+    super.initState();
+    futureMessages = AuthenticationService()
+        .fetchMessages(chatId: widget.conversation.groupChatName);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +42,14 @@ class InChatPage extends StatelessWidget {
         children: <Widget>[
           ChatHeaderBar(title: "The Boys"),
           Expanded(
-            child: ListView(
-              reverse: true,      //newest message at the bottom
-              children: <Widget>[
-                //add chat message here
-                /*ChatMessage(
-                  sender: "Matt Yost",
-                  initials: "MY",
-                  dateTime: "Today at 3:08 PM",
-                  message: "Same here!",
-                  color: Colors.green,
-                ),*/
-              ],
+            child: FutureBuilder(
+              future: futureMessages,
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                return RefreshIndicator(
+                  child: _conversationView(snapshot),
+                  onRefresh: _pull,
+                );
+              },
             ),
           ),
           MessageBox(),
@@ -40,5 +57,37 @@ class InChatPage extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavBar(),
     );
+  }
+
+  Widget _conversationView(AsyncSnapshot snapshot) {
+    if (snapshot.hasData) {
+      return ListView.builder(
+        itemCount: snapshot.data.length,
+        itemBuilder: (BuildContext context, int index) {
+          return ChatMessage(
+            sender: snapshot.data[index].Id,
+            initials: snapshot.data[index].Id[0], //TODO: Change this
+            dateTime: snapshot.data[index].chatTimeStamp,
+            message: snapshot.data[index].messageContent,
+            color: Colors.green, //add user color
+            //message: snapshot.data[index].message,
+            //time: snapshot.data[index].time,
+            //isMe: snapshot.data[index].isMe,
+          );
+        },
+      );
+    } else if (snapshot.hasError) {
+      return Text("${snapshot.error}");
+    }
+    return Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+
+  Future<void> _pull() async {
+    setState(() {
+      futureMessages = AuthenticationService()
+          .fetchMessages(chatId: widget.conversation.groupChatName);
+    });
   }
 }

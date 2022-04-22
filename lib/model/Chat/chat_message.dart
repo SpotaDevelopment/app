@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-class ChatMessage {
+class Message {
   String? messageContent;
   String? senderId;
   String? recipientId;
   String? groupChat;
   String? chatTimeStamp;
   String? chatId;
-  ChatMessage({
+  Message({
     this.messageContent,
     this.senderId,
     this.recipientId,
@@ -16,7 +16,7 @@ class ChatMessage {
     this.chatId,
   });
 
-  ChatMessage copyWith({
+  Message copyWith({
     String? messageContent,
     String? senderId,
     String? recipientId,
@@ -24,7 +24,7 @@ class ChatMessage {
     String? chatTimeStamp,
     String? chatId,
   }) {
-    return ChatMessage(
+    return Message(
       messageContent: messageContent ?? this.messageContent,
       senderId: senderId ?? this.senderId,
       recipientId: recipientId ?? this.recipientId,
@@ -45,8 +45,8 @@ class ChatMessage {
     };
   }
 
-  factory ChatMessage.fromMap(Map<String, dynamic> map) {
-    return ChatMessage(
+  factory Message.fromMap(Map<String, dynamic> map) {
+    return Message(
       messageContent: map['messageContent'],
       senderId: map['senderId'],
       recipientId: map['recipientId'],
@@ -58,7 +58,7 @@ class ChatMessage {
 
   String toJson() => json.encode(toMap());
 
-  factory ChatMessage.fromJson(String source) => ChatMessage.fromMap(json.decode(source));
+  factory Message.fromJson(String source) => Message.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -69,7 +69,7 @@ class ChatMessage {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
-    return other is ChatMessage &&
+    return other is Message &&
       other.messageContent == messageContent &&
       other.senderId == senderId &&
       other.recipientId == recipientId &&
