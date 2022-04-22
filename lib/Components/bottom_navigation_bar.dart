@@ -83,7 +83,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
         });
         if (index == 0 || index == 1 || index == 2) {
           return _onTap();
+        } else if (FirebaseAuth.instance.currentUser != null && index == 3) {
+          return _onTap();
         } else if (FirebaseAuth.instance.currentUser != null) {
+          if (globalUserAccount == null)
+            globalUserAccount = await getUserAccountByEmail(
+                FirebaseAuth.instance.currentUser?.email);
           List<UserAccount?> friendList =
               await getFriendsByEmail(globalUserAccount.email.trim());
           List<String?> favoriteTeamList =

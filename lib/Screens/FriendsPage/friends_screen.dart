@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/bottom_navigation_bar.dart';
 import 'package:sign_ups/UserServices/userServices.dart';
@@ -56,6 +57,9 @@ class FriendsScreen extends StatelessWidget {
                     size: 35,
                   ),
                   onTap: () async {
+                    if (globalUserAccount == null)
+                      globalUserAccount = await getUserAccountByEmail(
+                          FirebaseAuth.instance.currentUser?.email);
                     List<UserAccount?> friendList =
                         await getFriendsByEmail(globalUserAccount.email.trim());
                     List<String?> favoriteTeamList =
