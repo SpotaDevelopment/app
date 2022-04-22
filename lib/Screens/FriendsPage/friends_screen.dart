@@ -100,46 +100,46 @@ class FriendsScreen extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 physics: BouncingScrollPhysics(),
-                itemCount: friends.length + 2,
+                itemCount: friends.length,
                 itemBuilder: (context, index) {
-                  if (index == 0) {
-                    return Row(
-                      children: [
-                        SizedBox(
-                            width: size.width * 0.015,
-                            height: size.height * 0.05),
-                        Text(
-                          "Online",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                          ),
-                        )
-                      ],
-                    );
-                  } else if (index == friends.length + 1) {
-                    return Row(
-                      children: [
-                        SizedBox(
-                            width: size.width * 0.015,
-                            height: size.height * 0.05),
-                        Text(
-                          "Offline",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                          ),
-                        )
-                      ],
-                    );
-                  }
-                  String? fullName = friends[index - 1]!.firstName! +
+                  // if (index == 0) {
+                  //   return Row(
+                  //     children: [
+                  //       SizedBox(
+                  //           width: size.width * 0.015,
+                  //           height: size.height * 0.05),
+                  //       Text(
+                  //         "Online",
+                  //         style: TextStyle(
+                  //           fontWeight: FontWeight.bold,
+                  //           fontSize: 24,
+                  //         ),
+                  //       )
+                  //     ],
+                  //   );
+                  // } else if (index == friends.length + 1) {
+                  //   return Row(
+                  //     children: [
+                  //       SizedBox(
+                  //           width: size.width * 0.015,
+                  //           height: size.height * 0.05),
+                  //       Text(
+                  //         "Offline",
+                  //         style: TextStyle(
+                  //           fontWeight: FontWeight.bold,
+                  //           fontSize: 24,
+                  //         ),
+                  //       )
+                  //     ],
+                  //   );
+                  // }
+                  String? fullName = friends[index]!.firstName! +
                       " " +
-                      friends[index - 1]!.lastName!;
+                      friends[index]!.lastName!;
                   return FriendInList(
                     name: fullName,
-                    color: colorStringsToColors[
-                        friends[index - 1]!.profilePicColor!],
+                    color:
+                        colorStringsToColors[friends[index]!.profilePicColor!],
                     fullNameInitials: getInitials(fullName),
                   );
                 },
