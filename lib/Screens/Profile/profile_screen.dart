@@ -31,6 +31,7 @@ class ProfilePage extends StatelessWidget {
     final children = <Widget>[];
     for (int i = 0; i < min(favoriteTeamList.length, 3); i++) {
       String currTeam = favoriteTeamList[i]!.toLowerCase();
+      currTeam = (currTeam == 'trail blazers') ? 'trailblazers' : currTeam;
       children.add(
         SizedBox(
           height: 75,
