@@ -108,12 +108,6 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                           List<UserAccount?> friendList =
                               await getFriendsByEmail(
                                   searchedUsers![index].email);
-                          List<String?> friends = [];
-                          for (int i = 0; i < friendList.length; i++) {
-                            friends.add(friendList[i]!.firstName! +
-                                " " +
-                                friendList[i]!.lastName!);
-                          }
                           List<String?> favoriteTeams = await getFavoriteTeams(
                               searchedUsers![index].email);
                           Navigator.push(
@@ -121,7 +115,7 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                             MaterialPageRoute(
                               builder: (context) {
                                 return ProfilePage(
-                                  friends: friends,
+                                  friends: friendList,
                                   isPersonal: false,
                                   identifier:
                                       searchedUsers![index].firstName != ""

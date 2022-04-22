@@ -5,6 +5,7 @@ import 'package:sign_ups/Components/leagues_toggle_buttons.dart';
 import 'package:sign_ups/Components/news_article_with_image.dart';
 import 'package:sign_ups/Components/spota_appbar.dart';
 import 'package:sign_ups/constants/all_constants.dart';
+import 'package:sign_ups/model/UserAccount.dart';
 import '../../../Components/bottom_navigation_bar.dart';
 import '../../Components/UserComponents/DefaultUserProfile.dart';
 import '../../Components/menu_drawer.dart';
@@ -16,7 +17,7 @@ class ProfilePage extends StatelessWidget {
   // If user signed up with a name, then name will be displayed, else username.
   final String? identifier;
   final bool isPersonal;
-  final List<String?> friends;
+  final List<UserAccount?> friends;
   final List<String?> favoriteTeamList;
   final Color? color;
   ProfilePage({

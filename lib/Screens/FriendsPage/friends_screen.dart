@@ -15,7 +15,7 @@ import '../../model/UserAccount.dart';
 import '../Profile/profile_screen.dart';
 
 class FriendsScreen extends StatelessWidget {
-  var friends = [];
+  List<UserAccount?> friends = [];
   FriendsScreen({
     Key? key,
     required this.friends,
@@ -53,18 +53,12 @@ class FriendsScreen extends StatelessWidget {
                         await getFriendsByEmail(globalUserAccount.email.trim());
                     List<String?> favoriteTeamList =
                         await getFavoriteTeams(globalUserAccount.email.trim());
-                    List<String?> friends = [];
-                    for (int i = 0; i < friendList.length; i++) {
-                      friends.add(friendList[i]!.firstName! +
-                          " " +
-                          friendList[i]!.lastName!);
-                    }
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
                           return ProfilePage(
-                            friends: friends,
+                            friends: friendList,
                             isPersonal: true,
                             identifier: globalUserAccount.firstName != ""
                                 ? globalUserAccount.firstName! +
@@ -139,10 +133,14 @@ class FriendsScreen extends StatelessWidget {
                       ],
                     );
                   }
+                  String? fullName = friends[index - 1]!.firstName! +
+                      " " +
+                      friends[index - 1]!.lastName!;
                   return FriendInList(
-                    name: friends[index - 1],
-                    color: getRandColor(),
-                    fullNameInitials: getInitials(friends[index - 1]),
+                    name: fullName,
+                    color: colorStringsToColors[
+                        friends[index - 1]!.profilePicColor!],
+                    fullNameInitials: getInitials(fullName),
                   );
                 },
                 separatorBuilder: (context, index) {
