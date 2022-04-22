@@ -50,7 +50,8 @@ class _InChatPageState extends State<InChatPage> {
               initialData: widget.conversation.messageList,
               stream: streamController2.stream,
               //stream: streamController.stream,
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<Message>> snapshot) {
                 return _conversationView(snapshot);
                 /*return RefreshIndicator(
                   child: _conversationView(snapshot),
@@ -59,7 +60,8 @@ class _InChatPageState extends State<InChatPage> {
               },
             ),
           ),
-          MessageBox(groupChatName: widget.conversation.groupChatName!),
+          MessageBox(
+              groupChatName: widget.conversation.groupChatName ?? 'Group Chat'),
         ],
       ),
       bottomNavigationBar: BottomNavBar(),
