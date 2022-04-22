@@ -94,12 +94,17 @@ class _BottomNavBarState extends State<BottomNavBar> {
               await getFriendsByEmail(globalUserAccount.email.trim());
           List<String?> favoriteTeamList =
               await getFavoriteTeams(globalUserAccount.email.trim());
+          List<String?> friends = [];
+          for (int i = 0; i < friendList.length; i++) {
+            friends.add(
+                friendList[i]!.firstName! + " " + friendList[i]!.lastName!);
+          }
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
                 return ProfilePage(
-                  friendCount: friendList.length,
+                  friends: friends,
                   isPersonal: true,
                   identifier: globalUserAccount.firstName != ""
                       ? globalUserAccount.firstName +

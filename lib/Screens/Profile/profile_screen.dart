@@ -16,14 +16,14 @@ class ProfilePage extends StatelessWidget {
   // If user signed up with a name, then name will be displayed, else username.
   final String? identifier;
   final bool isPersonal;
-  final int friendCount;
+  final List<String?> friends;
   final List<String?> favoriteTeamList;
   final Color? color;
   ProfilePage({
     Key? key,
     required this.identifier,
     required this.isPersonal,
-    required this.friendCount,
+    required this.friends,
     required this.favoriteTeamList,
     required this.color,
   }) : super(key: key);
@@ -53,6 +53,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     int remainingTeams = favoriteTeamList.length - 3;
+    int friendCount = friends.length;
     return Scaffold(
       appBar: SpotaAppBar(),
       endDrawer: MenuDrawer(),
@@ -130,7 +131,9 @@ class ProfilePage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return FriendsScreen();
+                              return FriendsScreen(
+                                friends: friends,
+                              );
                             },
                           ),
                         );

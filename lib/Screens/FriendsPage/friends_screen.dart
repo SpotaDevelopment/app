@@ -15,22 +15,11 @@ import '../../model/UserAccount.dart';
 import '../Profile/profile_screen.dart';
 
 class FriendsScreen extends StatelessWidget {
-  FriendsScreen({Key? key}) : super(key: key);
-  var friends = [
-    "Kevin O'Brien",
-    "Matt Yost",
-    "Brian Curtis",
-    "Griffin Bourdon",
-    "Phil Bourdon",
-    "Ben Bosquet",
-    "Peter Bugala",
-    "Justin Rittmeyer",
-    "Charles Colbourn",
-    "Heewook Lee",
-    "Ming Zhao",
-    "Javier Gonzalez Sanchez",
-  ];
-
+  var friends = [];
+  FriendsScreen({
+    Key? key,
+    required this.friends,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -64,12 +53,18 @@ class FriendsScreen extends StatelessWidget {
                         await getFriendsByEmail(globalUserAccount.email.trim());
                     List<String?> favoriteTeamList =
                         await getFavoriteTeams(globalUserAccount.email.trim());
+                    List<String?> friends = [];
+                    for (int i = 0; i < friendList.length; i++) {
+                      friends.add(friendList[i]!.firstName! +
+                          " " +
+                          friendList[i]!.lastName!);
+                    }
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
                           return ProfilePage(
-                            friendCount: friendList.length,
+                            friends: friends,
                             isPersonal: true,
                             identifier: globalUserAccount.firstName != ""
                                 ? globalUserAccount.firstName! +
@@ -145,7 +140,10 @@ class FriendsScreen extends StatelessWidget {
                     );
                   }
                   return FriendInList(
-                      name: friends[index - 1], color: getRandColor());
+                    name: friends[index - 1],
+                    color: getRandColor(),
+                    fullNameInitials: getInitials(friends[index - 1]),
+                  );
                 },
                 separatorBuilder: (context, index) {
                   return Divider(

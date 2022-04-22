@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/UserComponents/DefaultUserProfile.dart';
+import 'package:sign_ups/UserServices/userServices.dart';
 
 import '../../HelperFunctions/functions.dart';
 
@@ -8,12 +9,17 @@ class FriendInList extends StatefulWidget {
   Color? color;
   String? fullNameInitials;
   bool addIcon;
+  String? user;
+  String? friend;
+
   FriendInList({
     Key? key,
     this.name,
     this.color,
-    this.fullNameInitials,
+    required this.fullNameInitials,
     this.addIcon = false,
+    this.user,
+    this.friend,
   }) : super(key: key);
 
   @override
@@ -56,6 +62,11 @@ class _FriendInListState extends State<FriendInList> {
                   ? Icon(Icons.add_circle_outline)
                   : Icon(Icons.check_circle_outline),
               onTap: () {
+                if (isAdded) {
+                  removeFriend(user: widget.user, friend: widget.friend);
+                } else {
+                  addFriend(user: widget.user, friend: widget.friend);
+                }
                 setState(
                   () {
                     isAdded = !isAdded;

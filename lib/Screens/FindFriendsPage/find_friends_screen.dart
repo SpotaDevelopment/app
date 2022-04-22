@@ -87,26 +87,33 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                       return GestureDetector(
                         behavior: HitTestBehavior.opaque,
                         child: FriendInList(
-                          fullNameInitials:
-                              searchedUsers![index].firstName != ""
-                                  ? searchedUsers![index]
-                                          .firstName![0]
-                                          .toUpperCase() +
-                                      searchedUsers![index]
-                                          .lastName![0]
-                                          .toUpperCase()
-                                  : "",
-                          name: searchedUsers![index].username!.isNotEmpty
-                              ? searchedUsers![index].username
-                              : searchedUsers![index].email,
-                          color: colorStringsToColors[
-                              searchedUsers![index].profilePicColor],
-                          addIcon: true,
-                        ),
+                            fullNameInitials:
+                                searchedUsers![index].firstName != ""
+                                    ? searchedUsers![index]
+                                            .firstName![0]
+                                            .toUpperCase() +
+                                        searchedUsers![index]
+                                            .lastName![0]
+                                            .toUpperCase()
+                                    : "",
+                            name: searchedUsers![index].username!.isNotEmpty
+                                ? searchedUsers![index].username
+                                : searchedUsers![index].email,
+                            color: colorStringsToColors[
+                                searchedUsers![index].profilePicColor],
+                            addIcon: true,
+                            user: globalUserAccount.email.trim(),
+                            friend: searchedUsers![index].email),
                         onTap: () async {
                           List<UserAccount?> friendList =
                               await getFriendsByEmail(
                                   searchedUsers![index].email);
+                          List<String?> friends = [];
+                          for (int i = 0; i < friendList.length; i++) {
+                            friends.add(friendList[i]!.firstName! +
+                                " " +
+                                friendList[i]!.lastName!);
+                          }
                           List<String?> favoriteTeams = await getFavoriteTeams(
                               searchedUsers![index].email);
                           Navigator.push(
@@ -114,7 +121,7 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                             MaterialPageRoute(
                               builder: (context) {
                                 return ProfilePage(
-                                  friendCount: friendList.length,
+                                  friends: friends,
                                   isPersonal: false,
                                   identifier:
                                       searchedUsers![index].firstName != ""
