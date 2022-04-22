@@ -69,7 +69,7 @@ class MessageBox extends StatelessWidget {
                     //recipientId: '',
                     chatTimeStamp: DateTime.now().toString());
                 AuthenticationService().saveMessage(message: msg);
-                //listMessages.add(msg);
+                listMessages.add(msg);
                 //TODO: send a message with the message in the text field
                 stompClient.send(
                     destination: '/app/chat', body: json.encode(msg));

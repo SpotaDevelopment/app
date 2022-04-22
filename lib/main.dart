@@ -119,7 +119,7 @@ class _MyAppState extends State<MyApp> {
         print('User is signed in!');
         stompClient.activate(); //activate the stomp client connection
         //streamController.add(_listMessage); //Observe list message changes
-        //streamController2.add(listMessages); //Observe list message changes
+        streamController2.add(listMessages); //Observe list message changes
       }
     });
   }

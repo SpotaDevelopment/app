@@ -73,6 +73,7 @@ class _InChatPageState extends State<InChatPage> {
   Widget _conversationView(AsyncSnapshot snapshot) {
     if (snapshot.hasData) {
       return ListView.builder(
+        reverse: true,
         itemCount: snapshot.data.length,
         itemBuilder: (BuildContext context, int index) {
           // return snapshot.data[index];
