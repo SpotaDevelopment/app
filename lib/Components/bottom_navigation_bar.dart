@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/rounded_button.dart';
+import 'package:sign_ups/HelperFunctions/functions.dart';
 import 'package:sign_ups/Screens/Chat/chat_page.dart';
 import 'package:sign_ups/Screens/Home/home_page.dart';
 import 'package:sign_ups/Screens/Home/home_screen.dart';
@@ -106,6 +107,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                           globalUserAccount.lastName
                       : globalUserAccount.username,
                   favoriteTeamList: favoriteTeamList,
+                  color:
+                      colorStringsToColors[globalUserAccount.profilePicColor],
                 );
               },
             ),

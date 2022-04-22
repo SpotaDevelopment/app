@@ -87,6 +87,7 @@ flutter:
     - assets/images/
     - assets/font/
     - assets/icons/NBA/
+    - assets/data/
   fonts:
     - family: Oxanium
       fonts:

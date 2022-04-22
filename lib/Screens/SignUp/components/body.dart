@@ -1,8 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/already_have_an_account_check.dart';
 import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Components/rounded_input_field.dart';
 import 'package:sign_ups/Components/rounded_password_field.dart';
+import 'package:sign_ups/HelperFunctions/functions.dart';
 import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/login_screen.dart';
 import 'package:sign_ups/Screens/SignUp/components/signUpBackground.dart';
@@ -10,12 +14,23 @@ import 'package:sign_ups/Screens/SignUpContinue/signup_screen_continue.dart';
 import 'package:sign_ups/auth/AuthenticationService.dart';
 import 'package:sign_ups/Components/skip_and_back_button.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:sign_ups/model/UserAccount.dart';
 
 class Body extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordCheckController = TextEditingController();
+
+  Future<List<String>> read(String fileName) async {
+    String response;
+    response = await rootBundle.loadString('assets/data/$fileName');
+    List<String> list = [];
+    LineSplitter.split(response).forEach((line) => list.add('$line'));
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -116,6 +131,34 @@ class Body extends StatelessWidget {
                   child: RoundedButton(
                     text: "Continue",
                     pressed: () {
+                      // List<String> emails = await read("emails.txt");
+                      // List<String> firstNames = await read("firstNames.txt");
+                      // List<String> lastNames = await read("lastNames.txt");
+                      // List<String> passwords = await read("passwords.txt");
+                      // List<String> usernames = await read("usernames.txt");
+                      // List<UserAccount> userAccounts = [];
+
+                      // for (int i = 0; i < 300; i++) {
+                      //   AuthenticationService().createUserWithEmailAndPassword(
+                      //       email: emails[i],
+                      //       password: passwords[i],
+                      //       passwordCheck: passwords[i],
+                      //       username: usernames[i]);
+                      // }
+
+                      // for (int i = 0; i < 300; i++) {
+                      //   UserAccount userAccount = new UserAccount(
+                      //     username: usernames[i],
+                      //     email: emails[i],
+                      //     firstName: firstNames[i],
+                      //     lastName: lastNames[i],
+                      //     profilePicColor: getRandColorString(),
+                      //     birthday: '',
+                      //   );
+                      //   userAccounts.add(userAccount);
+                      // }
+                      // AuthenticationService()
+                      //     .signUpMany(userAccounts: userAccounts);
                       //!When the button is pressed, it calls the authentication service to sign the user up
                       // Navigator.push(
                       //   context,

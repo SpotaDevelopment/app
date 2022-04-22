@@ -123,6 +123,8 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                                               searchedUsers![index].lastName!
                                           : searchedUsers![index].username,
                                   favoriteTeamList: favoriteTeams,
+                                  color: colorStringsToColors[
+                                      searchedUsers![index].profilePicColor],
                                 );
                               },
                             ),
