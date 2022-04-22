@@ -22,7 +22,7 @@ class InChatPage extends StatelessWidget {
           ChatHeaderBar(title: "The Boys"),
           Expanded(
             child: ListView(
-              reverse: true,      //newest message at the bottom
+              reverse: true, //newest message at the bottom
               children: <Widget>[
                 //add chat message here
                 /*ChatMessage(
@@ -38,7 +38,7 @@ class InChatPage extends StatelessWidget {
           MessageBox(),
         ],
       ),
-      bottomNavigationBar: BottomNavBar(),
+      bottomNavigationBar: BottomNavBar(curIndex: 3),
     );
   }
 }

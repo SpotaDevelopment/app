@@ -44,7 +44,7 @@ class _SportsNewsPageState extends State<SportsNewsPage> {
           },
         ),
       ),
-      bottomNavigationBar: BottomNavBar(),
+      bottomNavigationBar: BottomNavBar(curIndex: 0),
     );
   }
 

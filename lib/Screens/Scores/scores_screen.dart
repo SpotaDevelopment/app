@@ -46,7 +46,9 @@ class _SportsScoresPageState extends State<SportsScoresPage> {
           },
         ),
       ),
-      bottomNavigationBar: const BottomNavBar(),
+      bottomNavigationBar: const BottomNavBar(
+        curIndex: 1,
+      ),
     );
   }
 

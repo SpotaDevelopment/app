@@ -49,7 +49,7 @@ class ChatPage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavBar(),
+      bottomNavigationBar: BottomNavBar( curIndex: 3),
     );
   }
 
