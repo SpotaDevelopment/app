@@ -36,8 +36,10 @@ class _ChatPageState extends State<ChatPage> {
         children: <Widget>[
           SingleChildScrollView(
             child: SizedBox(
-              height: size.height,
+              height: size.height / 4,
               child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
                     child: FutureBuilder(
@@ -57,7 +59,7 @@ class _ChatPageState extends State<ChatPage> {
               ),
             ),
           ),
-          Padding(
+          /*Padding(
             padding: EdgeInsets.fromLTRB(
                 size.width * .82, size.height * .667, 16, 8),
             child: FloatingActionButton(
@@ -72,7 +74,7 @@ class _ChatPageState extends State<ChatPage> {
                 color: Colors.black,
               ),
             ),
-          ),
+          ),*/
         ],
       ),
       bottomNavigationBar: BottomNavBar(),
@@ -164,10 +166,12 @@ class _ChatPageState extends State<ChatPage> {
           return ChatDescBar(
             conversation: snapshot.data[index],
             title: snapshot.data[index].groupChatName,
-            lastText: snapshot
-                .data[index]
-                .messageList[snapshot.data[index].messageList.length - 1]
-                .messageContent,
+            lastText: snapshot.data[index].messageList.length > 0
+                ? snapshot
+                    .data[index]
+                    .messageList[snapshot.data[index].messageList.length - 1]
+                    .message
+                : "",
             //lastTime: DateFormat.yMMMd().format(snapshot.data[index].messageList[snapshot.data[index].messageList.length -1].chatTimeStamp),
           );
         },

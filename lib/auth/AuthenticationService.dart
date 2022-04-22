@@ -129,8 +129,11 @@ class AuthenticationService {
     );
     print('Response body: ${response.body} , ${response.statusCode}');
     if (response.statusCode == 201 || response.statusCode == 200) {
-      List<Conversation> conversations = (json.decode(response.body) as List)
-          .map((i) => Conversation.fromJson(i))
+      var jsonResponse = jsonDecode(response.body);
+
+      List<Conversation> conversations = jsonResponse
+          .map<Conversation>(
+              (i) => Conversation.fromMap(Map<String, dynamic>.from(i)))
           .toList();
       return conversations;
     } else {
