@@ -6,11 +6,13 @@ import '../../HelperFunctions/functions.dart';
 class FriendInList extends StatefulWidget {
   String? name;
   Color? color;
+  String? fullNameInitials;
   bool addIcon;
   FriendInList({
     Key? key,
     this.name,
     this.color,
+    this.fullNameInitials,
     this.addIcon = false,
   }) : super(key: key);
 
@@ -31,7 +33,9 @@ class _FriendInListState extends State<FriendInList> {
         children: [
           SizedBox(width: size.width * 0.02),
           DefaultUserProfile(
-            initials: getInitials(widget.name!),
+            initials: widget.fullNameInitials != ""
+                ? widget.fullNameInitials!
+                : getInitials(widget.name!),
             color: widget.color!,
             radius: 27,
           ),
