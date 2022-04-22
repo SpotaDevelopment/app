@@ -87,6 +87,15 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                       return GestureDetector(
                         behavior: HitTestBehavior.opaque,
                         child: FriendInList(
+                          fullNameInitials:
+                              searchedUsers![index].firstName != ""
+                                  ? searchedUsers![index]
+                                          .firstName![0]
+                                          .toUpperCase() +
+                                      searchedUsers![index]
+                                          .lastName![0]
+                                          .toUpperCase()
+                                  : "",
                           name: searchedUsers![index].username!.isNotEmpty
                               ? searchedUsers![index].username
                               : searchedUsers![index].email,
@@ -112,7 +121,7 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                                           ? searchedUsers![index].firstName! +
                                               " " +
                                               searchedUsers![index].lastName!
-                                          : searchedUsers![index].email,
+                                          : searchedUsers![index].username,
                                   favoriteTeamList: favoriteTeams,
                                 );
                               },

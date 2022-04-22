@@ -75,7 +75,7 @@ class FriendsScreen extends StatelessWidget {
                                 ? globalUserAccount.firstName! +
                                     " " +
                                     globalUserAccount.lastName
-                                : globalUserAccount.email,
+                                : globalUserAccount.username,
                             favoriteTeamList: favoriteTeamList,
                           );
                         },

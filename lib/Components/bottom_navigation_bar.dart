@@ -104,7 +104,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       ? globalUserAccount.firstName +
                           " " +
                           globalUserAccount.lastName
-                      : globalUserAccount.email,
+                      : globalUserAccount.username,
                   favoriteTeamList: favoriteTeamList,
                 );
               },
