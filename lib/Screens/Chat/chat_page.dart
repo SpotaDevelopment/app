@@ -34,32 +34,24 @@ class _ChatPageState extends State<ChatPage> {
       body: Stack(
         alignment: Alignment.center,
         children: <Widget>[
-          SingleChildScrollView(
-            child: SizedBox(
-              height: size.height / 4,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: FutureBuilder(
-                      future: futureConversations,
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        return RefreshIndicator(
-                          child: _conversationView(snapshot),
-                          onRefresh: _pull,
-                        );
-                      },
-                    ),
-                  ),
-                  //this is where chat descriptions go, like
-                  /*ChatDescBar(title: "The Boys",
-                      lastText: "Did you see Shohei Ohtani last night?!"),*/
-                ],
+          Column(
+            //   mainAxisSize: MainAxisSize.min,
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: FutureBuilder(
+                  future: futureConversations,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    return RefreshIndicator(
+                      child: _conversationView(snapshot),
+                      onRefresh: _pull,
+                    );
+                  },
+                ),
               ),
-            ),
+            ],
           ),
-          /*Padding(
+          Padding(
             padding: EdgeInsets.fromLTRB(
                 size.width * .82, size.height * .667, 16, 8),
             child: FloatingActionButton(
@@ -74,7 +66,7 @@ class _ChatPageState extends State<ChatPage> {
                 color: Colors.black,
               ),
             ),
-          ),*/
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavBar(),
@@ -160,16 +152,21 @@ class _ChatPageState extends State<ChatPage> {
   Widget _conversationView(AsyncSnapshot snapshot) {
     if (snapshot.hasData) {
       return ListView.builder(
-        reverse: true,
+        //reverse: false,
         itemCount: snapshot.data.length,
         itemBuilder: (BuildContext context, int index) {
           return ChatDescBar(
-            conversation: snapshot.data[index],
-            title: snapshot.data[index].groupChatName,
-            lastText: snapshot.data[index].messageList.length > 0
+            conversation: snapshot.data[snapshot.data.length - index - 1],
+            title:
+                snapshot.data[snapshot.data.length - index - 1].groupChatName,
+            lastText: snapshot.data[snapshot.data.length - index - 1]
+                        .messageList.length >
+                    0
                 ? snapshot
-                    .data[index]
-                    .messageList[snapshot.data[index].messageList.length - 1]
+                    .data[snapshot.data.length - index - 1]
+                    .messageList[snapshot.data[snapshot.data.length - index - 1]
+                            .messageList.length -
+                        1]
                     .message
                 : "",
             //lastTime: DateFormat.yMMMd().format(snapshot.data[index].messageList[snapshot.data[index].messageList.length -1].chatTimeStamp),
