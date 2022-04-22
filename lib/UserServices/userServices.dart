@@ -26,9 +26,10 @@ Future<List<UserAccount>> getUsersByPrefixService(
   return userAccounts;
 }
 
-Future<UserAccount?> getUserAccountByEmail(String email) async {
-  var url = Uri.parse(serverDomain + "users/getUserByEmail/" + email);
+Future<UserAccount?> getUserAccountByEmail(String? email) async {
+  var url = Uri.parse(serverDomain + "users/getUserByEmail/" + email!);
   final response = await http.get(url);
+  print(email);
   if (response.statusCode != 200) {
     print(response.statusCode);
     print(response.body);

@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Components/select_teams_list.dart';
 import 'package:sign_ups/Screens/Home/home_page.dart';
 import 'package:sign_ups/Screens/SelectTeams/components/background.dart';
+import 'package:sign_ups/UserServices/userServices.dart';
 import 'package:sign_ups/auth/AuthenticationService.dart';
 import 'package:sign_ups/model/UserAccount.dart';
 import 'package:sign_ups/model/leagues.dart';
@@ -42,8 +44,10 @@ class Body extends StatelessWidget {
           SelectTeamsList(),
           RoundedButton(
             text: "Continue",
-            pressed: () {
-              print(globalUserAccount.email);
+            pressed: () async {
+              if (globalUserAccount == null)
+                globalUserAccount = await getUserAccountByEmail(
+                    FirebaseAuth.instance.currentUser?.email);
               AuthenticationService()
                   .addTeamSubscriptions(
                 selectedTeams: selectedBasketballTeams,
