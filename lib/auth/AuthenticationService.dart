@@ -241,7 +241,30 @@ class AuthenticationService {
   }
 
   Future<List<Message>> fetchMessages({required var chatId}) async {
-    return [];
+    if (user == null) {
+      print(Exception('Error: User account not found'));
+      return [];
+    }
+
+    var url = Uri.parse(serverDomain +
+        "users/getConversations/" +
+        _firebaseAuth.currentUser!.email!);
+    final response = await client.get(
+      url,
+      headers: {"content-type": "application/json"},
+    );
+    print('Response body: ${response.body} , ${response.statusCode}');
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      var jsonResponse = jsonDecode(response.body);
+
+      List<Message> messages = jsonResponse
+          .map<Message>((i) => Message.fromMap(Map<String, dynamic>.from(i)))
+          .toList();
+      return messages;
+    } else {
+      print(Exception('Failed to load conversations'));
+      return [];
+    }
   }
 }
 

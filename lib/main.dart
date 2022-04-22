@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:sign_ups/auth/AuthenticationService.dart';
 import 'package:stomp_dart_client/stomp.dart';
 import 'package:stomp_dart_client/stomp_config.dart';
 import 'package:stomp_dart_client/stomp_frame.dart';
@@ -18,12 +19,12 @@ import 'firebase_options.dart';
 import 'model/Chat/chat_message.dart';
 
 StreamController<List<String>> streamController = StreamController();
-StreamController<List<ChatMessage>> streamController2 = StreamController();
+StreamController<List<Message>> streamController2 = StreamController();
 //Map<Conversation,List<Chat<Messages>>>
 //String destination = "/topic/messages";
 //String message_destination = "/ws/message";
 var _listMessage = <String>[];
-var _listMessages = <ChatMessage>[];
+var _listMessages = <Message>[];
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<
     NavigatorState>(); //allows for navigating anywhere without context
 Future<void> main() async {
@@ -41,13 +42,13 @@ void onConnect(StompFrame frame) {
         '/messages',
     callback: (frame) {
       Map<String, dynamic> result = json.decode(frame.body!);
-      ChatMessage? result2 = ChatMessage.fromJson(frame.body!);
+      Message? result2 = Message.fromJson(frame.body!);
       //print(frame);
       //display a dialog popup once the user receives a call back anywhere in the app
 
       //receive Message from topic
       _listMessage.add(result['content']);
-
+      _listMessages.add(result2!);
       //Observe list message
       streamController.sink.add(_listMessage);
       //receive Message from ws
@@ -56,7 +57,7 @@ void onConnect(StompFrame frame) {
     },
   );
   /* Timer.periodic(const Duration(seconds: 10), (_) {
-    ChatMessage chatMessage = ChatMessage(
+    Message chatMessage = Message(
       messageContent: 'Hello, Griffin!',
       senderId: '2', //username
       recipientId: 'spota', //recipent user name

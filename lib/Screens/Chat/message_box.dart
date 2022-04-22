@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../Components/rounded_input_field.dart';
+import '../../main.dart';
 
 class MessageBox extends StatelessWidget {
   final String message;
-
-  const MessageBox({
+  TextEditingController chatTBController = TextEditingController();
+  MessageBox({
     Key? key,
     this.message = "",
   }) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -40,19 +40,26 @@ class MessageBox extends StatelessWidget {
               margin: EdgeInsets.symmetric(vertical: 10),
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
               width: size.width * 0.69,
-              child: TextField(   //TODO: Fix this to make it nice bc idk how yall did it before
-                  decoration: InputDecoration(
-                    fillColor: Colors.grey,
-                    border: OutlineInputBorder(),
-                    labelText: 'Message',
-                  ),
+              child: TextField(
+                //TODO: Fix this to make it nice bc idk how yall did it before
+                controller: chatTBController,
+                decoration: InputDecoration(
+                  fillColor: Colors.grey,
+                  border: OutlineInputBorder(),
+                  labelText: 'Message',
+                ),
               ),
             ),
             IconButton(
               iconSize: 28,
               icon: Icon(Icons.send),
               color: Colors.black45,
-              onPressed: () {},
+              onPressed: () {
+                //TODO: send a message with the message in the text field
+                stompClient.send(destination: '');
+                chatTBController.text.trim();
+                chatTBController.clear();
+              },
             ),
           ],
         ),
