@@ -136,11 +136,39 @@ class FriendsScreen extends StatelessWidget {
                   String? fullName = friends[index]!.firstName! +
                       " " +
                       friends[index]!.lastName!;
-                  return FriendInList(
-                    name: fullName,
-                    color:
-                        colorStringsToColors[friends[index]!.profilePicColor!],
-                    fullNameInitials: getInitials(fullName),
+                  return GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    child: FriendInList(
+                      name: fullName,
+                      color: colorStringsToColors[
+                          friends[index]!.profilePicColor!],
+                      fullNameInitials: getInitials(fullName),
+                    ),
+                    onTap: () async {
+                      List<UserAccount?> friendList =
+                          await getFriendsByEmail(friends[index]!.email);
+                      List<String?> favoriteTeams =
+                          await getFavoriteTeams(friends[index]!.email);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return ProfilePage(
+                              friends: friendList,
+                              isPersonal: false,
+                              identifier: friends[index]!.firstName != ""
+                                  ? friends[index]!.firstName! +
+                                      " " +
+                                      friends[index]!.lastName!
+                                  : friends[index]!.username,
+                              favoriteTeamList: favoriteTeams,
+                              color: colorStringsToColors[
+                                  friends[index]!.profilePicColor],
+                            );
+                          },
+                        ),
+                      );
+                    },
                   );
                 },
                 separatorBuilder: (context, index) {
