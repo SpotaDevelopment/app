@@ -1,15 +1,22 @@
+import 'dart:convert';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sign_ups/auth/AuthenticationService.dart';
 
 import '../../Components/rounded_input_field.dart';
 import '../../main.dart';
+import '../../model/Chat/chat_message.dart';
 
 class MessageBox extends StatelessWidget {
   final String message;
+  final String groupChatName;
   TextEditingController chatTBController = TextEditingController();
   MessageBox({
     Key? key,
     this.message = "",
+    this.groupChatName = "",
   }) : super(key: key);
 
   @override
@@ -55,8 +62,31 @@ class MessageBox extends StatelessWidget {
               icon: Icon(Icons.send),
               color: Colors.black45,
               onPressed: () {
+                Message msg = Message(
+                    messageContent: chatTBController.text.trim(),
+                    groupChat: groupChatName,
+                    senderId: FirebaseAuth.instance.currentUser!.displayName!,
+                    //recipientId: '',
+                    chatTimeStamp: DateTime.now().toString());
+                AuthenticationService().saveMessage(message: msg);
+                listMessages.add(msg);
                 //TODO: send a message with the message in the text field
-                stompClient.send(destination: '');
+                stompClient.send(
+                    destination: '/app/chat', body: json.encode(msg));
+                /* Timer.periodic(const Duration(seconds: 10), (_) {
+                    Message chatMessage = Message(
+                      messageContent: 'Hello, Griffin!',
+                      senderId: '2', //username
+                      recipientId: 'spota', //recipent user name
+                      //chatId: '1',
+                      groupChat: 'groupName',
+                    );
+                    stompClient.send(
+                      destination: '/app/chat',
+                      // headers: {},
+                      body: json.encode(chatMessage.toMap()),
+                    );
+                  });*/
                 chatTBController.text.trim();
                 chatTBController.clear();
               },

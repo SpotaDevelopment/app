@@ -164,11 +164,7 @@ class _ChatPageState extends State<ChatPage> {
                     0
                 ? snapshot
                     .data[snapshot.data.length - index - 1]
-                    .messageList[snapshot.data[snapshot.data.length - index - 1]
-                            .messageList.length -
-                        1]
-                    .message
-                : "",
+                    .messageList[snapshot.data[snapshot.data.length - index - 1].messageList.length -1].messageContent : "",
             //lastTime: DateFormat.yMMMd().format(snapshot.data[index].messageList[snapshot.data[index].messageList.length -1].chatTimeStamp),
           );
         },

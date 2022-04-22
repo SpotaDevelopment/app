@@ -24,7 +24,7 @@ StreamController<List<Message>> streamController2 = StreamController();
 //String destination = "/topic/messages";
 //String message_destination = "/ws/message";
 var _listMessage = <String>[];
-var _listMessages = <Message>[];
+var listMessages = <Message>[];
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<
     NavigatorState>(); //allows for navigating anywhere without context
 Future<void> main() async {
@@ -48,12 +48,12 @@ void onConnect(StompFrame frame) {
 
       //receive Message from topic
       _listMessage.add(result['content']);
-      _listMessages.add(result2!);
+      listMessages.add(result2);
       //Observe list message
       streamController.sink.add(_listMessage);
       //receive Message from ws
       //if payload received is user added to group chat then add to list
-      streamController2.sink.add(_listMessages);
+      streamController2.sink.add(listMessages);
     },
   );
   /* Timer.periodic(const Duration(seconds: 10), (_) {
@@ -104,7 +104,7 @@ class _MyAppState extends State<MyApp> {
         print('User is signed in!');
         stompClient.activate(); //activate the stomp client connection
         streamController.add(_listMessage); //Observe list message changes
-        streamController2.add(_listMessages); //Observe list message changes
+        streamController2.add(listMessages); //Observe list message changes
       }
     });
   }

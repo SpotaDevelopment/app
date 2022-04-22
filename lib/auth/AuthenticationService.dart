@@ -30,6 +30,11 @@ class AuthenticationService {
     await _firebaseAuth.signOut(); //sign the user out
     client.close(); //close the http client
     stompClient.deactivate(); //deactivate stomp client
+    streamController.done;
+    streamController2.done;
+
+    streamController.close();
+    streamController2.close();
   }
 
   Future<String?> signIn(
@@ -102,6 +107,26 @@ class AuthenticationService {
       var response = await client.post(url,
           headers: {"content-type": "application/json"}, body: body);
       print(user);
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        return null;
+      }
+      return '${response.body}';
+    } on SocketException {
+      print('No Internet connection');
+    } on FormatException {
+      print("Bad response format");
+    }
+  }
+
+  Future<String?> saveMessage({required Message message}) async {
+    try {
+      var url = Uri.parse(serverDomain + "users/messages/saveMessage");
+      //print(url);
+      var body = message.toJson();
+      print(body);
+      var response = await client.post(url,
+          headers: {"content-type": "application/json"}, body: body);
+      print(response.body);
       if (response.statusCode == 201 || response.statusCode == 200) {
         return null;
       }

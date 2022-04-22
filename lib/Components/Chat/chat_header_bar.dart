@@ -1,5 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Screens/Chat/chat_page.dart';
+import 'package:sign_ups/main.dart';
+
+import '../../model/Chat/chat_message.dart';
 
 class ChatHeaderBar extends StatelessWidget {
   final String title;
@@ -26,6 +31,8 @@ class ChatHeaderBar extends StatelessWidget {
             icon: Icon(Icons.chevron_left_rounded),
             color: Colors.black,
             onPressed: () {
+              streamController2.close();
+              streamController2 = StreamController<List<Message>>();
               Navigator.push(
                 context,
                 PageRouteBuilder(

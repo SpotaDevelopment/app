@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:sign_ups/Components/Chat/chat_header_bar.dart';
 import 'package:sign_ups/Screens/Chat/message_box.dart';
@@ -43,7 +44,7 @@ class _InChatPageState extends State<InChatPage> {
       endDrawer: MenuDrawer(),
       body: Column(
         children: <Widget>[
-          ChatHeaderBar(title: "The Boys"),
+          ChatHeaderBar(title: widget.conversation.groupChatName!),
           Expanded(
             child: StreamBuilder(
               initialData: widget.conversation.messageList,
@@ -58,7 +59,7 @@ class _InChatPageState extends State<InChatPage> {
               },
             ),
           ),
-          MessageBox(),
+          MessageBox(groupChatName: widget.conversation.groupChatName!),
         ],
       ),
       bottomNavigationBar: BottomNavBar(),
@@ -72,9 +73,9 @@ class _InChatPageState extends State<InChatPage> {
         itemBuilder: (BuildContext context, int index) {
           // return snapshot.data[index];
           return ChatMessage(
-            sender: snapshot.data[index].Id,
-            initials: getInitials(snapshot.data[index].Id),
-            dateTime: snapshot.data[index].chatTimeStamp,
+            sender: snapshot.data[index].senderId,
+            initials: getInitials(snapshot.data[index].senderId),
+            dateTime: formatDate(snapshot.data[index].chatTimeStamp),
             message: snapshot.data[index].messageContent,
             color: Colors.green, //add user color
             //   //message: snapshot.data[index].message,
@@ -109,4 +110,10 @@ class _InChatPageState extends State<InChatPage> {
   //    // futureMessages.add(newMsg);
   //   });
   //}
+}
+
+formatDate(chatTimeStamp) {
+  var date = DateTime.parse(chatTimeStamp);
+  var formatter = new DateFormat('dd-MM-yyyy');
+  return formatter.format(date);
 }

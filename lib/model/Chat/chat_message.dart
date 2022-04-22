@@ -6,14 +6,14 @@ class Message {
   String? recipientId;
   String? groupChat;
   String? chatTimeStamp;
-  String? chatId;
+  //String? chatId;
   Message({
     this.messageContent,
     this.senderId,
     this.recipientId,
     this.groupChat,
     this.chatTimeStamp,
-    this.chatId,
+    // this.chatId,
   });
 
   Message copyWith({
@@ -22,7 +22,7 @@ class Message {
     String? recipientId,
     String? groupChat,
     String? chatTimeStamp,
-    String? chatId,
+    // String? chatId,
   }) {
     return Message(
       messageContent: messageContent ?? this.messageContent,
@@ -30,7 +30,7 @@ class Message {
       recipientId: recipientId ?? this.recipientId,
       groupChat: groupChat ?? this.groupChat,
       chatTimeStamp: chatTimeStamp ?? this.chatTimeStamp,
-      chatId: chatId ?? this.chatId,
+      // chatId: chatId ?? this.chatId,
     );
   }
 
@@ -41,7 +41,7 @@ class Message {
       'recipientId': recipientId,
       'groupChat': groupChat,
       'chatTimeStamp': chatTimeStamp,
-      'chatId': chatId,
+      // 'chatId': chatId,
     };
   }
 
@@ -52,39 +52,40 @@ class Message {
       recipientId: map['recipientId'],
       groupChat: map['groupChat'],
       chatTimeStamp: map['chatTimeStamp'],
-      chatId: map['chatId'],
+      //  chatId: map['chatId'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Message.fromJson(String source) => Message.fromMap(json.decode(source));
+  factory Message.fromJson(String source) =>
+      Message.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'ChatMessage(messageContent: $messageContent, senderId: $senderId, recipientId: $recipientId, groupChat: $groupChat, chatTimeStamp: $chatTimeStamp, chatId: $chatId)';
+    return 'ChatMessage(messageContent: $messageContent, senderId: $senderId, recipientId: $recipientId, groupChat: $groupChat, chatTimeStamp: $chatTimeStamp)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Message &&
-      other.messageContent == messageContent &&
-      other.senderId == senderId &&
-      other.recipientId == recipientId &&
-      other.groupChat == groupChat &&
-      other.chatTimeStamp == chatTimeStamp &&
-      other.chatId == chatId;
+        other.messageContent == messageContent &&
+        other.senderId == senderId &&
+        other.recipientId == recipientId &&
+        other.groupChat == groupChat &&
+        other.chatTimeStamp == chatTimeStamp;
+    //other.chatId == chatId;
   }
 
   @override
   int get hashCode {
     return messageContent.hashCode ^
-      senderId.hashCode ^
-      recipientId.hashCode ^
-      groupChat.hashCode ^
-      chatTimeStamp.hashCode ^
-      chatId.hashCode;
+        senderId.hashCode ^
+        recipientId.hashCode ^
+        groupChat.hashCode ^
+        chatTimeStamp.hashCode;
+    // chatId.hashCode;
   }
 }
