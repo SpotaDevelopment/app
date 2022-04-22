@@ -77,6 +77,8 @@ class FriendsScreen extends StatelessWidget {
                                     globalUserAccount.lastName
                                 : globalUserAccount.username,
                             favoriteTeamList: favoriteTeamList,
+                            color: colorStringsToColors[
+                                globalUserAccount.profilePicColor],
                           );
                         },
                       ),

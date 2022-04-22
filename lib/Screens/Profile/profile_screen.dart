@@ -18,13 +18,14 @@ class ProfilePage extends StatelessWidget {
   final bool isPersonal;
   final int friendCount;
   final List<String?> favoriteTeamList;
-
+  final Color? color;
   ProfilePage({
     Key? key,
     required this.identifier,
     required this.isPersonal,
     required this.friendCount,
     required this.favoriteTeamList,
+    required this.color,
   }) : super(key: key);
 
   List<Widget> getMaxOfThreeTeams() {
@@ -60,9 +61,7 @@ class ProfilePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: DefaultUserProfile(
-                initials: getInitials(identifier!),
-                color: Colors.blue,
-                radius: 42),
+                initials: getInitials(identifier!), color: color, radius: 42),
           ),
           Text(
             identifier!,

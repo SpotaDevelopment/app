@@ -84,6 +84,24 @@ class AuthenticationService {
     }
   }
 
+  Future<String?> signUpMany({required List<UserAccount> userAccounts}) async {
+    try {
+      var url = Uri.parse(serverDomain + "users/signUpMany");
+      var body = jsonEncode(userAccounts);
+      var response = await client.post(url,
+          headers: {"content-type": "application/json"}, body: body);
+      if (response.statusCode != 201) {
+        print(response.body);
+        return '${response.statusCode}';
+      }
+      return null;
+    } on SocketException {
+      print('No Internet connection');
+    } on FormatException {
+      print("Bad response format");
+    }
+  }
+
   Future<String?> passwordReset({required String email}) async {
     try {
       final user = await _firebaseAuth.sendPasswordResetEmail(email: email);
