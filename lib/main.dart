@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'Screens/Home/home_page.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +44,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       initialRoute: FirebaseAuth.instance.currentUser == null
           ? WelcomeScreen.id
-          : HomeScreen.id,
+          : HomePage.id,
       debugShowCheckedModeBanner: false,
       title: 'Spota',
       theme: ThemeData(

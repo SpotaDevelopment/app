@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sign_ups/Screens/Home/home_page.dart';
 import 'package:sign_ups/Screens/SelectLeagues/components/body.dart';
 import 'package:sign_ups/Screens/SignUpContinue/signup_screen_continue.dart';
-import '../Home/home_screen.dart';
 import '/constants/all_constants.dart';
 
 class SelectLeagues extends StatelessWidget {

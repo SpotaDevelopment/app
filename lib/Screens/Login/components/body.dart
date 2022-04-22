@@ -8,7 +8,6 @@ import 'package:sign_ups/Components/text_field_container.dart';
 import 'package:sign_ups/Screens/ForgotInfo/forgot_info_screen.dart';
 import 'package:sign_ups/Screens/Home/home_page.dart';
 
-import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/components/background.dart';
 import 'package:sign_ups/Screens/News/news_screen.dart';
 import 'package:sign_ups/Screens/SignUp/signup_screen.dart';
