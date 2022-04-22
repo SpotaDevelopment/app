@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 
 import '../model/Game.dart';
 
+var client = http.Client();
+
 Future<List<UserAccount>> getUsersByPrefixService(
     String prefix, bool isEmail) async {
   String field = (isEmail) ? "email" : "username";
@@ -69,4 +71,44 @@ Future<List<String?>> getFavoriteTeams(String? email) async {
       (jsonDecode(response.body) as List<dynamic>).cast<String>();
 
   return friendAccounts;
+}
+
+Future<String?> addFriend(
+    {required String? user, required String? friend}) async {
+  try {
+    var url =
+        Uri.parse(serverDomain + "users/addFriend/" + user! + "/" + friend!);
+    var response = await client.post(url,
+        headers: {"content-type": "application/json"},
+        body: jsonEncode({'user': user, 'friend': friend}));
+    print('Response body: ${response.body} , ${response.statusCode}');
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      return null;
+    }
+    return '${response.statusCode}';
+  } on SocketException {
+    print('No Internet connection');
+  } on FormatException {
+    print("Bad response format");
+  }
+}
+
+Future<String?> removeFriend(
+    {required String? user, required String? friend}) async {
+  try {
+    var url =
+        Uri.parse(serverDomain + "users/removeFriend/" + user! + "/" + friend!);
+    var response = await client.post(url,
+        headers: {"content-type": "application/json"},
+        body: jsonEncode({'user': user, 'friend': friend}));
+    print('Response body: ${response.body} , ${response.statusCode}');
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      return null;
+    }
+    return '${response.statusCode}';
+  } on SocketException {
+    print('No Internet connection');
+  } on FormatException {
+    print("Bad response format");
+  }
 }
