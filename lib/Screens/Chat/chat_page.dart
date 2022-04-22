@@ -31,53 +31,49 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       appBar: SpotaAppBar(),
       endDrawer: MenuDrawer(),
-      //TODO: Change this to implement a Stack with a SingleChildScrollView and a positioned element whose child is the Floating Action Button and put it in the correct spot.
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: size.height,
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, size.height * .667, 16, 8),
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: FloatingActionButton(
-                    //new chat button
-                    backgroundColor: secondaryColor,
-                    onPressed: () {
-                      createAlertDialog(context);
-                    },
-                    child: const Icon(
-                      Icons.add_comment_outlined,
-                      size: 35,
-                      color: Colors.black,
+      body: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          SingleChildScrollView(
+            child: SizedBox(
+              height: size.height,
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: FutureBuilder(
+                      future: futureConversations,
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        return RefreshIndicator(
+                          child: _conversationView(snapshot),
+                          onRefresh: _pull,
+                        );
+                      },
                     ),
                   ),
-                ),
+                  //this is where chat descriptions go, like
+                  /*ChatDescBar(title: "The Boys",
+                      lastText: "Did you see Shohei Ohtani last night?!"),*/
+                ],
               ),
-              Expanded(
-                child: FutureBuilder(
-                  future: futureConversations,
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    return RefreshIndicator(
-                      child: _conversationView(snapshot),
-                      onRefresh: _pull,
-                    );
-                  },
-                ),
-              ),
-              /*Expanded(
-                child: ListView(
-                  children: <Widget>[
-                    //this is where chat descriptions go, like
-                    /*ChatDescBar(title: "The Boys",
-                    lastText: "Did you see Shohei Ohtani last night?!"),*/
-                  ],
-                ),
-              ),*/
-            ],
+            ),
           ),
-        ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(
+                size.width * .82, size.height * .667, 16, 8),
+            child: FloatingActionButton(
+              //new chat button
+              backgroundColor: secondaryColor,
+              onPressed: () {
+                createAlertDialog(context);
+              },
+              child: const Icon(
+                Icons.add_comment_outlined,
+                size: 35,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavBar(),
     );

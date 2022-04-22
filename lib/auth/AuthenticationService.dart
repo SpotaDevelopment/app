@@ -116,7 +116,8 @@ class AuthenticationService {
 
   Future<List<Conversation>> fetchConversations() async {
     if (user == null) {
-      throw Exception('Error: User account not found');
+      print(Exception('Error: User account not found'));
+      return [];
     }
 
     var url = Uri.parse(serverDomain +
@@ -133,7 +134,8 @@ class AuthenticationService {
           .toList();
       return conversations;
     } else {
-      throw Exception('Failed to load conversations');
+      print(Exception('Failed to load conversations'));
+      return [];
     }
   }
 

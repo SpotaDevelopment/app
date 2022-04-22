@@ -3,6 +3,7 @@ import 'package:sign_ups/Screens/Home/home_page.dart';
 import 'package:sign_ups/Screens/SignUpContinue/components/Body.dart';
 
 import '../../Components/skip_and_back_button.dart';
+import '../SelectLeagues/select_leagues_screen.dart';
 import '../SignUp/signup_screen.dart';
 
 class SignUpContinue extends StatelessWidget {
@@ -26,7 +27,7 @@ class SignUpContinue extends StatelessWidget {
         elevation: 0,
         actions: <Widget>[
           SkipButton(
-              backScreen: const SignUpScreen(), skipScreen: const HomePage()),
+              backScreen: const SignUpScreen(), skipScreen: const SelectLeagues()),
         ],
       ),
       body: Body(email: email, username: username),

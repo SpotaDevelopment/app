@@ -25,7 +25,7 @@ class Conversation {
   Map<String, dynamic> toMap() {
     return {
       'groupChatName': groupChatName,
-      'messageList': messageList?.map((x) => x?.toMap())?.toList(),
+      'messageList': messageList?.map((x) => x.toMap()).toList(),
     };
   }
 
