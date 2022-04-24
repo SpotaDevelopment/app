@@ -49,6 +49,7 @@ class _InChatPageState extends State<InChatPage> {
           ChatHeaderBar(title: widget.conversation.groupChatName!),
           Expanded(
             child: StreamBuilder(
+              //reverse: true,
               initialData: widget.conversation.messageList,
               stream: streamController2.stream,
               //stream: streamController.stream,
@@ -73,7 +74,7 @@ class _InChatPageState extends State<InChatPage> {
   Widget _conversationView(AsyncSnapshot snapshot) {
     if (snapshot.hasData) {
       return ListView.builder(
-        reverse: true,
+        //reverse: true,
         itemCount: snapshot.data.length,
         itemBuilder: (BuildContext context, int index) {
           // return snapshot.data[index];
