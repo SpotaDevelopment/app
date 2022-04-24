@@ -1,13 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sign_ups/Components/rounded_button.dart';
+import 'package:sign_ups/HelperFunctions/functions.dart';
 import 'package:sign_ups/Screens/Chat/chat_page.dart';
 import 'package:sign_ups/Screens/Home/home_page.dart';
-import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/Login/login_screen.dart';
 import 'package:sign_ups/Screens/News/news_screen.dart';
 import 'package:sign_ups/Screens/Profile/profile_screen.dart';
 import 'package:sign_ups/Screens/Scores/scores_screen.dart';
 import 'package:sign_ups/UserServices/userServices.dart';
-
+import 'package:sign_ups/constants/all_constants.dart';
 import '../model/UserAccount.dart';
 
 int current = 0;
@@ -21,19 +23,25 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int currentIndex = 0;
+  int _currentIndex = 0;
   final screens = [
     const SportsNewsPage(),
     SportsScoresPage(),
     HomePage(),
     ChatPage(),
+    ProfilePage(
+        identifier: '',
+        isPersonal: false,
+        friends: [],
+        favoriteTeamList: [],
+        color: null)
   ];
 
   _onTap() {
     Navigator.push(
       context,
       PageRouteBuilder(
-        pageBuilder: (_, __, ___) => screens[currentIndex],
+        pageBuilder: (_, __, ___) => screens[_currentIndex],
         transitionDuration: const Duration(seconds: 0),
       ),
     );
@@ -46,8 +54,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
       showSelectedLabels: false,
       showUnselectedLabels: false,
       iconSize: 36,
-      currentIndex: currentIndex,
-      items: const <BottomNavigationBarItem>[
+      currentIndex: widget.curIndex,
+      items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.newspaper_outlined, color: Colors.black),
           label: 'News',
@@ -77,34 +85,106 @@ class _BottomNavBarState extends State<BottomNavBar> {
       onTap: (index) async {
         // this has changed
         setState(() {
-          currentIndex = index;
+          _currentIndex = index;
         });
-        if (index != 4)
-          _onTap();
-        else {
+        if (index == 0 || index == 1 || index == 2) {
+          return _onTap();
+        } else if (FirebaseAuth.instance.currentUser != null && index == 3) {
+          return _onTap();
+        } else if (FirebaseAuth.instance.currentUser != null && index == 4) {
+          if (globalUserAccount == null)
+            globalUserAccount = await getUserAccountByEmail(
+                FirebaseAuth.instance.currentUser?.email);
           List<UserAccount?> friendList =
               await getFriendsByEmail(globalUserAccount.email);
           List<String?> favoriteTeamList =
               await getFavoriteTeams(globalUserAccount.email.trim());
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) {
+            PageRouteBuilder(
+              pageBuilder: (_, __, ___) {
                 return ProfilePage(
-                  friendCount: friendList.length,
+                  friends: friendList,
                   isPersonal: true,
                   identifier: globalUserAccount.firstName != ""
                       ? globalUserAccount.firstName +
                           " " +
                           globalUserAccount.lastName
-                      : globalUserAccount.email,
+                      : globalUserAccount.username,
                   favoriteTeamList: favoriteTeamList,
+                  color:
+                      colorStringsToColors[globalUserAccount.profilePicColor],
                 );
               },
+              transitionDuration: const Duration(seconds: 0),
             ),
           );
+        } else {
+          showAlertDialog(context);
         }
       },
     );
   }
+}
+
+showAlertDialog(BuildContext context) {
+  Future.delayed(
+    Duration.zero,
+    () {
+      return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text(
+              "You need an account to access this feature.",
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+              ),
+            ),
+            backgroundColor: primaryColor,
+            actions: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RoundedButton(
+                      width: 0.25,
+                      text: "Sign In",
+                      vertical1: 10,
+                      horizontal1: 10,
+                      vertical2: 0,
+                      horizontal2: 10,
+                      fontSize: 12,
+                      pressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return LoginScreen();
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                    RoundedButton(
+                      width: 0.25,
+                      text: "Close",
+                      vertical1: 10,
+                      horizontal1: 10,
+                      vertical2: 0,
+                      horizontal2: 10,
+                      fontSize: 12,
+                      pressed: () => Navigator.pop(context),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          );
+        },
+      );
+    },
+  );
 }

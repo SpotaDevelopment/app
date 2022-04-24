@@ -66,7 +66,7 @@ class _InChatPageState extends State<InChatPage> {
               groupChatName: widget.conversation.groupChatName ?? 'Group Chat'),
         ],
       ),
-      bottomNavigationBar: BottomNavBar(),
+      bottomNavigationBar: BottomNavBar(curIndex: 3),
     );
   }
 

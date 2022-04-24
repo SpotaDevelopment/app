@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class DefaultUserProfile extends StatelessWidget {
   final String initials;
-  final Color color;
+  final Color? color;
   final double radius;
 
   const DefaultUserProfile({

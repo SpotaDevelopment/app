@@ -5,6 +5,7 @@ import 'package:sign_ups/Components/leagues_toggle_buttons.dart';
 import 'package:sign_ups/Components/news_article_with_image.dart';
 import 'package:sign_ups/Components/spota_appbar.dart';
 import 'package:sign_ups/constants/all_constants.dart';
+import 'package:sign_ups/model/UserAccount.dart';
 import '../../../Components/bottom_navigation_bar.dart';
 import '../../Components/UserComponents/DefaultUserProfile.dart';
 import '../../Components/menu_drawer.dart';
@@ -16,21 +17,23 @@ class ProfilePage extends StatelessWidget {
   // If user signed up with a name, then name will be displayed, else username.
   final String? identifier;
   final bool isPersonal;
-  final int friendCount;
+  final List<UserAccount?> friends;
   final List<String?> favoriteTeamList;
-
+  final Color? color;
   ProfilePage({
     Key? key,
     required this.identifier,
     required this.isPersonal,
-    required this.friendCount,
+    required this.friends,
     required this.favoriteTeamList,
+    required this.color,
   }) : super(key: key);
 
   List<Widget> getMaxOfThreeTeams() {
     final children = <Widget>[];
     for (int i = 0; i < min(favoriteTeamList.length, 3); i++) {
       String currTeam = favoriteTeamList[i]!.toLowerCase();
+      currTeam = (currTeam == 'trail blazers') ? 'trailblazers' : currTeam;
       children.add(
         SizedBox(
           height: 75,
@@ -51,6 +54,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     int remainingTeams = favoriteTeamList.length - 3;
+    int friendCount = friends.length;
     return Scaffold(
       appBar: SpotaAppBar(),
       endDrawer: MenuDrawer(),
@@ -59,9 +63,7 @@ class ProfilePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: DefaultUserProfile(
-                initials: getInitials(identifier!),
-                color: Colors.blue,
-                radius: 42),
+                initials: getInitials(identifier!), color: color, radius: 42),
           ),
           Text(
             identifier!,
@@ -130,7 +132,9 @@ class ProfilePage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return FriendsScreen();
+                              return FriendsScreen(
+                                friends: friends,
+                              );
                             },
                           ),
                         );
@@ -276,7 +280,9 @@ class ProfilePage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: const BottomNavBar(),
+      bottomNavigationBar: const BottomNavBar(
+        curIndex: 4,
+      ),
     );
   }
 }

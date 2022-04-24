@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sign_ups/Components/rounded_button.dart';
 import 'package:sign_ups/Screens/FavoritePosts/favoritePosts_screen.dart';
 import 'package:sign_ups/Screens/Groups/groups_screen.dart';
 import 'package:sign_ups/Screens/Login/login_screen.dart';
@@ -50,7 +51,9 @@ class MenuDrawer extends StatelessWidget {
             buildMenuItem(
               text: 'Notifications',
               icon: Icons.notifications,
-              onClicked: () => selectedItem(context, 0),
+              onClicked: () => FirebaseAuth.instance.currentUser != null
+                  ? selectedItem(context, 0)
+                  : showAlertDialog(context),
             ),
             const SizedBox(
               height: 5,
@@ -60,9 +63,12 @@ class MenuDrawer extends StatelessWidget {
               height: 5,
             ),
             buildMenuItem(
-                text: 'Groups',
-                icon: Icons.group,
-                onClicked: () => selectedItem(context, 1)),
+              text: 'Groups',
+              icon: Icons.group,
+              onClicked: () => FirebaseAuth.instance.currentUser != null
+                  ? selectedItem(context, 1)
+                  : showAlertDialog(context),
+            ),
             const SizedBox(
               height: 5,
             ),
@@ -71,9 +77,12 @@ class MenuDrawer extends StatelessWidget {
               height: 5,
             ),
             buildMenuItem(
-                text: 'Favorite Posts',
-                icon: Icons.favorite,
-                onClicked: () => selectedItem(context, 2)),
+              text: 'Favorite Posts',
+              icon: Icons.favorite,
+              onClicked: () => FirebaseAuth.instance.currentUser != null
+                  ? selectedItem(context, 2)
+                  : showAlertDialog(context),
+            ),
             const SizedBox(
               height: 5,
             ),
@@ -82,9 +91,12 @@ class MenuDrawer extends StatelessWidget {
               height: 5,
             ),
             buildMenuItem(
-                text: 'Find Friends',
-                icon: Icons.search,
-                onClicked: () => selectedItem(context, 3)),
+              text: 'Find Friends',
+              icon: Icons.search,
+              onClicked: () => FirebaseAuth.instance.currentUser != null
+                  ? selectedItem(context, 3)
+                  : showAlertDialog(context),
+            ),
             const SizedBox(
               height: 5,
             ),
@@ -93,9 +105,12 @@ class MenuDrawer extends StatelessWidget {
               height: 5,
             ),
             buildMenuItem(
-                text: 'Settings',
-                icon: Icons.settings,
-                onClicked: () => selectedItem(context, 4)),
+              text: 'Settings',
+              icon: Icons.settings,
+              onClicked: () => FirebaseAuth.instance.currentUser != null
+                  ? selectedItem(context, 4)
+                  : showAlertDialog(context),
+            ),
             const SizedBox(
               height: 5,
             ),
@@ -172,4 +187,66 @@ class MenuDrawer extends StatelessWidget {
         break;
     }
   }
+}
+
+showAlertDialog(BuildContext context) {
+  Future.delayed(
+    Duration.zero,
+    () {
+      return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text(
+              "You need an account to access this feature.",
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+              ),
+            ),
+            backgroundColor: primaryColor,
+            actions: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RoundedButton(
+                      width: 0.25,
+                      text: "Sign In",
+                      vertical1: 10,
+                      horizontal1: 10,
+                      vertical2: 0,
+                      horizontal2: 10,
+                      fontSize: 12,
+                      pressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return LoginScreen();
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                    RoundedButton(
+                      width: 0.25,
+                      text: "Close",
+                      vertical1: 10,
+                      horizontal1: 10,
+                      vertical2: 0,
+                      horizontal2: 10,
+                      fontSize: 12,
+                      pressed: () => Navigator.pop(context),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          );
+        },
+      );
+    },
+  );
 }

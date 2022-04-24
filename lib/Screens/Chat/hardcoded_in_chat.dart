@@ -22,7 +22,7 @@ class HardcodedInChatPage extends StatelessWidget {
           ChatHeaderBar(title: "The Boys"),
           Expanded(
             child: ListView(
-              reverse: true,      //newest message at the bottom
+              reverse: true, //newest message at the bottom
               children: <Widget>[
                 ChatMessage(
                   sender: "Matt Yost",
@@ -86,7 +86,7 @@ class HardcodedInChatPage extends StatelessWidget {
           MessageBox(),
         ],
       ),
-      bottomNavigationBar: BottomNavBar(),
+      bottomNavigationBar: BottomNavBar(curIndex: 3),
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Screens/Home/home_page.dart';
-import 'package:sign_ups/Screens/Home/home_screen.dart';
 import 'package:sign_ups/Screens/SelectTeams/components/body.dart';
 import '../SelectLeagues/select_leagues_screen.dart';
 import '../SignUpContinue/signup_screen_continue.dart';

@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/UserComponents/DefaultUserProfile.dart';
+import 'package:sign_ups/UserServices/userServices.dart';
 
 import '../../HelperFunctions/functions.dart';
 
 class FriendInList extends StatefulWidget {
   String? name;
   Color? color;
+  String? fullNameInitials;
   bool addIcon;
+  String? user;
+  String? friend;
+
   FriendInList({
     Key? key,
     this.name,
     this.color,
+    required this.fullNameInitials,
     this.addIcon = false,
+    this.user,
+    this.friend,
   }) : super(key: key);
 
   @override
@@ -31,7 +39,9 @@ class _FriendInListState extends State<FriendInList> {
         children: [
           SizedBox(width: size.width * 0.02),
           DefaultUserProfile(
-            initials: getInitials(widget.name!),
+            initials: widget.fullNameInitials != ""
+                ? widget.fullNameInitials!
+                : getInitials(widget.name!),
             color: widget.color!,
             radius: 27,
           ),
@@ -52,6 +62,11 @@ class _FriendInListState extends State<FriendInList> {
                   ? Icon(Icons.add_circle_outline)
                   : Icon(Icons.check_circle_outline),
               onTap: () {
+                if (isAdded) {
+                  removeFriend(user: widget.user, friend: widget.friend);
+                } else {
+                  addFriend(user: widget.user, friend: widget.friend);
+                }
                 setState(
                   () {
                     isAdded = !isAdded;

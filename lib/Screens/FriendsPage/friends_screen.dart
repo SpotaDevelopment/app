@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sign_ups/Components/bottom_navigation_bar.dart';
 import 'package:sign_ups/UserServices/userServices.dart';
@@ -14,22 +15,11 @@ import '../../model/UserAccount.dart';
 import '../Profile/profile_screen.dart';
 
 class FriendsScreen extends StatelessWidget {
-  FriendsScreen({Key? key}) : super(key: key);
-  var friends = [
-    "Kevin O'Brien",
-    "Matt Yost",
-    "Brian Curtis",
-    "Griffin Bourdon",
-    "Phil Bourdon",
-    "Ben Bosquet",
-    "Peter Bugala",
-    "Justin Rittmeyer",
-    "Charles Colbourn",
-    "Heewook Lee",
-    "Ming Zhao",
-    "Javier Gonzalez Sanchez",
-  ];
-
+  List<UserAccount?> friends = [];
+  FriendsScreen({
+    Key? key,
+    required this.friends,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -56,6 +46,9 @@ class FriendsScreen extends StatelessWidget {
                     size: 35,
                   ),
                   onTap: () async {
+                    if (globalUserAccount == null)
+                      globalUserAccount = await getUserAccountByEmail(
+                          FirebaseAuth.instance.currentUser?.email);
                     List<UserAccount?> friendList =
                         await getFriendsByEmail(globalUserAccount.email.trim());
                     List<String?> favoriteTeamList =
@@ -65,14 +58,16 @@ class FriendsScreen extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) {
                           return ProfilePage(
-                            friendCount: friendList.length,
+                            friends: friendList,
                             isPersonal: true,
                             identifier: globalUserAccount.firstName != ""
                                 ? globalUserAccount.firstName! +
                                     " " +
                                     globalUserAccount.lastName
-                                : globalUserAccount.email,
+                                : globalUserAccount.username,
                             favoriteTeamList: favoriteTeamList,
+                            color: colorStringsToColors[
+                                globalUserAccount.profilePicColor],
                           );
                         },
                       ),
@@ -91,8 +86,8 @@ class FriendsScreen extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                Icon(Icons.search_outlined, size: 35),
-                SizedBox(width: size.width * 0.02),
+                // Icon(Icons.search_outlined, size: 35),
+                SizedBox(width: size.width * 0.1),
               ],
             ),
           ),
@@ -105,41 +100,76 @@ class FriendsScreen extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 physics: BouncingScrollPhysics(),
-                itemCount: friends.length + 2,
+                itemCount: friends.length,
                 itemBuilder: (context, index) {
-                  if (index == 0) {
-                    return Row(
-                      children: [
-                        SizedBox(
-                            width: size.width * 0.015,
-                            height: size.height * 0.05),
-                        Text(
-                          "Online",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                          ),
-                        )
-                      ],
-                    );
-                  } else if (index == friends.length + 1) {
-                    return Row(
-                      children: [
-                        SizedBox(
-                            width: size.width * 0.015,
-                            height: size.height * 0.05),
-                        Text(
-                          "Offline",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                          ),
-                        )
-                      ],
-                    );
-                  }
-                  return FriendInList(
-                      name: friends[index - 1], color: getRandColor());
+                  // if (index == 0) {
+                  //   return Row(
+                  //     children: [
+                  //       SizedBox(
+                  //           width: size.width * 0.015,
+                  //           height: size.height * 0.05),
+                  //       Text(
+                  //         "Online",
+                  //         style: TextStyle(
+                  //           fontWeight: FontWeight.bold,
+                  //           fontSize: 24,
+                  //         ),
+                  //       )
+                  //     ],
+                  //   );
+                  // } else if (index == friends.length + 1) {
+                  //   return Row(
+                  //     children: [
+                  //       SizedBox(
+                  //           width: size.width * 0.015,
+                  //           height: size.height * 0.05),
+                  //       Text(
+                  //         "Offline",
+                  //         style: TextStyle(
+                  //           fontWeight: FontWeight.bold,
+                  //           fontSize: 24,
+                  //         ),
+                  //       )
+                  //     ],
+                  //   );
+                  // }
+                  String? fullName = friends[index]!.firstName! +
+                      " " +
+                      friends[index]!.lastName!;
+                  return GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    child: FriendInList(
+                      name: fullName,
+                      color: colorStringsToColors[
+                          friends[index]!.profilePicColor!],
+                      fullNameInitials: getInitials(fullName),
+                    ),
+                    onTap: () async {
+                      List<UserAccount?> friendList =
+                          await getFriendsByEmail(friends[index]!.email);
+                      List<String?> favoriteTeams =
+                          await getFavoriteTeams(friends[index]!.email);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return ProfilePage(
+                              friends: friendList,
+                              isPersonal: false,
+                              identifier: friends[index]!.firstName != ""
+                                  ? friends[index]!.firstName! +
+                                      " " +
+                                      friends[index]!.lastName!
+                                  : friends[index]!.username,
+                              favoriteTeamList: favoriteTeams,
+                              color: colorStringsToColors[
+                                  friends[index]!.profilePicColor],
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  );
                 },
                 separatorBuilder: (context, index) {
                   return Divider(
